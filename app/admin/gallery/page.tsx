@@ -242,7 +242,7 @@ export default function AdminGalleryPage() {
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     />
                   </div>
-                  <div style={{ padding: "1rem", flex: 1, display: "flex", flexDirection: "column", justifyBetween: "space-between" }}>
+                  <div style={{ padding: "1rem", flex: 1, display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
                     <div>
                       <div style={{ fontSize: "0.75rem", textTransform: "uppercase", color: "var(--gold-400)", fontWeight: 600 }}>
                         {item.category}
