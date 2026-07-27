@@ -108,11 +108,11 @@ export default function EnquirePage() {
           )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Honeypot field (hidden from real users) */}
-            <div style={{ display: "none" }} aria-hidden="true">
+            {/* Honeypot field (hidden from real users, off-screen to avoid autofill) */}
+            <div style={{ opacity: 0, position: "absolute", top: 0, left: 0, height: 0, width: 0, zIndex: -1, pointerEvents: "none" }} aria-hidden="true">
               <input
                 type="text"
-                name="website"
+                name="b_hp_2026"
                 tabIndex={-1}
                 value={honeypot}
                 onChange={(e) => setHoneypot(e.target.value)}

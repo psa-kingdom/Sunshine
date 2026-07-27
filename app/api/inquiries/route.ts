@@ -40,11 +40,11 @@ export async function POST(req: Request) {
 
     const body = await req.json();
 
-    // Honeypot spam check: hidden field 'website' filled by bots
-    if (body.website && body.website.trim() !== "") {
+    // Honeypot check (b_hp_2026): hidden field filled by automated spam bots
+    if (body.b_hp_2026 && String(body.b_hp_2026).trim() !== "") {
       // Silently accept submission without saving so bots don't adapt
       return NextResponse.json(
-        { success: true, message: "Your enquiry has been received successfully." },
+        { success: true, message: "Thank you! Your admission enquiry has been submitted successfully." },
         { status: 200 }
       );
     }

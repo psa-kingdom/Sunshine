@@ -22,9 +22,17 @@ export default async function AdminDashboardPage() {
           </div>
 
           <div className="adminUserInfo">
+            <Link
+              href="/admin/inquiries"
+              className="text-xs uppercase tracking-wider font-semibold text-[var(--gold-400)] hover:underline"
+            >
+              Inquiries
+            </Link>
+            <span className="text-gray-500">•</span>
             <span>
               Logged in as <strong>{session.user.email}</strong>
             </span>
+            <span className="text-gray-500">•</span>
             <form
               action={async () => {
                 "use server";
