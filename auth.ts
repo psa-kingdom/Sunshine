@@ -3,8 +3,10 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { connectDB } from "@/db";
 import { Admin } from "@/db/models/Admin";
+import { authConfig } from "./auth.config";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+  ...authConfig,
   providers: [
     Credentials({
       name: "Credentials",
@@ -40,26 +42,4 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
-  session: {
-    strategy: "jwt",
-  },
-  callbacks: {
-    async jwt({ token, user }) {
-      if (user) {
-        token.role = (user as { role?: string }).role || "admin";
-      }
-      return token;
-    },
-    async session({ session, token }) {
-      if (session.user && token.sub) {
-        (session.user as { id?: string; role?: string }).id = token.sub;
-        (session.user as { id?: string; role?: string }).role = (token.role as string) || "admin";
-      }
-      return session;
-    },
-  },
-  pages: {
-    signIn: "/admin/login",
-  },
-  secret: process.env.AUTH_SECRET,
 });
