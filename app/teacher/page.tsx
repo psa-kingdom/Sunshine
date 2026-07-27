@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
 import { signOut } from "next-auth/react";
 
 interface TeacherProfile {
@@ -295,7 +294,7 @@ export default function TeacherDashboardPage() {
 
               <div className="adminContentCard" style={{ padding: "1.25rem" }}>
                 <div style={{ fontSize: "0.75rem", textTransform: "uppercase", color: "var(--gold-400)", fontWeight: 600 }}>
-                  Today's Classes
+                  Today&apos;s Classes
                 </div>
                 <div style={{ fontFamily: "var(--font-display)", fontSize: "2rem", color: "#ffffff", fontWeight: 700, margin: "0.25rem 0" }}>
                   {classes.length}
@@ -436,7 +435,7 @@ export default function TeacherDashboardPage() {
 
               {/* Today's Class Schedule */}
               <div className="adminContentCard">
-                <h2>Today's Class Schedule</h2>
+                <h2>Today&apos;s Class Schedule</h2>
                 <div style={{ display: "grid", gap: "1rem", marginTop: "1rem" }}>
                   {classes.map((c, idx) => (
                     <div

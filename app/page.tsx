@@ -56,7 +56,7 @@ export default function Home() {
           <div className="wrap">
             <Link className="active" href="/">Home</Link>
             <a href="#about">About Us</a>
-            <a href="#principal">Principal's Message</a>
+            <a href="#principal">Principal&apos;s Message</a>
             <a href="#academics">Academics</a>
             <a href="#facilities">Facilities</a>
             <a href="#faculty">Faculty</a>
@@ -146,10 +146,10 @@ export default function Home() {
             <div>
               <p className="sectionTag">LEADERSHIP VISION</p>
               <h2 style={{ fontFamily: "var(--font-display)", fontSize: "var(--text-3xl)", color: "var(--navy-900)", marginBottom: "1rem" }}>
-                Principal's Message
+                Principal&apos;s Message
               </h2>
               <p style={{ color: "var(--text-secondary)", fontSize: "var(--text-base)", lineHeight: 1.7, marginBottom: "1rem" }}>
-                "At Sunshine Public School, education transcends textbooks. We empower young minds to ask bold questions, embrace scientific rigor, and lead with empathy. Our holistic curriculum blends academic rigor with athletic and creative expression."
+                &quot;At Sunshine Public School, education transcends textbooks. We empower young minds to ask bold questions, embrace scientific rigor, and lead with empathy. Our holistic curriculum blends academic rigor with athletic and creative expression.&quot;
               </p>
               <p style={{ color: "var(--text-secondary)", fontSize: "var(--text-base)", lineHeight: 1.7 }}>
                 We invite parents to partner with us in preparing your children for global opportunities and lifelong leadership.
