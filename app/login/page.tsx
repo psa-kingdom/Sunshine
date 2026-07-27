@@ -65,7 +65,7 @@ export default function UnifiedLoginPage() {
       {/* Top Brand Bar */}
       <header style={{ width: "100%", padding: "1.5rem 2rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
         <Link href="/" className="flex items-center gap-3 group" style={{ textDecoration: "none" }}>
-          <span className="crest" style={{ display: "inline-flex", alignItems: "center", justifyCenter: "center", width: "2.25rem", height: "2.25rem", borderRadius: "var(--radius-sm)", background: "var(--gold-500)", color: "var(--navy-900)", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.125rem" }}>
+          <span className="crest" style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: "2.25rem", height: "2.25rem", borderRadius: "var(--radius-sm)", background: "var(--gold-500)", color: "var(--navy-900)", fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.125rem" }}>
             S
           </span>
           <div>
