@@ -24,7 +24,7 @@ export default function AdminTeachersPage() {
   // Form states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("Teacher2026!");
+  const [password, setPassword] = useState("");
   const [employeeId, setEmployeeId] = useState("");
   const [department, setDepartment] = useState("Science");
   const [specialization, setSpecialization] = useState("");

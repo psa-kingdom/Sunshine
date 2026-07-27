@@ -7,8 +7,8 @@ import Link from "next/link";
 
 export default function UnifiedLoginPage() {
   const [activeRole, setActiveRole] = useState<"admin" | "teacher" | "student">("admin");
-  const [email, setEmail] = useState("admin@sunshineps.edu.in");
-  const [password, setPassword] = useState("SunshineAdmin2026!");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
@@ -16,16 +16,6 @@ export default function UnifiedLoginPage() {
   const handleRoleSwitch = (role: "admin" | "teacher" | "student") => {
     setActiveRole(role);
     setError("");
-    if (role === "admin") {
-      setEmail("admin@sunshineps.edu.in");
-      setPassword("SunshineAdmin2026!");
-    } else if (role === "teacher") {
-      setEmail("teacher@sunshineps.edu.in");
-      setPassword("Teacher2026!");
-    } else {
-      setEmail("student@sunshineps.edu.in");
-      setPassword("Student2026!");
-    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -153,11 +143,6 @@ export default function UnifiedLoginPage() {
             >
               Student
             </button>
-          </div>
-
-          {/* Quick Fill Notification Banner */}
-          <div style={{ background: "rgba(217, 155, 38, 0.12)", border: "1px solid rgba(217, 155, 38, 0.3)", borderRadius: "var(--radius-sm)", padding: "0.75rem", marginBottom: "1.5rem", fontSize: "0.8rem", color: "var(--gold-300)" }}>
-            ⚡ <strong>Portfolio Demo Mode:</strong> Credentials for <strong>{activeRole.toUpperCase()}</strong> have been pre-filled below for instant testing.
           </div>
 
           {error && <div className="adminError" style={{ marginBottom: "1.25rem" }}>{error}</div>}

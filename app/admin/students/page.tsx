@@ -24,7 +24,7 @@ export default function AdminStudentsPage() {
   // Form states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("Student2026!");
+  const [password, setPassword] = useState("");
   const [rollNumber, setRollNumber] = useState("");
   const [grade, setGrade] = useState("Grade X");
   const [section, setSection] = useState("A");
