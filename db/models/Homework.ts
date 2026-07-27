@@ -8,6 +8,7 @@ export interface IHomework extends Document {
   description: string;
   dueDate: string;
   teacherName?: string;
+  resourceUrl?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -21,6 +22,7 @@ const HomeworkSchema: Schema<IHomework> = new Schema(
     description: { type: String, required: true, trim: true },
     dueDate: { type: String, required: true, trim: true },
     teacherName: { type: String, trim: true },
+    resourceUrl: { type: String, trim: true },
   },
   { timestamps: true }
 );
