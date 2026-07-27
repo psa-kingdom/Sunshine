@@ -24,80 +24,72 @@ export default function AdminLoginPage() {
       });
 
       if (res?.error) {
-        setError("Invalid email or password.");
+        setError("Invalid email address or password. Please try again.");
       } else {
         router.push("/admin");
         router.refresh();
       }
     } catch {
-      setError("An unexpected error occurred. Please try again.");
+      setError("An unexpected authentication error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <main className="min-h-screen flex items-center justify-center p-4 bg-[#051325] text-white">
-      <div className="w-full max-w-md bg-[#07192f] border border-[#d99b26]/30 rounded-xl p-8 shadow-2xl">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#d99b26] text-[#051325] font-bold text-xl mb-3">
+    <main className="adminLoginWrapper">
+      <div className="adminCard">
+        <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+          <div className="adminCrest" style={{ margin: "0 auto 0.75rem auto", width: "2.75rem", height: "2.75rem", fontSize: "1.25rem" }}>
             S
           </div>
-          <h1 className="text-2xl font-semibold tracking-wide text-white">
-            Admin Portal
-          </h1>
-          <p className="text-sm text-gray-400 mt-1">
+          <h1 className="adminHeading">Admin Portal</h1>
+          <p className="adminSubheading">
             Sunshine Public School Management
           </p>
         </div>
 
         {error && (
-          <div className="mb-6 p-3 rounded bg-red-900/40 border border-red-500/50 text-red-200 text-sm text-center">
+          <div className="adminError" role="alert">
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-xs uppercase tracking-wider text-gray-300 font-medium mb-1.5"
-            >
+        <form onSubmit={handleSubmit}>
+          <div className="adminFormGroup">
+            <label htmlFor="admin-email" className="adminLabel">
               Email Address
             </label>
             <input
-              id="email"
+              id="admin-email"
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="admin@sunshineps.edu.in"
-              className="w-full px-4 py-3 rounded-lg bg-[#051325] border border-white/15 text-white placeholder-gray-500 focus:outline-none focus:border-[#d99b26] transition-colors"
+              className="adminInput"
             />
           </div>
 
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-xs uppercase tracking-wider text-gray-300 font-medium mb-1.5"
-            >
+          <div className="adminFormGroup">
+            <label htmlFor="admin-password" className="adminLabel">
               Password
             </label>
             <input
-              id="password"
+              id="admin-password"
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full px-4 py-3 rounded-lg bg-[#051325] border border-white/15 text-white placeholder-gray-500 focus:outline-none focus:border-[#d99b26] transition-colors"
+              className="adminInput"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 px-4 rounded-lg bg-[#d99b26] hover:bg-[#e5ad3e] text-[#051325] font-semibold transition-colors disabled:opacity-50 cursor-pointer"
+            className="adminSubmitButton"
           >
             {loading ? "Signing in..." : "Sign In to Admin Portal"}
           </button>

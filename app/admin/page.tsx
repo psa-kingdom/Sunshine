@@ -9,18 +9,20 @@ export default async function AdminDashboardPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#051325] text-white p-6 md:p-10">
-      <div className="max-w-5xl mx-auto">
-        <header className="flex flex-col md:flex-row md:items-center md:justify-between pb-6 mb-8 border-b border-white/10 gap-4">
-          <div>
-            <span className="text-xs uppercase tracking-widest text-[#d99b26] font-semibold">
-              Admin Portal
-            </span>
-            <h1 className="text-3xl font-bold mt-1">Admin Dashboard</h1>
+    <div className="adminShell">
+      <header className="adminHeader">
+        <div className="adminHeaderInner">
+          <div className="adminBrand">
+            <span className="adminCrest">S</span>
+            <div className="adminTitle">
+              SUNSHINE PUBLIC SCHOOL
+              <small>Admin Portal</small>
+            </div>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-300">
-              Logged in as <strong className="text-white">{session.user.email}</strong>
+
+          <div className="adminUserInfo">
+            <span>
+              Logged in as <strong>{session.user.email}</strong>
             </span>
             <form
               action={async () => {
@@ -28,25 +30,22 @@ export default async function AdminDashboardPage() {
                 await signOut({ redirectTo: "/admin/login" });
               }}
             >
-              <button
-                type="submit"
-                className="px-4 py-2 text-sm rounded-lg bg-red-600/80 hover:bg-red-600 text-white font-medium transition-colors cursor-pointer"
-              >
+              <button type="submit" className="adminSignOutButton">
                 Sign Out
               </button>
             </form>
           </div>
-        </header>
+        </div>
+      </header>
 
-        <section className="bg-[#07192f] border border-[#d99b26]/20 rounded-xl p-8 shadow-lg">
-          <h2 className="text-xl font-semibold text-[#d99b26] mb-3">
-            Welcome to the Sunshine Admin Portal
-          </h2>
-          <p className="text-gray-300 leading-relaxed max-w-2xl">
-            Authentication setup is complete. You are currently logged in as an authorized administrator. Dashboard features and management tools will appear here.
+      <main className="adminMain">
+        <div className="adminContentCard">
+          <h2>Admin Dashboard</h2>
+          <p>
+            Welcome to the Sunshine Public School management console. Authentication has been established using Auth.js and MongoDB Atlas. Administrative data management modules will be populated here.
           </p>
-        </section>
-      </div>
-    </main>
+        </div>
+      </main>
+    </div>
   );
 }
