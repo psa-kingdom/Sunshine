@@ -55,6 +55,7 @@ export default function Home() {
             <a href="#about">About Us</a>
             <a href="#academics">Academics</a>
             <a href="#admissions">Admissions</a>
+            <a href="/enquire">Enquire Now</a>
             <a href="#life">Student Life</a>
             <a href="#achievements">Achievements</a>
             <a href="#contact">Contact</a>
@@ -311,8 +312,12 @@ export default function Home() {
             <p>Schedule a personal campus tour, interact with our academic coordinators, and experience our learning environment.</p>
           </div>
           <div className="admissionButtons">
+            <a className="goldButton group" href="/enquire">
+              <span>Submit Online Enquiry</span>
+              <Arrow />
+            </a>
             <a className="goldButton group" href="mailto:admissions@sunshineps.edu.in">
-              <span>Start Online Application</span>
+              <span>Email Admissions</span>
               <Arrow />
             </a>
             <a className="outlineButton" href="tel:+911145678900">
