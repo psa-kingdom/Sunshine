@@ -38,12 +38,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="preload" as="image" href="/hero-school.webp" />
       </head>
       <body
         className={`${cinzel.variable} ${outfit.variable} ${jakarta.variable}`}
+        suppressHydrationWarning
       >
         {children}
       </body>
