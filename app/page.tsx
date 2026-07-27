@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { StatCounter } from "./StatCounter";
+import ParticleButton from "@/components/kokonutui/particle-button";
 
 const Arrow = () => <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">→</span>;
 
@@ -47,8 +48,10 @@ export default function Home() {
             <Link className="admissionTop" href="/enquire">
               ADMISSIONS OPEN 2026–27
             </Link>
-            <Link href="/login" className="goldButton" style={{ padding: "0.5rem 1rem", fontSize: "0.8rem", textDecoration: "none" }}>
-              <span>Portal Login</span>
+            <Link href="/login" style={{ textDecoration: "none" }}>
+              <ParticleButton variant="default" size="sm">
+                Portal Login
+              </ParticleButton>
             </Link>
           </div>
         </div>
@@ -82,12 +85,15 @@ export default function Home() {
               A future-ready education rooted in timeless values, intellectual curiosity, and confident student leadership. Nurturing over 2,400 students across 15 acres of modern campus.
             </p>
             <div className="heroActions">
-              <Link className="goldButton group" href="/enquire">
-                <span>Submit Admission Enquiry</span>
-                <Arrow />
+              <Link href="/enquire" style={{ textDecoration: "none" }}>
+                <ParticleButton variant="default" size="lg">
+                  Submit Admission Enquiry
+                </ParticleButton>
               </Link>
-              <Link className="outlineButton" href="/login">
-                Staff & Student Login
+              <Link href="/login" style={{ textDecoration: "none" }}>
+                <ParticleButton variant="outline" size="lg">
+                  Staff & Student Login
+                </ParticleButton>
               </Link>
             </div>
             <div className="stats">
@@ -267,17 +273,21 @@ export default function Home() {
             <h2>Give your child a bright beginning.</h2>
             <p>Schedule a personal campus tour, interact with our academic coordinators, and experience our learning environment.</p>
           </div>
-          <div className="admissionButtons">
-            <Link className="goldButton group" href="/enquire">
-              <span>Submit Online Enquiry</span>
-              <Arrow />
+          <div className="admissionButtons" style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <Link href="/enquire" style={{ textDecoration: "none" }}>
+              <ParticleButton variant="default" size="lg">
+                Submit Online Enquiry
+              </ParticleButton>
             </Link>
-            <a className="goldButton group" href="mailto:admissions@sunshineps.edu.in">
-              <span>Email Admissions</span>
-              <Arrow />
+            <a href="mailto:admissions@sunshineps.edu.in" style={{ textDecoration: "none" }}>
+              <ParticleButton variant="default" size="lg">
+                Email Admissions
+              </ParticleButton>
             </a>
-            <a className="outlineButton" href="tel:+911145678900">
-              Book a Campus Visit
+            <a href="tel:+911145678900" style={{ textDecoration: "none" }}>
+              <ParticleButton variant="outline" size="lg">
+                Book a Campus Visit
+              </ParticleButton>
             </a>
           </div>
         </div>
