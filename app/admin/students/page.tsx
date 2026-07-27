@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import ProfileDropdown from "@/components/kokonutui/profile-dropdown";
 
 interface StudentItem {
   _id: string;
@@ -108,10 +108,7 @@ export default function AdminStudentsPage() {
             <Link href="/admin/teachers" className="text-xs uppercase tracking-wider font-semibold text-[var(--gold-400)] hover:underline">
               Teachers
             </Link>
-            <span className="text-gray-500">•</span>
-            <button onClick={() => signOut({ callbackUrl: "/login" })} className="adminSignOutButton">
-              Sign Out
-            </button>
+            <ProfileDropdown userName="Administrator" userEmail="admin@sunshineps.edu.in" userRole="Admin" />
           </div>
         </div>
       </header>

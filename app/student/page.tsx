@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { signOut } from "next-auth/react";
+import ProfileDropdown from "@/components/kokonutui/profile-dropdown";
 
 interface StudentProfile {
   name: string;
@@ -231,13 +231,7 @@ export default function StudentDashboardPage() {
           </div>
 
           <div className="adminUserInfo">
-            <span>
-              Logged in as <strong>{student?.name || "Student"}</strong> ({student?.grade}-{student?.section})
-            </span>
-            <span className="text-gray-500">•</span>
-            <button onClick={() => signOut({ callbackUrl: "/login" })} className="adminSignOutButton">
-              Sign Out
-            </button>
+            <ProfileDropdown userName={student?.name || "Aarav Patel"} userEmail={student?.email || "student@sunshineps.edu.in"} userRole="Student" />
           </div>
         </div>
       </header>

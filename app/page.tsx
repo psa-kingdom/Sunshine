@@ -1,16 +1,24 @@
+"use client";
+
+import React, { useState } from "react";
 import Link from "next/link";
 import { StatCounter } from "./StatCounter";
 import ParticleButton from "@/components/kokonutui/particle-button";
-
-const Arrow = () => <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">→</span>;
+import EnquiryDrawer from "@/components/kokonutui/enquiry-drawer";
+import MorphicNavbar from "@/components/kokonutui/morphic-navbar";
 
 const Icon = ({ children }: { children: React.ReactNode }) => (
   <span className="quickIcon" aria-hidden="true">{children}</span>
 );
 
 export default function Home() {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   return (
     <main className="min-h-screen">
+      {/* Enquiry Drawer Component */}
+      <EnquiryDrawer isOpen={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} />
+
       {/* Utility Contact & Portal Bar */}
       <div className="utility">
         <div className="wrap utilityInner">
@@ -45,9 +53,14 @@ export default function Home() {
             </div>
           </Link>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <Link className="admissionTop" href="/enquire">
+            <button
+              type="button"
+              onClick={() => setIsDrawerOpen(true)}
+              className="admissionTop"
+              style={{ background: "transparent", border: "none", cursor: "pointer" }}
+            >
               ADMISSIONS OPEN 2026–27
-            </Link>
+            </button>
             <Link href="/login" style={{ textDecoration: "none" }}>
               <ParticleButton variant="default" size="sm">
                 Portal Login
@@ -55,19 +68,22 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <nav id="navigation" className="mainNav" aria-label="Main navigation">
-          <div className="wrap">
-            <Link className="active" href="/">Home</Link>
-            <a href="#about">About Us</a>
-            <a href="#principal">Principal&apos;s Message</a>
-            <a href="#academics">Academics</a>
-            <a href="#facilities">Facilities</a>
-            <a href="#faculty">Faculty</a>
-            <Link href="/enquire">Enquire Now</Link>
-            <a href="#life">Student Life</a>
-            <a href="#contact">Contact</a>
-          </div>
-        </nav>
+        <MorphicNavbar
+          items={[
+            { id: "home", name: "Home", href: "#home" },
+            { id: "about", name: "About Us", href: "#principal" },
+            { id: "principal", name: "Principal's Message", href: "#principal" },
+            { id: "academics", name: "Academics", href: "#facilities" },
+            { id: "facilities", name: "Facilities", href: "#facilities" },
+            { id: "faculty", name: "Faculty", href: "#faculty" },
+            { id: "enquire", name: "Enquire Now", isAction: true },
+            { id: "admissions", name: "Admissions", href: "#admissions" },
+            { id: "contact", name: "Contact", href: "#contact" },
+          ]}
+          onActionClick={(id) => {
+            if (id === "enquire") setIsDrawerOpen(true);
+          }}
+        />
       </header>
 
       {/* Hero Section */}
@@ -85,11 +101,9 @@ export default function Home() {
               A future-ready education rooted in timeless values, intellectual curiosity, and confident student leadership. Nurturing over 2,400 students across 15 acres of modern campus.
             </p>
             <div className="heroActions">
-              <Link href="/enquire" style={{ textDecoration: "none" }}>
-                <ParticleButton variant="default" size="lg">
-                  Submit Admission Enquiry
-                </ParticleButton>
-              </Link>
+              <ParticleButton variant="default" size="lg" onClick={() => setIsDrawerOpen(true)}>
+                Submit Admission Enquiry
+              </ParticleButton>
               <Link href="/login" style={{ textDecoration: "none" }}>
                 <ParticleButton variant="outline" size="lg">
                   Staff & Student Login
@@ -274,11 +288,9 @@ export default function Home() {
             <p>Schedule a personal campus tour, interact with our academic coordinators, and experience our learning environment.</p>
           </div>
           <div className="admissionButtons" style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <Link href="/enquire" style={{ textDecoration: "none" }}>
-              <ParticleButton variant="default" size="lg">
-                Submit Online Enquiry
-              </ParticleButton>
-            </Link>
+            <ParticleButton variant="default" size="lg" onClick={() => setIsDrawerOpen(true)}>
+              Submit Online Enquiry
+            </ParticleButton>
             <a href="mailto:admissions@sunshineps.edu.in" style={{ textDecoration: "none" }}>
               <ParticleButton variant="default" size="lg">
                 Email Admissions
@@ -307,7 +319,13 @@ export default function Home() {
             <a href="#academics">Academic Programs</a>
             <a href="#facilities">Campus Facilities</a>
             <a href="#faculty">Faculty</a>
-            <Link href="/enquire">Online Enquiry</Link>
+            <button
+              type="button"
+              onClick={() => setIsDrawerOpen(true)}
+              style={{ background: "transparent", border: "none", color: "inherit", cursor: "pointer", font: "inherit", textAlign: "left", padding: 0 }}
+            >
+              Online Enquiry
+            </button>
             <Link href="/login">Portal Sign In</Link>
           </div>
           <div>

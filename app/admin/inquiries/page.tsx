@@ -2,7 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+import Loader from "@/components/kokonutui/loader";
+import ProfileDropdown from "@/components/kokonutui/profile-dropdown";
+import SmoothTab from "@/components/kokonutui/smooth-tab";
+import DataToolbar from "@/components/kokonutui/data-toolbar";
+import { useRouter } from "next/navigation";
 
 interface InquiryItem {
   _id: string;
@@ -19,8 +23,20 @@ export default function AdminInquiriesPage() {
   const [inquiries, setInquiries] = useState<InquiryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [filterStatus, setFilterStatus] = useState<string>("all");
+  const [filterStatus, setFilterStatus] = useState("all");
   const [updatingId, setUpdatingId] = useState<string | null>(null);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [activeAdminTab, setActiveAdminTab] = useState("inquiries");
+  const router = useRouter();
+
+  const handleTabChange = (tabId: string) => {
+    setActiveAdminTab(tabId);
+    if (tabId === "teachers") {
+      router.push("/admin/teachers");
+    } else if (tabId === "students") {
+      router.push("/admin/students");
+    }
+  };
 
   const fetchInquiries = async () => {
     setLoading(true);
@@ -28,12 +44,13 @@ export default function AdminInquiriesPage() {
     try {
       const res = await fetch("/api/admin/inquiries");
       if (!res.ok) {
-        throw new Error("Failed to load admission inquiries");
+        throw new Error(`Server error: ${res.status}`);
       }
       const data = await res.json();
-      setInquiries(data.inquiries || []);
+      setInquiries(data.data || []);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "An error occurred");
+      const msg = err instanceof Error ? err.message : "Failed to load inquiries";
+      setError(msg);
     } finally {
       setLoading(false);
     }
@@ -69,7 +86,7 @@ export default function AdminInquiriesPage() {
     }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDeleteSingle = async (id: string) => {
     if (!confirm("Are you sure you want to delete this enquiry?")) {
       return;
     }
@@ -86,11 +103,66 @@ export default function AdminInquiriesPage() {
       }
 
       setInquiries((prev) => prev.filter((item) => item._id !== id));
+      setSelectedIds((prev) => prev.filter((item) => item !== id));
     } catch {
       alert("Error deleting inquiry");
     } finally {
       setUpdatingId(null);
     }
+  };
+
+  const handleDeleteSelected = async () => {
+    if (selectedIds.length === 0) return;
+    if (!confirm(`Delete ${selectedIds.length} selected enquiry record(s)?`)) return;
+
+    for (const id of selectedIds) {
+      try {
+        await fetch(`/api/admin/inquiries/${id}`, { method: "DELETE" });
+      } catch (err) {
+        console.error("Failed deleting", id, err);
+      }
+    }
+    setInquiries((prev) => prev.filter((item) => !selectedIds.includes(item._id)));
+    setSelectedIds([]);
+  };
+
+  const handleExportCSV = () => {
+    const headers = ["Parent Name", "Email", "Phone", "Grade", "Status", "Date"];
+    const rows = filteredInquiries.map((item) => [
+      `"${item.parentName.replace(/"/g, '""')}"`,
+      `"${item.email.replace(/"/g, '""')}"`,
+      `"${item.phone.replace(/"/g, '""')}"`,
+      `"${item.gradeApplyingFor.replace(/"/g, '""')}"`,
+      `"${item.status}"`,
+      `"${new Date(item.createdAt).toLocaleDateString()}"`,
+    ]);
+    const csvContent =
+      "data:text/csv;charset=utf-8," +
+      [headers.join(","), ...rows.map((e) => e.join(","))].join("\n");
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute(
+      "download",
+      `sunshine_enquiries_${new Date().toISOString().slice(0, 10)}.csv`
+    );
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const toggleSelectAll = () => {
+    if (selectedIds.length === filteredInquiries.length) {
+      setSelectedIds([]);
+    } else {
+      setSelectedIds(filteredInquiries.map((i) => i._id));
+    }
+  };
+
+  const toggleSelectOne = (id: string) => {
+    setSelectedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
   };
 
   const filteredInquiries = inquiries.filter((item) => {
@@ -113,24 +185,31 @@ export default function AdminInquiriesPage() {
           <div className="adminUserInfo">
             <Link
               href="/admin"
-              className="text-xs uppercase tracking-wider font-semibold text-[var(--gold-400)] hover:underline"
+              className="text-xs uppercase tracking-wider font-semibold text-[var(--gold-400)] hover:underline mr-2"
             >
               Dashboard
             </Link>
-            <span className="text-gray-500">•</span>
-            <button
-              onClick={() => signOut({ callbackUrl: "/admin/login" })}
-              className="adminSignOutButton"
-            >
-              Sign Out
-            </button>
+            <ProfileDropdown userName="Administrator" userEmail="admin@sunshineps.edu.in" userRole="Admin" />
           </div>
         </div>
       </header>
 
       <main className="adminMain">
+        {/* KokonutUI SmoothTab Navigation */}
+        <div className="mb-6 flex justify-between items-center flex-wrap gap-4">
+          <SmoothTab
+            tabs={[
+              { id: "inquiries", label: "Admission Enquiries", badge: inquiries.length },
+              { id: "teachers", label: "Teachers & Staff" },
+              { id: "students", label: "Students & Parents" },
+            ]}
+            activeTab={activeAdminTab}
+            onChange={handleTabChange}
+          />
+        </div>
+
         <div className="adminContentCard">
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem", flexWrap: "wrap", gap: "1rem" }}>
             <div>
               <h2>Submitted Enquiries</h2>
               <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.6)" }}>
@@ -157,10 +236,16 @@ export default function AdminInquiriesPage() {
             </div>
           </div>
 
+          {/* KokonutUI DataToolbar */}
+          <DataToolbar
+            selectedCount={selectedIds.length}
+            onDeleteSelected={handleDeleteSelected}
+            onExportCSV={handleExportCSV}
+            className="mb-4"
+          />
+
           {loading ? (
-            <div style={{ textAlign: "center", padding: "3rem", color: "rgba(255,255,255,0.6)" }}>
-              Loading inquiries...
-            </div>
+            <Loader title="Loading enquiries..." subtitle="Fetching prospective student applications" />
           ) : error ? (
             <div className="adminError">{error}</div>
           ) : filteredInquiries.length === 0 ? (
@@ -172,9 +257,17 @@ export default function AdminInquiriesPage() {
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.875rem" }}>
                 <thead>
                   <tr style={{ borderBottom: "1px solid var(--border-subtle)", textAlign: "left", color: "var(--gold-400)", textTransform: "uppercase", fontSize: "0.75rem", letterSpacing: "0.05em" }}>
+                    <th style={{ padding: "0.75rem 1rem", width: "40px" }}>
+                      <input
+                        type="checkbox"
+                        checked={selectedIds.length === filteredInquiries.length && filteredInquiries.length > 0}
+                        onChange={toggleSelectAll}
+                        className="cursor-pointer"
+                      />
+                    </th>
                     <th style={{ padding: "0.75rem 1rem" }}>Date</th>
                     <th style={{ padding: "0.75rem 1rem" }}>Parent Name</th>
-                    <th style={{ padding: "0.75rem 1rem" }}>Contact Details</th>
+                    <th style={{ padding: "0.75rem 1rem" }}>Contact Info</th>
                     <th style={{ padding: "0.75rem 1rem" }}>Grade</th>
                     <th style={{ padding: "0.75rem 1rem" }}>Message</th>
                     <th style={{ padding: "0.75rem 1rem" }}>Status</th>
@@ -185,71 +278,75 @@ export default function AdminInquiriesPage() {
                   {filteredInquiries.map((item) => (
                     <tr
                       key={item._id}
-                      style={{
-                        borderBottom: "1px solid rgba(255,255,255,0.08)",
-                        opacity: updatingId === item._id ? 0.5 : 1,
-                      }}
+                      style={{ borderBottom: "1px solid rgba(255,255,255,0.05)", background: selectedIds.includes(item._id) ? "rgba(217, 155, 38, 0.08)" : "transparent" }}
                     >
-                      <td style={{ padding: "0.875rem 1rem", whiteSpace: "nowrap", color: "rgba(255,255,255,0.6)" }}>
-                        {new Date(item.createdAt).toLocaleDateString("en-IN", {
-                          day: "numeric",
-                          month: "short",
-                          year: "numeric",
-                        })}
+                      <td style={{ padding: "0.75rem 1rem" }}>
+                        <input
+                          type="checkbox"
+                          checked={selectedIds.includes(item._id)}
+                          onChange={() => toggleSelectOne(item._id)}
+                          className="cursor-pointer"
+                        />
                       </td>
-                      <td style={{ padding: "0.875rem 1rem", fontWeight: "600", color: "#ffffff" }}>
+                      <td style={{ padding: "0.75rem 1rem", whiteSpace: "nowrap", color: "rgba(255,255,255,0.6)" }}>
+                        {new Date(item.createdAt).toLocaleDateString()}
+                      </td>
+                      <td style={{ padding: "0.75rem 1rem", fontWeight: 600, color: "#ffffff" }}>
                         {item.parentName}
                       </td>
-                      <td style={{ padding: "0.875rem 1rem" }}>
-                        <div style={{ color: "#ffffff" }}>{item.email}</div>
-                        <div style={{ color: "rgba(255,255,255,0.6)", fontSize: "0.8rem" }}>{item.phone}</div>
+                      <td style={{ padding: "0.75rem 1rem" }}>
+                        <div style={{ color: "rgba(255,255,255,0.9)" }}>{item.email}</div>
+                        <div style={{ fontSize: "0.75rem", color: "var(--gold-400)" }}>{item.phone}</div>
                       </td>
-                      <td style={{ padding: "0.875rem 1rem", whiteSpace: "nowrap", color: "var(--gold-300)" }}>
+                      <td style={{ padding: "0.75rem 1rem", color: "rgba(255,255,255,0.8)" }}>
                         {item.gradeApplyingFor}
                       </td>
-                      <td style={{ padding: "0.875rem 1rem", maxWidth: "250px", color: "rgba(255,255,255,0.7)", fontSize: "0.8rem" }}>
-                        {item.message || "—"}
+                      <td style={{ padding: "0.75rem 1rem", maxWidth: "240px" }}>
+                        <p style={{ margin: 0, fontSize: "0.8rem", color: "rgba(255,255,255,0.7)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                          {item.message || "—"}
+                        </p>
                       </td>
-                      <td style={{ padding: "0.875rem 1rem", whiteSpace: "nowrap" }}>
+                      <td style={{ padding: "0.75rem 1rem" }}>
                         <select
                           value={item.status}
                           disabled={updatingId === item._id}
                           onChange={(e) => handleStatusChange(item._id, e.target.value)}
-                          className="adminInput"
                           style={{
                             padding: "0.25rem 0.5rem",
                             fontSize: "0.75rem",
+                            borderRadius: "var(--radius-sm)",
+                            border: "1px solid var(--border-subtle)",
                             background:
                               item.status === "new"
-                                ? "rgba(217,155,38,0.2)"
+                                ? "rgba(229, 173, 60, 0.15)"
                                 : item.status === "contacted"
-                                ? "rgba(59,130,246,0.2)"
-                                : "rgba(34,197,94,0.2)",
-                            borderColor:
+                                ? "rgba(59, 130, 246, 0.15)"
+                                : "rgba(16, 185, 129, 0.15)",
+                            color:
                               item.status === "new"
-                                ? "var(--gold-500)"
+                                ? "var(--gold-400)"
                                 : item.status === "contacted"
-                                ? "#3b82f6"
-                                : "#22c55e",
+                                ? "#60a5fa"
+                                : "#34d399",
+                            cursor: "pointer",
                           }}
                         >
-                          <option value="new" style={{ background: "var(--navy-900)" }}>New</option>
-                          <option value="contacted" style={{ background: "var(--navy-900)" }}>Contacted</option>
-                          <option value="closed" style={{ background: "var(--navy-900)" }}>Closed</option>
+                          <option value="new" style={{ background: "var(--navy-900)", color: "#fff" }}>New</option>
+                          <option value="contacted" style={{ background: "var(--navy-900)", color: "#fff" }}>Contacted</option>
+                          <option value="closed" style={{ background: "var(--navy-900)", color: "#fff" }}>Closed</option>
                         </select>
                       </td>
-                      <td style={{ padding: "0.875rem 1rem", textAlign: "right", whiteSpace: "nowrap" }}>
+                      <td style={{ padding: "0.75rem 1rem", textAlign: "right" }}>
                         <button
-                          onClick={() => handleDelete(item._id)}
+                          onClick={() => handleDeleteSingle(item._id)}
                           disabled={updatingId === item._id}
                           style={{
-                            background: "rgba(220,38,38,0.2)",
-                            border: "1px solid rgba(239,68,68,0.4)",
-                            color: "#fca5a5",
-                            padding: "0.25rem 0.6rem",
-                            borderRadius: "var(--radius-sm)",
+                            background: "transparent",
+                            border: "none",
+                            color: "#ef4444",
                             fontSize: "0.75rem",
                             cursor: "pointer",
+                            textDecoration: "underline",
                           }}
                         >
                           Delete
