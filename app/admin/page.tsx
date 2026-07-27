@@ -29,6 +29,13 @@ export default async function AdminDashboardPage() {
               Inquiries
             </Link>
             <span className="text-gray-500">•</span>
+            <Link
+              href="/admin/gallery"
+              className="text-xs uppercase tracking-wider font-semibold text-[var(--gold-400)] hover:underline"
+            >
+              Gallery
+            </Link>
+            <span className="text-gray-500">•</span>
             <span>
               Logged in as <strong>{session.user.email}</strong>
             </span>
@@ -66,6 +73,20 @@ export default async function AdminDashboardPage() {
               </h3>
               <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.7)" }}>
                 View submitted parent enquiries, update review status, and manage prospective student applications.
+              </p>
+            </div>
+          </Link>
+
+          <Link href="/admin/gallery" style={{ textDecoration: "none" }}>
+            <div className="adminContentCard" style={{ cursor: "pointer", height: "100%" }}>
+              <div style={{ fontSize: "0.75rem", textTransform: "uppercase", letterSpacing: "0.1em", color: "var(--gold-400)", fontWeight: 600, marginBottom: "0.5rem" }}>
+                Media & Assets
+              </div>
+              <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.25rem", color: "#ffffff", marginBottom: "0.5rem" }}>
+                Media Gallery →
+              </h3>
+              <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.7)" }}>
+                Upload campus photography, lab facilities, and event media assets directly to Vercel Blob storage.
               </p>
             </div>
           </Link>

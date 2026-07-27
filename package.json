@@ -10,6 +10,7 @@
     "seed:admin": "tsx scripts/seed-admin.ts"
   },
   "dependencies": {
+    "@vercel/blob": "^2.6.1",
     "bcryptjs": "^2.4.3",
     "mongoose": "^8.10.0",
     "next": "^15.1.7",
