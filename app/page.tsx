@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { StatCounter } from "./StatCounter";
 
 const Arrow = () => <span aria-hidden="true" className="transition-transform duration-200 group-hover:translate-x-1">→</span>;
@@ -25,9 +26,9 @@ export default function Home() {
             <span>Sector 45, Gurugram, Haryana</span>
           </div>
           <nav aria-label="Portal links">
-            <a href="#portal">Alumni</a>
-            <a href="#portal">Parent Portal</a>
-            <a href="#portal">Student Login</a>
+            <Link href="/login" style={{ color: "var(--gold-400)", fontWeight: 700 }}>
+              🔒 Staff & Student Portal Login
+            </Link>
           </nav>
         </div>
       </div>
@@ -35,29 +36,32 @@ export default function Home() {
       {/* Main Header & Brand Bar */}
       <header>
         <div className="wrap brandRow">
-          <a className="brand" href="#home" aria-label="Sunshine Public School home">
+          <Link className="brand" href="/" aria-label="Sunshine Public School home">
             <span className="crest" aria-hidden="true">S</span>
             <div className="brandText">
               <strong>SUNSHINE PUBLIC SCHOOL</strong>
               <small>Learning <b>•</b> Leadership <b>•</b> Character</small>
             </div>
-          </a>
-          <a className="admissionTop" href="#admissions">
-            ADMISSIONS OPEN 2026–27
-          </a>
-          <a className="menu" href="#navigation" aria-label="Open navigation">
-            ☰
-          </a>
+          </Link>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <Link className="admissionTop" href="/enquire">
+              ADMISSIONS OPEN 2026–27
+            </Link>
+            <Link href="/login" className="goldButton" style={{ padding: "0.5rem 1rem", fontSize: "0.8rem", textDecoration: "none" }}>
+              <span>Portal Login</span>
+            </Link>
+          </div>
         </div>
         <nav id="navigation" className="mainNav" aria-label="Main navigation">
           <div className="wrap">
-            <a className="active" href="#home">Home</a>
+            <Link className="active" href="/">Home</Link>
             <a href="#about">About Us</a>
+            <a href="#principal">Principal's Message</a>
             <a href="#academics">Academics</a>
-            <a href="#admissions">Admissions</a>
-            <a href="/enquire">Enquire Now</a>
+            <a href="#facilities">Facilities</a>
+            <a href="#faculty">Faculty</a>
+            <Link href="/enquire">Enquire Now</Link>
             <a href="#life">Student Life</a>
-            <a href="#achievements">Achievements</a>
             <a href="#contact">Contact</a>
           </div>
         </nav>
@@ -78,14 +82,13 @@ export default function Home() {
               A future-ready education rooted in timeless values, intellectual curiosity, and confident student leadership. Nurturing over 2,400 students across 15 acres of modern campus.
             </p>
             <div className="heroActions">
-              <a className="goldButton group" href="#admissions">
-                <span>Explore Admissions</span>
+              <Link className="goldButton group" href="/enquire">
+                <span>Submit Admission Enquiry</span>
                 <Arrow />
-              </a>
-              <a className="textLink group" href="#about">
-                <span>Discover Our School</span>
-                <Arrow />
-              </a>
+              </Link>
+              <Link className="outlineButton" href="/login">
+                Staff & Student Login
+              </Link>
             </div>
             <div className="stats">
               <div>
@@ -98,208 +101,161 @@ export default function Home() {
               </div>
               <div>
                 <StatCounter value="100%" />
-                <small>CBSE Board Success</small>
+                <small>CBSE Pass Rate</small>
               </div>
             </div>
           </div>
         </div>
-        <div className="heroImage" role="img" aria-label="Sunshine Public School campus and students" />
-      </section>
-
-      {/* Live Announcement Bar */}
-      <a className="notice" href="#notices">
-        <div className="wrap noticeInner">
-          <span className="noticeTitle">◉ LATEST ANNOUNCEMENT</span>
-          <span className="noticeText">
-            Admissions open for Nursery to Grade XI (Session 2026–27) &nbsp;•&nbsp; Campus tours every Saturday at 10:00 AM
-          </span>
-          <Arrow />
-        </div>
-      </a>
-
-      {/* Quick Access Services */}
-      <section className="wrap" aria-label="Quick links">
-        <div className="quickGrid">
-          <a href="#admissions" className="quickCard">
-            <Icon>▤</Icon>
-            <span>Apply Online</span>
-            <Arrow />
-          </a>
-          <a href="#academics" className="quickCard">
-            <Icon>▦</Icon>
-            <span>Academic Calendar</span>
-            <Arrow />
-          </a>
-          <a href="#contact" className="quickCard">
-            <Icon>▣</Icon>
-            <span>School Transport</span>
-            <Arrow />
-          </a>
-          <a href="#contact" className="quickCard">
-            <Icon>☎</Icon>
-            <span>Contact Helpdesk</span>
-            <Arrow />
-          </a>
+        <div className="heroVisual">
+          <div className="imageWrapper">
+            <img
+              src="/hero-school.webp"
+              alt="Sunshine Public School Students"
+              width={700}
+              height={500}
+            />
+          </div>
+          <div className="floatingBadge">
+            <span className="star">★</span>
+            <div>
+              <strong>Top 10 CBSE School</strong>
+              <small>Gurugram District Ranking 2025</small>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Editorial About Section */}
-      <section id="about" className="wrap intro">
-        <div>
-          <p className="sectionTag">WELCOME TO SUNSHINE</p>
-          <h2>Education that builds character—and a future.</h2>
-        </div>
-        <div>
-          <p>
-            For over 25 years, Sunshine Public School has empowered children to discover their authentic strengths through rigorous academic pathways, holistic co-curricular immersion, and individualized educator mentoring.
-          </p>
-          <a className="textLinkDark group" href="#academics">
-            <span>Meet our leadership &amp; faculty</span>
-            <Arrow />
-          </a>
+      {/* Principal's Message Section */}
+      <section id="principal" className="wrap news" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
+        <div style={{ background: "var(--surface-card)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)", padding: "clamp(1.5rem, 4vw, 3rem)", boxShadow: "var(--shadow-md)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2.5rem", alignItems: "center" }}>
+            <div style={{ position: "relative" }}>
+              <div style={{ width: "100%", height: "360px", borderRadius: "var(--radius-md)", overflow: "hidden", border: "2px solid var(--gold-400)" }}>
+                <img
+                  src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop"
+                  alt="Principal Dr. Meenakshi Sundaram"
+                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                />
+              </div>
+              <div style={{ position: "absolute", bottom: "1rem", left: "1rem", right: "1rem", background: "rgba(7,25,47,0.9)", padding: "0.75rem 1rem", borderRadius: "var(--radius-sm)", border: "1px solid var(--gold-400)" }}>
+                <strong style={{ color: "#fff", display: "block" }}>Dr. Meenakshi Sundaram</strong>
+                <small style={{ color: "var(--gold-400)" }}>Principal & Academic Director (Ph.D. Education)</small>
+              </div>
+            </div>
+
+            <div>
+              <p className="sectionTag">LEADERSHIP VISION</p>
+              <h2 style={{ fontFamily: "var(--font-display)", fontSize: "var(--text-3xl)", color: "var(--navy-900)", marginBottom: "1rem" }}>
+                Principal's Message
+              </h2>
+              <p style={{ color: "var(--text-secondary)", fontSize: "var(--text-base)", lineHeight: 1.7, marginBottom: "1rem" }}>
+                "At Sunshine Public School, education transcends textbooks. We empower young minds to ask bold questions, embrace scientific rigor, and lead with empathy. Our holistic curriculum blends academic rigor with athletic and creative expression."
+              </p>
+              <p style={{ color: "var(--text-secondary)", fontSize: "var(--text-base)", lineHeight: 1.7 }}>
+                We invite parents to partner with us in preparing your children for global opportunities and lifelong leadership.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Academic Journey */}
-      <section id="academics" className="programs">
+      {/* School Facilities */}
+      <section id="facilities" className="features" style={{ background: "var(--cream-50)" }}>
         <div className="wrap">
           <div className="sectionHead">
             <div>
-              <p className="sectionTag">ACADEMIC PATHWAYS</p>
-              <h2>Learning tailored for every stage</h2>
+              <p className="sectionTag">CAMPUS INFRASTRUCTURE</p>
+              <h2>World-class learning facilities</h2>
             </div>
-            <p>
-              Purpose-built CBSE programmes foster conceptual depth, collaborative inquiry, and critical thinking from early childhood through senior secondary.
-            </p>
+            <p>Designed to ignite curiosity, physical fitness, and technological mastery.</p>
           </div>
+
           <div className="cardGrid">
-            <article className="programCard">
-              <span className="numeralAnchor">01</span>
-              <h3>Foundational Years</h3>
-              <p>Joyful, experiential play-led curriculum nurturing sensory discovery, literacy, and social confidence for Nursery to Grade II.</p>
-              <a href="#contact">
-                <span>Explore Foundational Stage</span>
-                <Arrow />
-              </a>
-            </article>
-            <article className="programCard">
-              <span className="numeralAnchor">02</span>
-              <h3>Middle School</h3>
-              <p>Conceptual mastery, STEM exploration, humanities, and creative project inquiry for Grades III–VIII.</p>
-              <a href="#contact">
-                <span>Explore Middle School</span>
-                <Arrow />
-              </a>
-            </article>
-            <article className="programCard">
-              <span className="numeralAnchor">03</span>
-              <h3>Senior Secondary</h3>
-              <p>Future-focused CBSE streams (Science, Commerce, Humanities) paired with career mentoring and competitive exam guidance.</p>
-              <a href="#contact">
-                <span>Explore Senior School</span>
-                <Arrow />
-              </a>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      {/* Excellence & Statistics */}
-      <section id="achievements" className="wrap achievement">
-        <div>
-          <p className="sectionTag">EXCELLENCE IN ACTION</p>
-          <h2>Big ambitions.<br />Remarkable outcomes.</h2>
-          <p>
-            Our scholars consistently excel in national board exams, Olympiads, robotics showcases, state sports meets, and performing arts festivals—guided by experienced educators in a vibrant environment.
-          </p>
-          <a className="goldButton group" href="#notices">
-            <span>View Student Achievements</span>
-            <Arrow />
-          </a>
-        </div>
-        <div className="achievementStats">
-          <div className="statBox">
-            <StatCounter value="98.6%" />
-            <span>School Topper Score (Grade XII)</span>
-          </div>
-          <div className="statBox">
-            <StatCounter value="40+" />
-            <span>National &amp; District Sports Awards</span>
-          </div>
-          <div className="statBox">
-            <StatCounter value="18:1" />
-            <span>Student–Teacher Learning Ratio</span>
-          </div>
-          <div className="statBox">
-            <StatCounter value="30+" />
-            <span>Clubs &amp; Student Societies</span>
-          </div>
-        </div>
-      </section>
-
-      {/* Beyond the Classroom */}
-      <section id="life" className="life">
-        <div className="wrap">
-          <div className="sectionHead">
-            <div>
-              <p className="sectionTag">BEYOND THE CLASSROOM</p>
-              <h2>A campus alive with possibility</h2>
+            <div className="featureCard">
+              <Icon>🔬</Icon>
+              <h3>Advanced STEM & Robotics Labs</h3>
+              <p>State-of-the-art Physics, Chemistry, Biology, and AI Robotics laboratories equipped with modern experimental apparatus.</p>
             </div>
-            <p>
-              From athletic grounds and coding labs to music studios and community outreach, every student finds their voice.
-            </p>
-          </div>
-          <div className="lifeGrid">
-            <div className="lifePhoto one">
-              <span>Sports &amp; Athletic Excellence</span>
+            <div className="featureCard">
+              <Icon>🏀</Icon>
+              <h3>15-Acre Sports Complex</h3>
+              <p>Olympic-standard basketball courts, synthetic running tracks, indoor badminton arena, and trained athletic coaches.</p>
             </div>
-            <div className="lifePhoto two">
-              <span>Robotics &amp; Innovation Labs</span>
+            <div className="featureCard">
+              <Icon>📚</Icon>
+              <h3>Digital Resource Library</h3>
+              <p>Over 25,000 physical titles, e-book archives, quiet study pods, and online research databases for student projects.</p>
             </div>
-            <div className="lifePhoto three">
-              <span>Performing Arts &amp; Cultural Guild</span>
+            <div className="featureCard">
+              <Icon>🎭</Icon>
+              <h3>Auditorium & Arts Guild</h3>
+              <p>600-seater acoustic auditorium hosting dramatics, music recitals, inter-house debates, and cultural showcases.</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* School Updates */}
-      <section id="notices" className="wrap news">
+      {/* Faculty Showcase */}
+      <section id="faculty" className="wrap news" style={{ paddingTop: "4rem", paddingBottom: "4rem" }}>
         <div className="sectionHead">
           <div>
-            <p className="sectionTag">SCHOOL UPDATES</p>
-            <h2>Latest news &amp; notices</h2>
+            <p className="sectionTag">DISTINGUISHED FACULTY</p>
+            <h2>Meet our department leaders</h2>
           </div>
-          <a className="textLinkDark group" href="#">
-            <span>View All Notices</span>
-            <Arrow />
-          </a>
+          <p>Dedicated educators fostering academic excellence and personal mentorship.</p>
         </div>
+
         <div className="newsGrid">
-          <article className="newsCard">
-            <time>12 JUL 2026</time>
-            <h3>Admissions for the 2026–27 Academic Session are now open</h3>
-            <a href="#admissions">
-              <span>Read Announcement</span>
-              <Arrow />
-            </a>
-          </article>
-          <article className="newsCard">
-            <time>08 JUL 2026</time>
-            <h3>Annual Inter-House Science &amp; Innovation Showcase 2026</h3>
-            <a href="#">
-              <span>Read Full Story</span>
-              <Arrow />
-            </a>
-          </article>
-          <article className="newsCard">
-            <time>02 JUL 2026</time>
-            <h3>Sunshine Athletics Team Triumphs at District Championship</h3>
-            <a href="#">
-              <span>Read Full Story</span>
-              <Arrow />
-            </a>
-          </article>
+          <div className="newsCard" style={{ background: "#ffffff" }}>
+            <div style={{ height: "200px", overflow: "hidden", borderRadius: "var(--radius-sm)", marginBottom: "1rem" }}>
+              <img
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop"
+                alt="Dr. Ananya Sharma"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            </div>
+            <span style={{ fontSize: "0.75rem", textTransform: "uppercase", color: "var(--gold-500)", fontWeight: 700 }}>
+              Head of Science
+            </span>
+            <h3 style={{ margin: "0.25rem 0" }}>Dr. Ananya Sharma</h3>
+            <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>
+              Ph.D. Physics • 14 Years Teaching Experience • Olympiad Mentor
+            </p>
+          </div>
+
+          <div className="newsCard" style={{ background: "#ffffff" }}>
+            <div style={{ height: "200px", overflow: "hidden", borderRadius: "var(--radius-sm)", marginBottom: "1rem" }}>
+              <img
+                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop"
+                alt="Prof. Rajesh Malhotra"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            </div>
+            <span style={{ fontSize: "0.75rem", textTransform: "uppercase", color: "var(--gold-500)", fontWeight: 700 }}>
+              Mathematics Chair
+            </span>
+            <h3 style={{ margin: "0.25rem 0" }}>Prof. Rajesh Malhotra</h3>
+            <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>
+              M.Sc. Mathematics • Calculus & Competitive Exam Specialist
+            </p>
+          </div>
+
+          <div className="newsCard" style={{ background: "#ffffff" }}>
+            <div style={{ height: "200px", overflow: "hidden", borderRadius: "var(--radius-sm)", marginBottom: "1rem" }}>
+              <img
+                src="https://images.unsplash.com/photo-1580894732468-918939c4f1c9?q=80&w=400&auto=format&fit=crop"
+                alt="Priya Nair"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            </div>
+            <span style={{ fontSize: "0.75rem", textTransform: "uppercase", color: "var(--gold-500)", fontWeight: 700 }}>
+              English & Humanities
+            </span>
+            <h3 style={{ margin: "0.25rem 0" }}>Priya Nair</h3>
+            <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>
+              M.A. English Literature • Debating Society Director & Literary Editor
+            </p>
+          </div>
         </div>
       </section>
 
@@ -312,10 +268,10 @@ export default function Home() {
             <p>Schedule a personal campus tour, interact with our academic coordinators, and experience our learning environment.</p>
           </div>
           <div className="admissionButtons">
-            <a className="goldButton group" href="/enquire">
+            <Link className="goldButton group" href="/enquire">
               <span>Submit Online Enquiry</span>
               <Arrow />
-            </a>
+            </Link>
             <a className="goldButton group" href="mailto:admissions@sunshineps.edu.in">
               <span>Email Admissions</span>
               <Arrow />
@@ -339,25 +295,31 @@ export default function Home() {
             <h4>Explore</h4>
             <a href="#about">About Us</a>
             <a href="#academics">Academic Programs</a>
-            <a href="#life">Student Life</a>
-            <a href="#admissions">Admissions</a>
+            <a href="#facilities">Campus Facilities</a>
+            <a href="#faculty">Faculty</a>
+            <Link href="/enquire">Online Enquiry</Link>
+            <Link href="/login">Portal Sign In</Link>
           </div>
           <div>
-            <h4>Portals</h4>
-            <a href="#">Parent Portal</a>
-            <a href="#">Student Login</a>
-            <a href="#notices">School Notices</a>
-            <a href="#contact">Careers at Sunshine</a>
+            <h4>Admissions</h4>
+            <p>Sector 45, Gurugram<br />Haryana 122003</p>
+            <p style={{ marginTop: "1rem" }}>
+              Phone: +91 11 4567 8900<br />
+              Email: admissions@sunshineps.edu.in
+            </p>
           </div>
           <div>
-            <h4>Visit Us</h4>
-            <p>Sector 45, Gurugram<br />Haryana 122003, India</p>
-            <p>+91 11 4567 8900<br />info@sunshineps.edu.in</p>
+            <h4>CBSE Affiliation</h4>
+            <p>Affiliation No. 1234567<br />School Code: 54321</p>
+            <p style={{ marginTop: "1rem" }}>
+              Hours: Mon – Sat<br />
+              8:00 AM – 3:30 PM
+            </p>
           </div>
         </div>
         <div className="wrap copyright">
-          <span>© 2026 Sunshine Public School. All Rights Reserved.</span>
-          <span>CBSE Affiliation No. 1234567 | School Code: 54321</span>
+          <span>© 2026 Sunshine Public School. All rights reserved.</span>
+          <span>CBSE Affiliated Institution</span>
         </div>
       </footer>
     </main>

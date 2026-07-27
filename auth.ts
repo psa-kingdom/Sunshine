@@ -3,6 +3,8 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { connectDB } from "@/db";
 import { Admin } from "@/db/models/Admin";
+import { Teacher } from "@/db/models/Teacher";
+import { Student } from "@/db/models/Student";
 import { authConfig } from "./auth.config";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -24,21 +26,54 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
         await connectDB();
 
+        // 1. Check Admin collection
         const admin = await Admin.findOne({ email });
-        if (!admin || !admin.passwordHash) {
-          return null;
+        if (admin && admin.passwordHash) {
+          const isValid = await bcrypt.compare(password, admin.passwordHash);
+          if (isValid) {
+            return {
+              id: admin._id.toString(),
+              email: admin.email,
+              name: "Administrator",
+              role: "admin",
+            };
+          }
         }
 
-        const isValid = await bcrypt.compare(password, admin.passwordHash);
-        if (!isValid) {
-          return null;
+        // 2. Check Teacher collection
+        const teacher = await Teacher.findOne({ email });
+        if (teacher && teacher.passwordHash) {
+          const isValid = await bcrypt.compare(password, teacher.passwordHash);
+          if (isValid) {
+            return {
+              id: teacher._id.toString(),
+              email: teacher.email,
+              name: teacher.name,
+              role: "teacher",
+              employeeId: teacher.employeeId,
+              assignedClass: teacher.assignedClass,
+            };
+          }
         }
 
-        return {
-          id: admin._id.toString(),
-          email: admin.email,
-          role: admin.role || "admin",
-        };
+        // 3. Check Student collection
+        const student = await Student.findOne({ email });
+        if (student && student.passwordHash) {
+          const isValid = await bcrypt.compare(password, student.passwordHash);
+          if (isValid) {
+            return {
+              id: student._id.toString(),
+              email: student.email,
+              name: student.name,
+              role: "student",
+              rollNumber: student.rollNumber,
+              grade: student.grade,
+              section: student.section,
+            };
+          }
+        }
+
+        return null;
       },
     }),
   ],
