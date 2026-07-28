@@ -45,8 +45,17 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Title is required." }, { status: 400 });
     }
 
+    // Size limit: 15MB for gallery uploads
+    const MAX_SIZE = 15 * 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      return NextResponse.json(
+        { error: `File size exceeds maximum limit of 15MB (File: ${(file.size / (1024 * 1024)).toFixed(1)}MB).` },
+        { status: 413 }
+      );
+    }
+
     // Upload to Vercel Blob via lib/storage.ts
-    const blobUrl = await uploadFile(`gallery/${Date.now()}-${file.name}`, file);
+    const blobUrl = await uploadFile(`gallery/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9.-]/g, "_")}`, file);
 
     await connectDB();
     const mediaItem = await MediaItem.create({
@@ -60,7 +69,7 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("Error uploading media file:", error);
     return NextResponse.json(
-      { error: "Failed to upload media item" },
+      { error: error instanceof Error ? error.message : "Failed to upload media item" },
       { status: 500 }
     );
   }

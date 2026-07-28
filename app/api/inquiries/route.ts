@@ -49,7 +49,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const { parentName, email, phone, gradeApplyingFor, message } = body;
+    const { parentName, studentName, email, phone, gradeApplyingFor, admissionSession, message } = body;
 
     // Server-side field validation
     if (!parentName || typeof parentName !== "string" || !parentName.trim()) {
@@ -92,9 +92,11 @@ export async function POST(req: Request) {
 
     const inquiry = await Inquiry.create({
       parentName: parentName.trim(),
+      studentName: studentName && typeof studentName === "string" ? studentName.trim() : "",
       email: email.trim().toLowerCase(),
       phone: phone.trim(),
       gradeApplyingFor: gradeApplyingFor.trim(),
+      admissionSession: admissionSession && typeof admissionSession === "string" ? admissionSession.trim() : "",
       message: message && typeof message === "string" ? message.trim() : "",
       status: "new",
     });
