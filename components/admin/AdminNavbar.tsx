@@ -11,7 +11,6 @@ import {
   Megaphone,
   CreditCard,
   Mail,
-  CalendarDays,
   ImageIcon,
   ClipboardList,
   ChevronDown,
@@ -23,17 +22,15 @@ import {
 } from "lucide-react";
 
 const NAV_ITEMS = [
-  { href: "/admin",            label: "Dashboard",  icon: LayoutDashboard },
-  { href: "/admin/students",   label: "Students",   icon: GraduationCap },
-  { href: "/admin/teachers",   label: "Teachers",   icon: Users },
-  { href: "/admin/notices",    label: "Notices",    icon: Megaphone },
-  { href: "/admin/fees",       label: "Fees",       icon: CreditCard },
-  { href: "/admin/reports",    label: "Reports",    icon: BarChart3 },
-  { href: "/admin/audit-logs", label: "Audit Logs", icon: ShieldCheck },
-  { href: "/admin/emails",     label: "Emails",     icon: Mail },
-  { href: "/admin/events",      label: "Events",      icon: CalendarDays },
-  { href: "/admin/gallery",     label: "Gallery",     icon: ImageIcon },
-  { href: "/admin/inquiries",   label: "Inquiries",   icon: ClipboardList },
+  { href: "/admin",               label: "Dashboard",     icon: LayoutDashboard },
+  { href: "/admin/students",      label: "Students",      icon: GraduationCap },
+  { href: "/admin/teachers",      label: "Teachers",      icon: Users },
+  { href: "/admin/announcements", label: "Announcements", icon: Megaphone },
+  { href: "/admin/fees",          label: "Fees",          icon: CreditCard },
+  { href: "/admin/analytics",     label: "Analytics",     icon: BarChart3 },
+  { href: "/admin/emails",        label: "Emails",        icon: Mail },
+  { href: "/admin/gallery",       label: "Gallery",       icon: ImageIcon },
+  { href: "/admin/inquiries",     label: "Inquiries",     icon: ClipboardList },
 ];
 
 interface AdminNavbarProps {

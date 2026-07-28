@@ -10,10 +10,10 @@ interface EnquiryDrawerProps {
 }
 
 const inputClass = `
-  w-full px-4 py-3 rounded-xl border-2 border-slate-200
-  bg-white text-slate-800 text-sm placeholder:text-slate-400
+  w-full min-w-0 px-4 py-3 rounded-xl border-2 border-slate-200
+  bg-white text-slate-800 text-sm placeholder:text-slate-400 placeholder:truncate truncate
   focus:outline-none focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/10
-  transition-all duration-200
+  transition-all duration-200 text-ellipsis overflow-hidden box-border
 `.trim();
 
 const labelClass = "block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wider";
@@ -397,7 +397,7 @@ export default function EnquiryDrawer({ isOpen, onClose }: EnquiryDrawerProps) {
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Inquire about fees, transport, hostel, scholarships, or general queries..."
                         className={inputClass}
-                        style={{ resize: "vertical" }}
+                        style={{ resize: "vertical", verticalAlign: "top", minHeight: "110px", lineHeight: "1.5" }}
                       />
                     </div>
 

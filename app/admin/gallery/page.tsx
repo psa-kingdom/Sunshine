@@ -120,15 +120,26 @@ export default function AdminGalleryPage() {
 
       try {
         const res = await fetch(endpoint, { method: "POST", body: formData });
+        if (!res.ok) {
+          let errorMsg = `Upload failed (${res.status})`;
+          const ct = res.headers.get("content-type") || "";
+          if (ct.includes("application/json")) {
+            const data = await res.json();
+            errorMsg = data.error || errorMsg;
+          } else if (res.status === 413) {
+            errorMsg = "File exceeds the maximum payload size limit.";
+          }
+          toast.error("Upload failed.", errorMsg);
+          return;
+        }
         const data = await res.json();
-        if (!res.ok) { toast.error("Upload failed.", data.error || ""); return; }
         toast.success(isVideo ? "Hero Video uploaded!" : "Hero Image uploaded!", title);
         setTitle(""); setCaption(""); setFile(null); setPreviewUrl(null);
         if (fileRef.current) fileRef.current.value = "";
         setShowUploadForm(false);
         fetchHeroMedia();
-      } catch {
-        toast.error("Upload error. Check connection.");
+      } catch (err) {
+        toast.error("Upload error.", err instanceof Error ? err.message : "Check network connection.");
       } finally {
         setUploading(false);
       }
@@ -144,15 +155,26 @@ export default function AdminGalleryPage() {
 
     try {
       const res = await fetch("/api/admin/media", { method: "POST", body: formData });
+      if (!res.ok) {
+        let errorMsg = `Upload failed (${res.status})`;
+        const ct = res.headers.get("content-type") || "";
+        if (ct.includes("application/json")) {
+          const data = await res.json();
+          errorMsg = data.error || errorMsg;
+        } else if (res.status === 413) {
+          errorMsg = "File exceeds the maximum payload size limit.";
+        }
+        toast.error("Upload failed.", errorMsg);
+        return;
+      }
       const data = await res.json();
-      if (!res.ok) { toast.error("Upload failed.", data.error || ""); return; }
       toast.success("Image uploaded!", title);
       setTitle(""); setCaption(""); setFile(null); setPreviewUrl(null);
       if (fileRef.current) fileRef.current.value = "";
       setShowUploadForm(false);
       fetchItems();
-    } catch {
-      toast.error("Upload error. Check connection.");
+    } catch (err) {
+      toast.error("Upload error.", err instanceof Error ? err.message : "Check network connection.");
     } finally {
       setUploading(false);
     }

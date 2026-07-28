@@ -103,7 +103,7 @@ export default async function AdminDashboardPage() {
           </div>
         </Link>
 
-        <Link href="/admin/notices" style={{ textDecoration: "none" }}>
+        <Link href="/admin/announcements" style={{ textDecoration: "none" }}>
           <div className="adminContentCard" style={{ cursor: "pointer", height: "100%" }}>
             <div
               style={{
@@ -115,18 +115,18 @@ export default async function AdminDashboardPage() {
                 marginBottom: "0.5rem",
               }}
             >
-              Announcements
+              Communication & Calendar
             </div>
             <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.25rem", color: "#ffffff", marginBottom: "0.5rem" }}>
-              Notice Manager →
+              Announcements & Events →
             </h3>
             <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.7)" }}>
-              Publish school announcements, filter target audiences, and pin important notices to the homepage.
+              Publish school notices, manage target audiences, pinned header alerts, and academic calendar events.
             </p>
           </div>
         </Link>
 
-        <Link href="/admin/emails" style={{ textDecoration: "none" }}>
+        <Link href="/admin/analytics" style={{ textDecoration: "none" }}>
           <div className="adminContentCard" style={{ cursor: "pointer", height: "100%" }}>
             <div
               style={{
@@ -138,36 +138,13 @@ export default async function AdminDashboardPage() {
                 marginBottom: "0.5rem",
               }}
             >
-              Communication
+              Intelligence & Audit
             </div>
             <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.25rem", color: "#ffffff", marginBottom: "0.5rem" }}>
-              Email Broadcasts →
+              Analytics & Audit Logs →
             </h3>
             <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.7)" }}>
-              Send class-wise email broadcasts, faculty notifications, and parent alerts.
-            </p>
-          </div>
-        </Link>
-
-        <Link href="/admin/events" style={{ textDecoration: "none" }}>
-          <div className="adminContentCard" style={{ cursor: "pointer", height: "100%" }}>
-            <div
-              style={{
-                fontSize: "0.75rem",
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                color: "var(--gold-400)",
-                fontWeight: 600,
-                marginBottom: "0.5rem",
-              }}
-            >
-              Academic Calendar
-            </div>
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "1.25rem", color: "#ffffff", marginBottom: "0.5rem" }}>
-              Events & Holidays →
-            </h3>
-            <p style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.7)" }}>
-              Manage school events, national holiday schedules, exam dates, and sports meets.
+              Real-time student & faculty stats, fee collection metrics, downloadable system reports, and audit logs.
             </p>
           </div>
         </Link>
