@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { MapPin, Mail, PhoneCall, Clock, ChevronDown } from "lucide-react";
+import { MapPin, Mail, PhoneCall, Clock, ChevronDown, Globe } from "lucide-react";
 import MorphicNavbar from "@/components/kokonutui/morphic-navbar";
 import EnquiryDrawer from "@/components/kokonutui/enquiry-drawer";
 import InteractiveNoticeBoard from "@/components/school/InteractiveNoticeBoard";
@@ -106,6 +106,31 @@ const TESTIMONIALS = [
     name: "Mr. Rajan Sharma",
     role: "Parent — Grade X",
     portrait: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80&auto=format&fit=crop&face",
+  },
+];
+
+/* ─── DEPARTMENT DIRECTORS DATA ─────────────────────────────────────────── */
+const DEPARTMENT_DIRECTORS = [
+  {
+    name: "Mrs. Ananya Sen",
+    title: "Director — Primary & Early Years",
+    qual: "M.Ed. Early Childhood, Delhi University",
+    desc: "Over 18 years dedicated to foundational pedagogy, play-integrated numeracy, and child psychology.",
+    portrait: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80&auto=format&fit=crop&face",
+  },
+  {
+    name: "Dr. Vikramaditya Singh",
+    title: "Director — Senior STEM & Research",
+    qual: "Ph.D. Physics, IIT Delhi",
+    desc: "Spearheads advanced laboratory research, Olympiad mentorship, and AI-assisted learning projects.",
+    portrait: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80&auto=format&fit=crop&face",
+  },
+  {
+    name: "Mrs. Radhika Kapoor",
+    title: "Director — Student Welfare & Arts",
+    qual: "M.A. Applied Psychology, TISS",
+    desc: "Leads holistic counselling, performing arts, sports academies, and inclusive education initiatives.",
+    portrait: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80&auto=format&fit=crop&face",
   },
 ];
 
@@ -413,6 +438,29 @@ export default function HomePage() {
                   Schedule a Visit
                 </button>
               </div>
+            </div>
+          </div>
+
+          {/* Department Directors & Academic Leadership */}
+          <div style={{ marginTop: "5rem", paddingTop: "3.5rem", borderTop: "1px solid var(--color-sand)" }}>
+            <div style={{ maxWidth: 560, marginBottom: "2.5rem" }}>
+              <span className="spn-eyebrow">Academic Leadership</span>
+              <h3 className="spn-h3" style={{ fontSize: "1.6rem" }}>Department Directors</h3>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2rem" }}>
+              {DEPARTMENT_DIRECTORS.map((d) => (
+                <div key={d.name} style={{ background: "var(--color-surface)", border: "1px solid var(--color-sand)", padding: "2rem", display: "flex", flexDirection: "column" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.25rem" }}>
+                    <img src={d.portrait} alt={d.name} style={{ width: 54, height: 54, borderRadius: "50%", objectFit: "cover" }} loading="lazy" />
+                    <div>
+                      <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.05rem", fontWeight: 600, color: "var(--color-brown)" }}>{d.name}</h4>
+                      <div style={{ fontFamily: "var(--font-body)", fontSize: "0.72rem", fontWeight: 600, color: "var(--color-brown-light)", letterSpacing: "0.06em", textTransform: "uppercase", marginTop: "0.2rem" }}>{d.title}</div>
+                    </div>
+                  </div>
+                  <div style={{ fontSize: "0.75rem", fontWeight: 500, color: "var(--color-text-muted)", marginBottom: "0.75rem", fontStyle: "italic" }}>{d.qual}</div>
+                  <p style={{ fontSize: "0.85rem", color: "var(--color-text-muted)", lineHeight: 1.75, flex: 1 }}>{d.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -916,6 +964,69 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
+
+              {/* Social Media Links */}
+              <div className="spn-footer-social" aria-label="Social media channels">
+                {[
+                  {
+                    label: "Facebook",
+                    href: "https://facebook.com",
+                    icon: (
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    label: "Instagram",
+                    href: "https://instagram.com",
+                    icon: (
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    label: "YouTube",
+                    href: "https://youtube.com",
+                    icon: (
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" />
+                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    label: "LinkedIn",
+                    href: "https://linkedin.com",
+                    icon: (
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                        <rect x="2" y="9" width="4" height="12" />
+                        <circle cx="4" cy="4" r="2" />
+                      </svg>
+                    ),
+                  },
+                  {
+                    label: "CBSE Portal",
+                    href: "https://cbse.gov.in",
+                    icon: <Globe size={15} />,
+                  },
+                ].map(({ icon, label, href }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="spn-footer-social-link"
+                    aria-label={`Follow Sunshine Public School on ${label}`}
+                  >
+                    {icon}
+                  </a>
+                ))}
+              </div>
             </div>
 
             {/* Quick Links */}
@@ -952,6 +1063,7 @@ export default function HomePage() {
               <h4>Portal & Info</h4>
               <Link href="/login">Student Portal</Link>
               <Link href="/login">Staff Login</Link>
+              <Link href="/admin/login">Admin Access</Link>
               <a href="#news">News & Events</a>
               <div style={{ marginTop: "1.25rem", paddingTop: "1.25rem", borderTop: "1px solid rgba(213,195,161,0.15)" }}>
                 <div style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-sand)", marginBottom: "0.5rem" }}>CBSE</div>
@@ -971,6 +1083,18 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+
+      {/* Floating Quick Action Button */}
+      <button
+        type="button"
+        id="floating-enquire-btn"
+        className="spn-floating-cta"
+        onClick={() => setIsDrawerOpen(true)}
+        aria-label="Open admission enquiry drawer"
+      >
+        <Mail size={16} />
+        <span>Enquire Now</span>
+      </button>
     </main>
   );
 }

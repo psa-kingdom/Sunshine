@@ -70,6 +70,13 @@ export default function MorphicNavbar({
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
             {/* Desktop CTA */}
             <div className="spn-nav-desktop-cta">
+              <Link
+                href="/login"
+                className="spn-btn spn-btn-outline"
+                style={{ padding: "0.5rem 1rem", fontSize: "0.7rem" }}
+              >
+                Portal
+              </Link>
               {actionItems.map((item) => (
                 <button
                   key={item.id}
@@ -168,8 +175,11 @@ export default function MorphicNavbar({
               {item.name}
             </button>
           ))}
-          <Link href="/login" style={{ display: "block", textAlign: "center", padding: "0.875rem", border: "1.5px solid var(--color-sand)", color: "var(--color-brown)", fontFamily: "var(--font-body)", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }} onClick={() => setMobileOpen(false)}>
-            Staff & Student Portal
+          <Link href="/login" style={{ display: "block", textAlign: "center", padding: "0.75rem", border: "1.5px solid var(--color-sand)", color: "var(--color-brown)", fontFamily: "var(--font-body)", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }} onClick={() => setMobileOpen(false)}>
+            Student & Staff Portal
+          </Link>
+          <Link href="/admin/login" style={{ display: "block", textAlign: "center", padding: "0.75rem", background: "var(--color-brown)", color: "var(--color-beige)", fontFamily: "var(--font-body)", fontSize: "0.75rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }} onClick={() => setMobileOpen(false)}>
+            Admin Access
           </Link>
         </div>
       </div>
