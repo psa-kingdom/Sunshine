@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-display",
@@ -33,8 +34,9 @@ export const metadata: Metadata = {
     "codex-preview": "development",
   },
   icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
+    icon: "/ssps logo dark.png",
+    shortcut: "/ssps logo dark.png",
+    apple: "/ssps logo dark.png",
   },
 };
 
@@ -46,13 +48,18 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var s=localStorage.getItem('sunshine_theme');var t=s||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`,
+          }}
+        />
         <link rel="preload" as="image" href="/hero-school.webp" />
       </head>
       <body
         className={`${cormorant.variable} ${inter.variable} ${libreBaskerville.variable}`}
         suppressHydrationWarning
       >
-        {children}
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

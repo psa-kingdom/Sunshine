@@ -11,6 +11,7 @@ import {
   Clock
 } from "lucide-react";
 import MorphicNavbar from "@/components/kokonutui/morphic-navbar";
+import BrandLogo from "@/components/ui/BrandLogo";
 
 export default function EnquirePage() {
   const [parentName, setParentName] = useState("");
@@ -236,9 +237,8 @@ export default function EnquirePage() {
       <footer id="contact" className="footer-futuristic border-t border-indigo-50">
         <div className="wrap footerGrid">
           <div className="footerBrand space-y-3.5">
-            <div className="flex items-center gap-2">
-              <span className="logo-icon">S</span>
-              <h3 className="font-display font-extrabold text-slate-800 tracking-wider">SUNSHINE PUBLIC SCHOOL</h3>
+            <div>
+              <BrandLogo height={36} />
             </div>
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
               Learning • Leadership • Character

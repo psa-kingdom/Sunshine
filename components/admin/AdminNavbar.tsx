@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
+import BrandLogo from "@/components/ui/BrandLogo";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 import {
   LayoutDashboard,
   Users,
@@ -36,17 +38,29 @@ const NAV_ITEMS = [
 interface AdminNavbarProps {
   userName?: string;
   userEmail?: string;
-  pageLabel?: string;
 }
 
 export default function AdminNavbar({
   userName = "Administrator",
   userEmail = "admin@sunshineps.edu.in",
-  pageLabel = "Admin Portal",
 }: AdminNavbarProps) {
   const pathname = usePathname();
   const [profileOpen, setProfileOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const getPageLabel = (path: string) => {
+    if (path === "/admin") return "Overview Console";
+    if (path.startsWith("/admin/students")) return "Student Directory";
+    if (path.startsWith("/admin/teachers")) return "Faculty Members";
+    if (path.startsWith("/admin/fees")) return "Fee Management";
+    if (path.startsWith("/admin/inquiries")) return "Admissions Inquiries";
+    if (path.startsWith("/admin/announcements") || path.startsWith("/admin/notices")) return "Notices & Announcements";
+    if (path.startsWith("/admin/gallery")) return "Media Gallery";
+    if (path.startsWith("/admin/analytics")) return "Audit Logs & Reports";
+    return "Management Portal";
+  };
+
+  const pageLabel = getPageLabel(pathname);
 
   return (
     <>
@@ -63,17 +77,17 @@ export default function AdminNavbar({
               borderBottom: "1px solid rgba(255,255,255,0.06)",
             }}
           >
-            {/* Brand Logo */}
-            <Link href="/admin" className="adminBrand" style={{ textDecoration: "none" }}>
-              <span className="adminCrest">S</span>
-              <div className="adminTitle">
-                SUNSHINE PUBLIC SCHOOL
-                <small>{pageLabel}</small>
-              </div>
+            {/* Brand Logo & Active Module Title */}
+            <Link href="/admin" className="adminBrand" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+              <BrandLogo height={34} />
+              <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--gold-400)", textTransform: "uppercase", letterSpacing: "0.08em", paddingLeft: "0.75rem", borderLeft: "1px solid rgba(255,255,255,0.15)" }}>
+                {pageLabel}
+              </span>
             </Link>
 
-            {/* Profile Dropdown & Mobile Menu Toggle */}
+            {/* Profile Dropdown & Theme Toggle & Mobile Menu Toggle */}
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+              <ThemeToggle />
               {/* Profile Dropdown */}
               <div style={{ position: "relative" }}>
                 <button

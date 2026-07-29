@@ -2,6 +2,8 @@
 
 import React, { useEffect, useState } from "react";
 import ProfileDropdown from "@/components/kokonutui/profile-dropdown";
+import BrandLogo from "@/components/ui/BrandLogo";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 
 interface StudentProfile {
   name: string;
@@ -225,14 +227,11 @@ export default function StudentDashboardPage() {
       <header className="adminHeader">
         <div className="adminHeaderInner">
           <div className="adminBrand">
-            <span className="adminCrest">S</span>
-            <div className="adminTitle">
-              SUNSHINE PUBLIC SCHOOL
-              <small>Student & Parent Portal</small>
-            </div>
+            <BrandLogo height={34} />
           </div>
 
-          <div className="adminUserInfo">
+          <div className="adminUserInfo" style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            <ThemeToggle />
             <ProfileDropdown userName={student?.name || "Aarav Patel"} userEmail={student?.email || "student@sunshineps.edu.in"} userRole="Student" />
           </div>
         </div>

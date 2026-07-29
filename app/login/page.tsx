@@ -5,6 +5,8 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ShieldCheck, UserCheck, GraduationCap, Lock } from "lucide-react";
+import BrandLogo from "@/components/ui/BrandLogo";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 
 export default function UnifiedLoginPage() {
   const [activeRole, setActiveRole] = useState<"admin" | "teacher" | "student">("admin");
@@ -160,51 +162,31 @@ export default function UnifiedLoginPage() {
           backdropFilter: "blur(12px)",
         }}
       >
-        <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.75rem" }}>
-          <div style={{
-            width: "2.25rem",
-            height: "2.25rem",
-            borderRadius: "50%",
-            background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#fff",
-            fontWeight: 900,
-            fontSize: "1rem",
-            flexShrink: 0,
-          }}>
-            S
-          </div>
-          <div>
-            <div style={{ color: "#fff", fontWeight: 800, fontSize: "0.875rem", letterSpacing: "0.05em" }}>
-              SUNSHINE PUBLIC SCHOOL
-            </div>
-            <div style={{ color: "var(--gold-400)", fontSize: "0.65rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em" }}>
-              ERP Management Portal
-            </div>
-          </div>
+        <Link href="/" style={{ textDecoration: "none" }}>
+          <BrandLogo height={38} />
         </Link>
 
-        <Link
-          href="/"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "0.4rem",
-            color: "rgba(255,255,255,0.7)",
-            fontSize: "0.8rem",
-            fontWeight: 700,
-            textDecoration: "none",
-            padding: "0.45rem 0.9rem",
-            border: "1px solid rgba(255,255,255,0.12)",
-            borderRadius: "var(--radius-full)",
-            transition: "all 0.2s",
-          }}
-        >
-          <ArrowLeft style={{ width: "0.85rem", height: "0.85rem" }} />
-          Back to Website
-        </Link>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <ThemeToggle />
+          <Link
+            href="/"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.4rem",
+              color: "rgba(255,255,255,0.7)",
+              fontSize: "0.8rem",
+              fontWeight: 600,
+              textDecoration: "none",
+              padding: "0.4rem 0.8rem",
+              borderRadius: "0.5rem",
+              border: "1px solid rgba(255,255,255,0.1)",
+              transition: "all 0.2s",
+            }}
+          >
+            <ArrowLeft size={14} /> Back to Website
+          </Link>
+        </div>
       </header>
 
       {/* ── Main Content ── */}

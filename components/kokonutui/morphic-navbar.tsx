@@ -3,6 +3,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import BrandLogo from "@/components/ui/BrandLogo";
+import ThemeToggle from "@/components/theme/ThemeToggle";
 
 export interface MorphicNavItem {
   id: string;
@@ -20,14 +22,17 @@ interface MorphicNavbarProps {
 export default function MorphicNavbar({
   items,
   onActionClick,
+  className = "",
 }: MorphicNavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   // Lock body scroll when mobile menu is open
@@ -42,15 +47,11 @@ export default function MorphicNavbar({
   return (
     <>
       {/* ── Fixed Bar ── */}
-      <div className={`spn-nav-shell${scrolled ? " scrolled" : ""}`}>
+      <div className={`spn-nav-shell${scrolled ? " scrolled" : ""} ${className}`}>
         <nav className="spn-nav">
           {/* Brand */}
           <Link href="/" className="spn-nav-logo" aria-label="Sunshine Public School Home">
-            <span className="spn-nav-crest" aria-hidden="true">S</span>
-            <div className="spn-nav-name">
-              <span className="spn-nav-name-primary">Sunshine</span>
-              <span className="spn-nav-name-sub">Public School</span>
-            </div>
+            <BrandLogo height={38} />
           </Link>
 
           {/* Desktop Links */}
@@ -66,8 +67,11 @@ export default function MorphicNavbar({
             ))}
           </div>
 
-          {/* Desktop CTA + Mobile Toggle */}
+          {/* Desktop CTA + Theme Switcher + Mobile Toggle */}
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            {/* Theme Switcher */}
+            <ThemeToggle />
+
             {/* Desktop CTA */}
             <div className="spn-nav-desktop-cta">
               <Link
@@ -122,29 +126,10 @@ export default function MorphicNavbar({
         >
           <X size={24} />
         </button>
-
-        {/* Logo in drawer */}
-        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "3rem", marginTop: "1rem" }}>
-          <span
-            style={{
-              width: 36, height: 36,
-              background: "var(--color-brown)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-              color: "var(--color-beige)",
-              fontFamily: "var(--font-display)",
-              fontSize: "1.1rem", fontWeight: 600,
-            }}
-          >
-            S
-          </span>
-          <div>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: "1rem", fontWeight: 600, color: "var(--color-brown)", letterSpacing: "0.06em", textTransform: "uppercase" }}>
-              Sunshine
-            </div>
-            <div style={{ fontFamily: "var(--font-body)", fontSize: "0.6rem", fontWeight: 500, color: "var(--color-text-muted)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-              Public School
-            </div>
-          </div>
+        {/* Logo & Theme Toggle in drawer */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "2.5rem", marginTop: "1rem" }}>
+          <BrandLogo height={32} />
+          <ThemeToggle />
         </div>
 
         {/* Mobile Links */}

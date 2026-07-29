@@ -6,6 +6,7 @@ import { MapPin, Mail, PhoneCall, Clock, ChevronDown, Globe } from "lucide-react
 import MorphicNavbar from "@/components/kokonutui/morphic-navbar";
 import EnquiryDrawer from "@/components/kokonutui/enquiry-drawer";
 import InteractiveNoticeBoard from "@/components/school/InteractiveNoticeBoard";
+import BrandLogo from "@/components/ui/BrandLogo";
 import { StatCounter } from "./StatCounter";
 
 /* ─── FAQ DATA ────────────────────────────────────────────────────────────── */
@@ -1001,12 +1002,8 @@ export default function HomePage() {
           <div className="spn-footer-grid">
             {/* Brand column */}
             <div>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "1.25rem" }}>
-                <span style={{ width: 36, height: 36, background: "var(--color-beige)", display: "flex", alignItems: "center", justifyContent: "center", color: "var(--color-brown)", fontFamily: "var(--font-display)", fontSize: "1.1rem", fontWeight: 600, flexShrink: 0 }}>S</span>
-                <div>
-                  <div style={{ fontFamily: "var(--font-display)", fontSize: "1rem", fontWeight: 600, color: "var(--color-beige)", letterSpacing: "0.06em", textTransform: "uppercase" }}>Sunshine Public School</div>
-                  <div style={{ fontFamily: "var(--font-body)", fontSize: "0.6rem", fontWeight: 500, color: "var(--color-sand)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Gurugram, Haryana</div>
-                </div>
+              <div style={{ marginBottom: "1.25rem" }}>
+                <BrandLogo variant="dark" height={44} />
               </div>
               <p style={{ fontSize: "0.85rem", color: "rgba(242,232,216,0.55)", lineHeight: 1.8, marginBottom: "1.5rem", maxWidth: "280px" }}>
                 Nurturing curious minds and building confident futures since 1998.
