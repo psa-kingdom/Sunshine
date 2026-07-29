@@ -41,7 +41,11 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: "All invoice fields are required" }, { status: 400 });
       }
 
-      const students = await Student.find({ grade }).lean();
+      const query: Record<string, unknown> = { grade };
+      if (section && section !== "all") {
+        query.section = section;
+      }
+      const students = await Student.find(query).lean();
       const createdFees = [];
       for (const s of students) {
         const fee = await Fee.create({

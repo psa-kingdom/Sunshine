@@ -65,6 +65,7 @@ export default function TeacherPreviewDrawer({
       if (res.ok) {
         setResetSuccess("Password successfully updated!");
         setNewPassword("");
+        onRefresh?.();
         setTimeout(() => {
           setShowPasswordResetModal(false);
           setResetSuccess("");

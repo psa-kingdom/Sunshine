@@ -55,6 +55,7 @@ interface HomeworkItem {
   resourceUrl?: string;
 }
 
+
 interface NoticeItem {
   _id: string;
   title: string;
@@ -69,6 +70,7 @@ interface FeeItem {
   dueDate: string;
   status: "paid" | "pending" | "overdue";
   paidDate?: string;
+  receiptNumber?: string;
   transactionId?: string;
 }
 
@@ -458,6 +460,22 @@ export default function StudentDashboardPage() {
                     </div>
                   </div>
                 </div>
+
+                {/* School Bulletins & Notices */}
+                {notices.length > 0 && (
+                  <div className="adminContentCard" style={{ marginBottom: "2rem" }}>
+                    <h2>📢 Recent School Announcements</h2>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1rem", marginTop: "1rem" }}>
+                      {notices.slice(0, 3).map((item) => (
+                        <div key={item._id} style={{ padding: "1rem", background: "var(--navy-900)", border: "1px solid var(--border-subtle)", borderRadius: "var(--radius-md)" }}>
+                          <span style={{ fontSize: "0.68rem", textTransform: "uppercase", color: "var(--gold-400)", fontWeight: 700 }}>{item.category}</span>
+                          <h4 style={{ color: "#ffffff", fontSize: "0.95rem", margin: "0.3rem 0" }}>{item.title}</h4>
+                          <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.7)", display: "-webkit-box", WebkitLineClamp: 3, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.content}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </>
             )}
 

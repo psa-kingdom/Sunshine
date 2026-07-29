@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import AdminSkeleton from "@/components/admin/AdminSkeleton";
 import AdminEmptyState from "@/components/admin/AdminEmptyState";
 import { ToastContainer, useToast } from "@/components/admin/Toast";
@@ -92,7 +92,7 @@ export default function AdminAnnouncementsPage() {
   const [viewMonth, setViewMonth] = useState(today.getMonth());
 
   // ── Fetchers ──
-  const fetchNotices = async () => {
+  const fetchNotices = useCallback(async () => {
     setNoticesLoading(true);
     try {
       const res = await fetch("/api/admin/notices");
@@ -105,9 +105,9 @@ export default function AdminAnnouncementsPage() {
     } finally {
       setNoticesLoading(false);
     }
-  };
+  }, [toast]);
 
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     setEventsLoading(true);
     try {
       const res = await fetch("/api/admin/events");
@@ -120,12 +120,12 @@ export default function AdminAnnouncementsPage() {
     } finally {
       setEventsLoading(false);
     }
-  };
+  }, [toast]);
 
   useEffect(() => {
     fetchNotices();
     fetchEvents();
-  }, []);
+  }, [fetchNotices, fetchEvents]);
 
   // ── Notice Handlers ──
   const handleCreateNotice = async (e: React.FormEvent) => {

@@ -7,7 +7,7 @@ import DataToolbar from "@/components/kokonutui/data-toolbar";
 import { useRouter } from "next/navigation";
 import AdminEmptyState from "@/components/admin/AdminEmptyState";
 import InquiryWorkflowDrawer, { InquiryWorkflowData } from "@/components/admin/InquiryWorkflowDrawer";
-import { Eye } from "lucide-react";
+import { Eye, Trash2 } from "lucide-react";
 
 interface InquiryItem {
   _id: string;
@@ -326,24 +326,44 @@ export default function AdminInquiriesPage() {
                       </select>
                     </td>
                     <td style={{ padding: "0.75rem 1rem", textAlign: "right" }}>
-                      <button
-                        onClick={() => setSelectedInquiry(item)}
-                        style={{
-                          display: "inline-flex",
-                          alignItems: "center",
-                          gap: "0.3rem",
-                          padding: "0.3rem 0.65rem",
-                          background: "rgba(255,107,53,0.15)",
-                          border: "1px solid rgba(255,107,53,0.3)",
-                          color: "var(--gold-400)",
-                          borderRadius: "var(--radius-sm)",
-                          fontSize: "0.75rem",
-                          fontWeight: 700,
-                          cursor: "pointer",
-                        }}
-                      >
-                        <Eye style={{ width: "0.8rem", height: "0.8rem" }} /> Notes & Workflow
-                      </button>
+                      <div style={{ display: "inline-flex", gap: "0.5rem", alignItems: "center" }}>
+                        <button
+                          onClick={() => setSelectedInquiry(item)}
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "0.3rem",
+                            padding: "0.3rem 0.65rem",
+                            background: "rgba(255,107,53,0.15)",
+                            border: "1px solid rgba(255,107,53,0.3)",
+                            color: "var(--gold-400)",
+                            borderRadius: "var(--radius-sm)",
+                            fontSize: "0.75rem",
+                            fontWeight: 700,
+                            cursor: "pointer",
+                          }}
+                        >
+                          <Eye style={{ width: "0.8rem", height: "0.8rem" }} /> Notes & Workflow
+                        </button>
+                        <button
+                          onClick={() => handleDeleteSingle(item._id)}
+                          title="Delete enquiry"
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            padding: "0.3rem 0.5rem",
+                            background: "rgba(239, 68, 68, 0.15)",
+                            border: "1px solid rgba(239, 68, 68, 0.3)",
+                            color: "#ef4444",
+                            borderRadius: "var(--radius-sm)",
+                            fontSize: "0.75rem",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <Trash2 style={{ width: "0.8rem", height: "0.8rem" }} />
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 ))}

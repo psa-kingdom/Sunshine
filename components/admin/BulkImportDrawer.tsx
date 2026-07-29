@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { Upload, FileSpreadsheet, Download, CheckCircle, AlertCircle, X, Trash2 } from "lucide-react";
+import { Upload, FileSpreadsheet, Download, CheckCircle, AlertCircle, Trash2 } from "lucide-react";
 import AdminModal from "./AdminModal";
 
 export interface FieldMapping {

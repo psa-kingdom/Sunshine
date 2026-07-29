@@ -44,9 +44,9 @@ export default async function AdminDashboardPage() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-          gap: "1.5rem",
-          marginBottom: "2rem",
+          gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+          gap: "1rem",
+          marginBottom: "2.5rem",
         }}
       >
         <AdminStatCard
@@ -58,6 +58,12 @@ export default async function AdminDashboardPage() {
           label="Faculty Members"
           value={totalTeachers}
           subtext="Teaching Staff"
+        />
+        <AdminStatCard
+          label="Admissions Enquiries"
+          value={totalInquiries}
+          subtext="Active Enquiries"
+          valueColor="#60a5fa"
         />
         <AdminStatCard
           label="Fees Collected"

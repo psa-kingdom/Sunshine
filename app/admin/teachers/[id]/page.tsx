@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, use } from "react";
+import React, { useEffect, useState, useCallback, use } from "react";
 import Link from "next/link";
 import {
   User,
@@ -50,7 +50,7 @@ export default function TeacherProfilePage({ params }: { params: Promise<{ id: s
   const [resetting, setResetting] = useState(false);
   const [resetSuccess, setResetSuccess] = useState("");
 
-  const fetchTeacher = async () => {
+  const fetchTeacher = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/admin/teachers/${id}`);
@@ -62,11 +62,11 @@ export default function TeacherProfilePage({ params }: { params: Promise<{ id: s
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     fetchTeacher();
-  }, [id]);
+  }, [fetchTeacher]);
 
   const handleResetPassword = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import AdminSkeleton from "@/components/admin/AdminSkeleton";
 import AdminEmptyState from "@/components/admin/AdminEmptyState";
 import { ToastContainer, useToast } from "@/components/admin/Toast";
 import {
   Upload, X, Trash2, ChevronLeft, FolderOpen, ImageIcon, Film,
-  Eye, EyeOff, ExternalLink, Sparkles
+  Eye, EyeOff, ExternalLink
 } from "lucide-react";
 
 interface MediaItem {
@@ -60,7 +60,7 @@ export default function AdminGalleryPage() {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
-  const fetchItems = async () => {
+  const fetchItems = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch("/api/admin/media");
@@ -72,9 +72,9 @@ export default function AdminGalleryPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [toast]);
 
-  const fetchHeroMedia = async () => {
+  const fetchHeroMedia = useCallback(async () => {
     setHeroLoading(true);
     try {
       const [imgRes, vidRes] = await Promise.all([
@@ -90,12 +90,12 @@ export default function AdminGalleryPage() {
     } finally {
       setHeroLoading(false);
     }
-  };
+  }, [toast]);
 
   useEffect(() => {
     fetchItems();
     fetchHeroMedia();
-  }, []);
+  }, [fetchItems, fetchHeroMedia]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0] || null;
@@ -132,7 +132,7 @@ export default function AdminGalleryPage() {
           toast.error("Upload failed.", errorMsg);
           return;
         }
-        const data = await res.json();
+        await res.json().catch(() => ({}));
         toast.success(isVideo ? "Hero Video uploaded!" : "Hero Image uploaded!", title);
         setTitle(""); setCaption(""); setFile(null); setPreviewUrl(null);
         if (fileRef.current) fileRef.current.value = "";
@@ -167,7 +167,7 @@ export default function AdminGalleryPage() {
         toast.error("Upload failed.", errorMsg);
         return;
       }
-      const data = await res.json();
+      await res.json().catch(() => ({}));
       toast.success("Image uploaded!", title);
       setTitle(""); setCaption(""); setFile(null); setPreviewUrl(null);
       if (fileRef.current) fileRef.current.value = "";

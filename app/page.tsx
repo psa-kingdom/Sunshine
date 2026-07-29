@@ -180,9 +180,9 @@ function FaqItem({ q, a }: { q: string; a: string }) {
         aria-expanded={open}
       >
         <span>{q}</span>
-        <span className="spn-faq-icon" aria-hidden="true">+</span>
+        <span className="spn-faq-icon" aria-hidden="true">{open ? "−" : "+"}</span>
       </button>
-      <div className="spn-faq-answer" aria-hidden={!open}>
+      <div className="spn-faq-answer" style={{ display: open ? "block" : "none" }}>
         <div className="spn-faq-answer-inner">{a}</div>
       </div>
     </div>
@@ -191,15 +191,44 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 /* ─── CONTACT FORM ───────────────────────────────────────────────────────── */
 function ContactForm() {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    await new Promise((r) => setTimeout(r, 800));
-    setSubmitting(false);
-    setSent(true);
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/inquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          studentName: name.trim(),
+          parentName: name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          grade: "General Inquiry",
+          notes: message.trim(),
+        }),
+      });
+
+      if (res.ok) {
+        setSent(true);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data.error || "Failed to submit message. Please try again.");
+      }
+    } catch {
+      setErrorMsg("Network error. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (sent) {
@@ -217,25 +246,56 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+      {errorMsg && (
+        <div style={{ padding: "0.75rem 1rem", background: "#fee2e2", border: "1px solid #fca5a5", color: "#991b1b", fontSize: "0.85rem" }}>
+          {errorMsg}
+        </div>
+      )}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
         <div>
           <label htmlFor="cf-name" className="spn-label">Full Name</label>
-          <input id="cf-name" type="text" required placeholder="Rajesh Kumar" className="spn-input" />
+          <input
+            id="cf-name"
+            type="text"
+            required
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Rajesh Kumar"
+            className="spn-input"
+          />
         </div>
         <div>
           <label htmlFor="cf-phone" className="spn-label">Phone</label>
-          <input id="cf-phone" type="tel" required placeholder="+91 98765 43210" className="spn-input" />
+          <input
+            id="cf-phone"
+            type="tel"
+            required
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            placeholder="+91 98765 43210"
+            className="spn-input"
+          />
         </div>
       </div>
       <div>
         <label htmlFor="cf-email" className="spn-label">Email Address</label>
-        <input id="cf-email" type="email" required placeholder="your@email.com" className="spn-input" />
+        <input
+          id="cf-email"
+          type="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          className="spn-input"
+        />
       </div>
       <div>
         <label htmlFor="cf-message" className="spn-label">Message</label>
         <textarea
           id="cf-message"
           rows={4}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           placeholder="How can we help you?"
           className="spn-input"
           style={{ resize: "vertical", verticalAlign: "top" }}

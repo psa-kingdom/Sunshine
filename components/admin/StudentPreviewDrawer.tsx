@@ -70,6 +70,7 @@ export default function StudentPreviewDrawer({
       if (res.ok) {
         setResetSuccess("Password successfully updated!");
         setNewPassword("");
+        onRefresh?.();
         setTimeout(() => {
           setShowPasswordResetModal(false);
           setResetSuccess("");

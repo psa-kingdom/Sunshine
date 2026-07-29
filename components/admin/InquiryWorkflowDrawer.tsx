@@ -40,13 +40,15 @@ export default function InquiryWorkflowDrawer({
 
   if (!isOpen || !inquiry) return null;
 
-  const handleUpdateStatus = async (statusVal: string) => {
-    setCurrentStatus(statusVal as InquiryWorkflowData["status"]);
+  const handleUpdateStatus = async (statusVal: string, staffVal?: string) => {
+    const targetStatus = statusVal || currentStatus;
+    const targetStaff = staffVal || assignedStaff;
+    setCurrentStatus(targetStatus as InquiryWorkflowData["status"]);
     try {
       await fetch(`/api/admin/inquiries/${inquiry._id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ status: statusVal, assignedStaff }),
+        body: JSON.stringify({ status: targetStatus, assignedStaff: targetStaff }),
       });
       onRefresh();
     } catch {
@@ -146,6 +148,21 @@ export default function InquiryWorkflowDrawer({
             <div><span style={{ color: "rgba(255,255,255,0.5)" }}>Grade Applying For:</span> <strong style={{ color: "var(--gold-300)" }}>{inquiry.gradeApplyingFor}</strong></div>
             <div><span style={{ color: "rgba(255,255,255,0.5)" }}>Email:</span> <strong style={{ color: "#fff" }}>{inquiry.email}</strong></div>
             <div><span style={{ color: "rgba(255,255,255,0.5)" }}>Phone:</span> <strong style={{ color: "#fff" }}>{inquiry.phone}</strong></div>
+            <div><span style={{ color: "rgba(255,255,255,0.5)" }}>Assigned Counselor:</span> 
+              <select
+                value={assignedStaff}
+                onChange={(e) => {
+                  setAssignedStaff(e.target.value);
+                  handleUpdateStatus(currentStatus, e.target.value);
+                }}
+                className="adminInput"
+                style={{ marginTop: "0.25rem", fontSize: "0.8rem", padding: "0.25rem 0.5rem" }}
+              >
+                <option value="Admissions Team" style={{ background: "var(--navy-900)" }}>Admissions Team</option>
+                <option value="Senior Counselor" style={{ background: "var(--navy-900)" }}>Senior Counselor</option>
+                <option value="Head of Admissions" style={{ background: "var(--navy-900)" }}>Head of Admissions</option>
+              </select>
+            </div>
             <div><span style={{ color: "rgba(255,255,255,0.5)" }}>Submitted Message:</span> <div style={{ color: "rgba(255,255,255,0.8)", marginTop: "0.2rem", background: "rgba(0,0,0,0.2)", padding: "0.5rem", borderRadius: "4px" }}>{inquiry.message || "No message specified."}</div></div>
           </div>
 

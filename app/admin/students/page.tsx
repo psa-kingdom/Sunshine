@@ -215,7 +215,15 @@ export default function AdminStudentsPage() {
   // Table columns definition
   const columns: Column<StudentItem>[] = [
     {
-      header: "",
+      header: (
+        <input
+          type="checkbox"
+          checked={paginatedStudents.length > 0 && selectedIds.length === paginatedStudents.length}
+          onChange={toggleSelectAll}
+          className="cursor-pointer"
+          title="Select all page rows"
+        />
+      ),
       width: "40px",
       cell: (s) => (
         <input

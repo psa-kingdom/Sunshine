@@ -5,7 +5,6 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ShieldCheck, UserCheck, GraduationCap, Lock } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 export default function UnifiedLoginPage() {
   const [activeRole, setActiveRole] = useState<"admin" | "teacher" | "student">("admin");

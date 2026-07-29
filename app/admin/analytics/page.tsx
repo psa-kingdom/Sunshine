@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import AdminStatCard from "@/components/admin/AdminStatCard";
 import AdminSkeleton from "@/components/admin/AdminSkeleton";
 import AdminEmptyState from "@/components/admin/AdminEmptyState";
@@ -11,7 +11,6 @@ import {
   Users,
   GraduationCap,
   CreditCard,
-  ClipboardList,
   ShieldCheck,
   Download,
   Printer,
@@ -59,7 +58,7 @@ export default function AdminAnalyticsPage() {
   const [moduleFilter, setModuleFilter] = useState("all");
   const [actionFilter, setActionFilter] = useState("all");
 
-  const fetchMetrics = async () => {
+  const fetchMetrics = useCallback(async () => {
     setMetricsLoading(true);
     try {
       const [resStudents, resTeachers, resFees, resInquiries] = await Promise.all([
@@ -87,9 +86,9 @@ export default function AdminAnalyticsPage() {
     } finally {
       setMetricsLoading(false);
     }
-  };
+  }, [toast]);
 
-  const fetchLogs = async () => {
+  const fetchLogs = useCallback(async () => {
     setLogsLoading(true);
     try {
       const res = await fetch("/api/admin/audit-logs");
@@ -102,12 +101,12 @@ export default function AdminAnalyticsPage() {
     } finally {
       setLogsLoading(false);
     }
-  };
+  }, [toast]);
 
   useEffect(() => {
     fetchMetrics();
     fetchLogs();
-  }, []);
+  }, [fetchMetrics, fetchLogs]);
 
   // ── Audit Logs Filtering ──
   const filteredLogs = useMemo(() => {

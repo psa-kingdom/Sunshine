@@ -1,7 +1,7 @@
 import React from "react";
 
 export interface Column<T> {
-  header: string;
+  header: string | React.ReactNode;
   accessor?: keyof T | ((row: T) => React.ReactNode);
   cell?: (row: T) => React.ReactNode;
   align?: "left" | "center" | "right";
