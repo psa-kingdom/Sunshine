@@ -236,8 +236,8 @@ export default function HomePage() {
   const [heroVideoUrl, setHeroVideoUrl] = useState<string | null>(null);
   const [heroImageUrl, setHeroImageUrl] = useState<string | null>(null);
 
-  // Pexels fallback video (direct CDN)
-  const PEXELS_VIDEO = "https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4";
+  // Local hero video
+  const LOCAL_HERO_VIDEO = "/SchoolVideo1.mp4";
 
   useEffect(() => {
     fetch("/api/hero-video")
@@ -250,7 +250,7 @@ export default function HomePage() {
       .catch(() => {});
   }, []);
 
-  const activeVideo = heroVideoUrl ?? PEXELS_VIDEO;
+  const activeVideo = heroVideoUrl ?? LOCAL_HERO_VIDEO;
 
   return (
     <main style={{ background: "var(--color-bg)" }}>
