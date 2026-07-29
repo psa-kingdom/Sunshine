@@ -59,8 +59,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ video, success: true }, { status: 201 });
   } catch (error) {
+    const message = error instanceof Error ? error.message : "Failed to upload video";
     console.error("Error uploading hero video:", error);
-    return NextResponse.json({ error: "Failed to upload video" }, { status: 500 });
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 

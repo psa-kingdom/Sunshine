@@ -48,8 +48,9 @@ export async function POST(req: Request) {
     const image = await HeroImage.create({ title: title.trim(), url: imageUrl, isActive: false });
     return NextResponse.json({ image, success: true }, { status: 201 });
   } catch (error) {
+    const message = error instanceof Error ? error.message : "Failed to upload image";
     console.error("Error uploading hero image:", error);
-    return NextResponse.json({ error: "Failed to upload image" }, { status: 500 });
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
