@@ -131,7 +131,16 @@ export function StatCounter({ value, className }: StatCounterProps) {
   }, [value]);
 
   return (
-    <strong ref={ref} className={className}>
+    <strong
+      ref={ref}
+      className={className}
+      style={{
+        fontVariantNumeric: "tabular-nums",
+        fontFeatureSettings: '"tnum"',
+        display: "inline-block",
+        textAlign: "center",
+      }}
+    >
       {displayText}
     </strong>
   );

@@ -235,9 +235,11 @@ export default function HomePage() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [heroVideoUrl, setHeroVideoUrl] = useState<string | null>(null);
   const [heroImageUrl, setHeroImageUrl] = useState<string | null>(null);
+  const [videoError, setVideoError] = useState(false);
 
-  // Local hero video
+  // Local hero video and image fallbacks
   const LOCAL_HERO_VIDEO = "/SchoolVideo1.mp4";
+  const LOCAL_HERO_IMAGE = "/hero-school.webp";
 
   useEffect(() => {
     fetch("/api/hero-video")
@@ -250,7 +252,22 @@ export default function HomePage() {
       .catch(() => {});
   }, []);
 
-  const activeVideo = heroVideoUrl ?? LOCAL_HERO_VIDEO;
+  // Priority Chain:
+  // 1. Active Hero Video (from DB /api/hero-video)
+  // 2. Active Hero Image (from DB /api/hero-image if no active video)
+  // 3. Default bundled fallback (/SchoolVideo1.mp4 with /hero-school.webp fallback)
+  const renderDbVideo = Boolean(heroVideoUrl);
+  const renderDbImage = !renderDbVideo && Boolean(heroImageUrl);
+
+  const activeVideoSrc = renderDbVideo
+    ? heroVideoUrl!
+    : !renderDbImage
+    ? LOCAL_HERO_VIDEO
+    : null;
+
+  const activeImageSrc = renderDbImage
+    ? heroImageUrl!
+    : LOCAL_HERO_IMAGE;
 
   return (
     <main style={{ background: "var(--color-bg)" }}>
@@ -274,36 +291,27 @@ export default function HomePage() {
           § 1 — HERO
           ════════════════════════════════════════════════════════════════════ */}
       <section id="home" className="spn-hero" aria-label="Hero">
-        {/* Video background */}
-        <video
-          key={activeVideo}
-          className="spn-hero-video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          aria-hidden="true"
-          onError={(e) => {
-            // If pexels video fails, fall back to static image
-            const vid = e.currentTarget;
-            if (heroImageUrl) {
-              vid.style.display = "none";
-              const img = document.querySelector(".spn-hero-img-fallback") as HTMLElement;
-              if (img) img.style.display = "block";
-            }
-          }}
-        >
-          <source src={activeVideo} type="video/mp4" />
-        </video>
-
-        {/* Image fallback (admin-controlled hero image or public webp) */}
-        <img
-          className="spn-hero-img spn-hero-img-fallback"
-          src={heroImageUrl ?? "/hero-school.webp"}
-          alt="Sunshine Public School Campus"
-          style={{ display: "none" }}
-          aria-hidden="true"
-        />
+        {/* Video or Image based on Priority Chain */}
+        {activeVideoSrc && !videoError ? (
+          <video
+            key={activeVideoSrc}
+            src={activeVideoSrc}
+            className="spn-hero-video"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+            onError={() => setVideoError(true)}
+          />
+        ) : (
+          <img
+            className="spn-hero-img"
+            src={activeImageSrc}
+            alt="Sunshine Public School Campus"
+            aria-hidden="true"
+          />
+        )}
 
         {/* Dark overlay */}
         <div className="spn-hero-overlay" aria-hidden="true" />
