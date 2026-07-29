@@ -377,9 +377,9 @@ export default function HomePage() {
               </h2>
               <div className="spn-divider" style={{ marginBottom: "2rem" }} />
               <p style={{ fontSize: "1.05rem", color: "var(--color-text)", lineHeight: 1.9, marginBottom: "1.25rem", fontStyle: "italic", fontFamily: "var(--font-display)" }}>
-                "Education, in its truest form, is not the filling of a vessel but the lighting
+                &ldquo;Education, in its truest form, is not the filling of a vessel but the lighting
                 of a flame. At Sunshine Public School, we have spent over two decades building
-                an environment where every child is seen, heard, and empowered."
+                an environment where every child is seen, heard, and empowered.&rdquo;
               </p>
               <p style={{ fontSize: "0.95rem", color: "var(--color-text-muted)", lineHeight: 1.85, marginBottom: "1.25rem" }}>
                 Our curriculum is designed to challenge young minds while nurturing their
@@ -388,7 +388,7 @@ export default function HomePage() {
               </p>
               <p style={{ fontSize: "0.95rem", color: "var(--color-text-muted)", lineHeight: 1.85, marginBottom: "2.5rem" }}>
                 I invite you to experience our campus, meet our faculty, and discover why
-                thousands of families in Gurugram have trusted us with their children's most
+                thousands of families in Gurugram have trusted us with their children&apos;s most
                 formative years.
               </p>
               <div className="spn-signature">Dr. Meenakshi Sundaram</div>
@@ -506,7 +506,7 @@ export default function HomePage() {
             <p style={{ color: "var(--color-text)", lineHeight: 1.9, marginBottom: "1.25rem" }}>
               Founded in 1998, Sunshine Public School began with a single vision: to create an
               institution where rigorous scholarship and genuine human development co-exist.
-              What started with 180 students and 12 teachers has grown into one of Gurugram's
+              What started with 180 students and 12 teachers has grown into one of Gurugram&apos;s
               most respected educational institutions, serving over 2,400 students today.
             </p>
             <p style={{ color: "var(--color-text-muted)", lineHeight: 1.9, marginBottom: "2rem" }}>
@@ -672,12 +672,12 @@ export default function HomePage() {
         <div className="container">
           <div style={{ maxWidth: 480, marginBottom: "3.5rem" }}>
             <span className="spn-eyebrow">What Our Community Says</span>
-            <h2 id="testimonials-heading" className="spn-h2">Words from Parents & Alumni</h2>
+            <h2 id="testimonials-heading" className="spn-h2">Words from Parents &amp; Alumni</h2>
           </div>
           <div className="spn-testimonial-grid">
             {TESTIMONIALS.map((t) => (
               <div key={t.name} className="spn-testimonial">
-                <div style={{ fontFamily: "var(--font-display)", fontSize: "3rem", lineHeight: 1, color: "var(--color-sand)", marginBottom: "-0.5rem" }}>"</div>
+                <div style={{ fontFamily: "var(--font-display)", fontSize: "3rem", lineHeight: 1, color: "var(--color-sand)", marginBottom: "-0.5rem" }}>&ldquo;</div>
                 <p className="spn-testimonial-quote">{t.quote}</p>
                 <div className="spn-testimonial-author">
                   <img src={t.portrait} alt={t.name} className="spn-testimonial-portrait" loading="lazy" />
@@ -796,7 +796,7 @@ export default function HomePage() {
               </h2>
               <div className="spn-divider" />
               <p style={{ color: "var(--color-text-muted)", lineHeight: 1.85, marginTop: "1.5rem", marginBottom: "2rem", fontSize: "0.95rem" }}>
-                Can't find your answer? Contact our admissions office directly — we're happy to help.
+                Can&apos;t find your answer? Contact our admissions office directly &mdash; we&apos;re happy to help.
               </p>
               <button
                 type="button"
@@ -828,7 +828,7 @@ export default function HomePage() {
       <section id="contact" className="spn-section-white" aria-labelledby="contact-heading">
         <div className="container" style={{ marginBottom: "3rem" }}>
           <span className="spn-eyebrow">Get in Touch</span>
-          <h2 id="contact-heading" className="spn-h2">We'd Love to Hear from You</h2>
+          <h2 id="contact-heading" className="spn-h2">We&apos;d Love to Hear from You</h2>
         </div>
 
         <div className="container">
@@ -913,7 +913,7 @@ export default function HomePage() {
             {/* Quick Links */}
             <div>
               <h4>Explore</h4>
-              <a href="#principal">Principal's Message</a>
+              <a href="#principal">Principal&apos;s Message</a>
               <a href="#why">Why Choose Us</a>
               <a href="#about">About the School</a>
               <a href="#academics">Academic Programmes</a>
