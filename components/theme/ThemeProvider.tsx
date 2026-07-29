@@ -8,32 +8,27 @@ interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
   setTheme: (theme: Theme) => void;
+  mounted: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
+  const [theme, setThemeState] = useState<Theme>("light");
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    // Initialize theme from DOM attribute set by head script or fallback to localStorage/system
-    const domTheme = document.documentElement.getAttribute("data-theme") as Theme;
-    if (domTheme === "light" || domTheme === "dark") {
-      setThemeState(domTheme);
-      return;
-    }
-
     const stored = localStorage.getItem("sunshine_theme") as Theme | null;
     if (stored === "light" || stored === "dark") {
       setThemeState(stored);
       document.documentElement.setAttribute("data-theme", stored);
     } else {
+      // First visit: check system preference, default to light
       const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const initial: Theme = prefersDark ? "dark" : "light";
-      setThemeState(initial);
-      document.documentElement.setAttribute("data-theme", initial);
+      const initialTheme: Theme = prefersDark ? "dark" : "light";
+      setThemeState(initialTheme);
+      document.documentElement.setAttribute("data-theme", initialTheme);
     }
   }, []);
 
@@ -48,9 +43,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme(nextTheme);
   };
 
-  // Prevent flash by avoiding mismatched server/client rendering if needed
   return (
-    <ThemeContext.Provider value={{ theme: mounted ? theme : "dark", toggleTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, setTheme, mounted }}>
       {children}
     </ThemeContext.Provider>
   );

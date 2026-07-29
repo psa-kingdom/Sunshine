@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useTheme } from "@/components/theme/ThemeProvider";
 
 interface BrandLogoProps {
   variant?: "auto" | "light" | "dark";
@@ -18,69 +19,47 @@ export default function BrandLogo({
   className = "",
   showText = false,
 }: BrandLogoProps) {
-  if (variant === "light") {
-    return (
-      <div className={`brand-logo-wrap ${className}`} style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
-        <Image
-          src="/ssps logo light.png"
-          alt="Sunshine Public School Logo"
-          width={width}
-          height={height}
-          priority
-          style={{ height: `${height}px`, width: "auto", objectFit: "contain" }}
-        />
-        {showText && (
-          <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.1rem", color: "var(--color-text)" }}>
-            Sunshine Public School
-          </span>
-        )}
-      </div>
-    );
-  }
+  const { theme } = useTheme();
 
+  // Determine which single image path to render
+  let logoSrc = "/ssps logo light.png";
   if (variant === "dark") {
-    return (
-      <div className={`brand-logo-wrap ${className}`} style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
-        <Image
-          src="/ssps logo dark.png"
-          alt="Sunshine Public School Logo"
-          width={width}
-          height={height}
-          priority
-          style={{ height: `${height}px`, width: "auto", objectFit: "contain" }}
-        />
-        {showText && (
-          <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.1rem", color: "var(--color-text)" }}>
-            Sunshine Public School
-          </span>
-        )}
-      </div>
-    );
+    logoSrc = "/ssps logo dark.png";
+  } else if (variant === "light") {
+    logoSrc = "/ssps logo light.png";
+  } else {
+    // auto variant: reactively select single logo based on active theme
+    logoSrc = theme === "dark" ? "/ssps logo dark.png" : "/ssps logo light.png";
   }
 
-  // Auto mode: CSS-driven instant theme switching without hydration flash
   return (
-    <div className={`brand-logo-auto ${className}`} style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+    <div
+      className={`brand-logo-container ${className}`}
+      style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
+    >
       <Image
-        src="/ssps logo light.png"
+        key={logoSrc}
+        src={logoSrc}
         alt="Sunshine Public School Logo"
         width={width}
         height={height}
         priority
-        className="logo-img-light"
-        style={{ height: `${height}px`, width: "auto", objectFit: "contain" }}
-      />
-      <Image
-        src="/ssps logo dark.png"
-        alt="Sunshine Public School Logo"
-        width={width}
-        height={height}
-        priority
-        className="logo-img-dark"
-        style={{ height: `${height}px`, width: "auto", objectFit: "contain" }}
+        style={{
+          height: `${height}px`,
+          width: "auto",
+          objectFit: "contain",
+          transition: "opacity 0.2s ease-in-out",
+        }}
       />
       {showText && (
-        <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.1rem", color: "var(--color-text)" }}>
+        <span
+          style={{
+            fontFamily: "var(--font-display)",
+            fontWeight: 700,
+            fontSize: "1.1rem",
+            color: "var(--color-text)",
+          }}
+        >
           Sunshine Public School
         </span>
       )}

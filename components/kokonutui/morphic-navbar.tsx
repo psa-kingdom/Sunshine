@@ -69,11 +69,8 @@ export default function MorphicNavbar({
 
           {/* Desktop CTA + Theme Switcher + Mobile Toggle */}
           <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-            {/* Theme Switcher */}
-            <ThemeToggle />
-
             {/* Desktop CTA */}
-            <div className="spn-nav-desktop-cta">
+            <div className="spn-nav-desktop-cta" style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
               <Link
                 href="/login"
                 className="spn-btn spn-btn-outline"
@@ -93,6 +90,7 @@ export default function MorphicNavbar({
                   {item.name}
                 </button>
               ))}
+              <ThemeToggle />
             </div>
 
             {/* Mobile Hamburger */}

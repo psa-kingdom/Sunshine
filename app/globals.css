@@ -8,46 +8,37 @@
 /* --------------------------------------------------------------------------
    DESIGN TOKENS & THEME SYSTEM
    -------------------------------------------------------------------------- */
-:root, [data-theme="dark"] {
+:root, [data-theme="light"] {
   /* Fonts */
   --font-display:  var(--font-cormorant-garamond, "Georgia", serif);
   --font-heading:  var(--font-libre-baskerville, "Georgia", serif);
   --font-body:     var(--font-inter, system-ui, sans-serif);
 
-  /* ── Dark Palette (Default luxury dark surfaces) ────────────────────── */
-  --color-brown:        #1e1208;
-  --color-brown-dark:   #0f0a04;
-  --color-brown-light:  #331e0e;
-  --color-beige:        #182436;
-  --color-beige-dark:   #111a28;
-  --color-bg:           #0c1421;
-  --color-sand:         #d5c3a1;
-  --color-sand-light:   #3d4a5c;
-  --color-text:         #f2e8d8;
-  --color-text-muted:   rgba(242, 232, 216, 0.65);
-  --color-surface:      #162234;
+  /* ── Light Palette (Warm heritage default) ────────────────────────── */
+  --color-bg:           #FAF8F4;
+  --color-surface:      #FFFFFF;
+  --color-card:         #FFFFFF;
+  --color-card-border:  rgba(75, 52, 37, 0.12);
+  --color-border:        rgba(75, 52, 37, 0.12);
+  --color-text:          #2D2A26;
+  --color-text-muted:    #7A6E62;
+  --color-brown:         #4B3425;
+  --color-brown-dark:    #2D1E10;
+  --color-brown-light:   #7A5C42;
+  --color-beige:         #F2E8D8;
+  --color-beige-dark:    #E8D8C0;
+  --color-sand:          #D5C3A1;
+  --color-sand-light:    #EDE0CC;
+  --color-gold:          #B87C14;
 
-  /* ── Admin Backward-Compat Tokens ──────────────────────────────────── */
-  --navy-950: #080d1a;
-  --navy-900: #0f172a;
-  --navy-800: #1e293b;
-  --navy-700: #334155;
-  --gold-500: #d99b26;
-  --gold-400: #e5b352;
-  --gold-300: #f2d494;
-  --color-primary:        #6366f1;
-  --color-primary-dark:   #4f46e5;
-  --color-primary-light:  #c7d2fe;
-  --color-secondary:      #ff6b35;
-  --color-secondary-light:#ffedd5;
-  --color-accent:         #ec4899;
-  --border-subtle:    rgba(213, 195, 161, 0.2);
-  --border-glass:     rgba(255, 255, 255, 0.15);
-
-  /* ── Public Shadows ─────────────────────────────────────────────────── */
-  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.2);
-  --shadow-md:   0 4px 16px rgba(0, 0, 0, 0.3);
-  --shadow-lg:   0 8px 32px rgba(0, 0, 0, 0.4);
+  --navy-950: #ffffff;
+  --navy-900: #f8fafc;
+  --navy-800: #f1f5f9;
+  --navy-700: #e2e8f0;
+  --border-subtle:    rgba(75, 52, 37, 0.15);
+  --shadow-sm:   0 1px 3px rgba(45, 26, 16, 0.06);
+  --shadow-md:   0 4px 16px rgba(45, 26, 16, 0.08);
+  --shadow-lg:   0 8px 32px rgba(45, 26, 16, 0.10);
 
   /* ── Spacing ────────────────────────────────────────────────────────── */
   --space-1: 0.25rem;
@@ -74,10 +65,140 @@
 
   /* ── Motion ─────────────────────────────────────────────────────────── */
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-spring: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --dur-fast:    180ms;
   --dur-mid:     350ms;
   --dur-slow:    600ms;
+}
+
+[data-theme="dark"] {
+  /* ── Dark Palette (Exact User Spec) ───────────────────────────────── */
+  --color-bg:           #08111F;
+  --color-surface:      #101C2D;
+  --color-card:         #152235;
+  --color-card-border:  rgba(255, 255, 255, 0.08);
+  --color-border:        rgba(255, 255, 255, 0.08);
+  --color-text:          #F8F5EE;
+  --color-text-muted:    #B7C2D4;
+  --color-brown:         #d5c3a1;
+  --color-brown-dark:    #c4b08b;
+  --color-brown-light:   #e8d8c0;
+  --color-beige:         #101C2D;
+  --color-beige-dark:    #0c1626;
+  --color-sand:          #d5c3a1;
+  --color-sand-light:    #1c2d45;
+  --color-gold:          #d99b26;
+
+  --navy-950: #050b14;
+  --navy-900: #08111F;
+  --navy-800: #101C2D;
+  --navy-700: #152235;
+  --border-subtle:    rgba(255, 255, 255, 0.08);
+  --shadow-sm:   0 2px 4px rgba(0, 0, 0, 0.4);
+  --shadow-md:   0 6px 20px rgba(0, 0, 0, 0.5);
+  --shadow-lg:   0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Smooth Global Theme Transitions */
+body, nav, section, footer, div.adminContentCard, div.spn-faq-item, div.spn-nav-shell, button, input, select, textarea {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ── Apple / Linear / Vercel Grade Glassmorphic Theme Toggle ───────────── */
+.spn-apple-toggle {
+  position: relative;
+  width: 64px;
+  height: 32px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 4px 12px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+[data-theme="light"] .spn-apple-toggle {
+  background: rgba(75, 52, 37, 0.06);
+  border-color: rgba(75, 52, 37, 0.14);
+}
+
+.spn-apple-toggle:hover {
+  transform: translateY(-1px);
+  border-color: var(--color-sand);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), 0 6px 16px rgba(213, 195, 161, 0.15);
+}
+
+.spn-apple-toggle:active {
+  transform: scale(0.95);
+}
+
+.spn-apple-toggle:focus-visible {
+  outline: 2px solid var(--color-sand);
+  outline-offset: 3px;
+}
+
+/* Track Icons Container */
+.spn-toggle-track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 7px;
+  pointer-events: none;
+}
+
+.spn-track-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  opacity: 0.4;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.spn-track-icon.active {
+  opacity: 0.9;
+  color: var(--color-gold);
+}
+
+/* Floating Glass Thumb */
+.spn-toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffffff 0%, #f3ece1 100%);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25), 0 1px 2px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.35s ease;
+  z-index: 2;
+}
+
+.spn-toggle-thumb.dark {
+  transform: translateX(32px);
+  background: linear-gradient(135deg, #1c2b42 0%, #0d1728 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.spn-thumb-icon {
+  color: #331e0e;
+  transition: transform 0.35s ease, color 0.3s ease;
+}
+
+.spn-toggle-thumb.dark .spn-thumb-icon {
+  color: #f8fafc;
 }
 
 /* --------------------------------------------------------------------------
