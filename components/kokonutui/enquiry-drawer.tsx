@@ -10,9 +10,9 @@ interface EnquiryDrawerProps {
 }
 
 const inputClass = `
-  w-full min-w-0 px-4 py-3 rounded-xl border-2 border-slate-200
+  w-full min-w-0 px-4 py-3 border border-[#D5C3A1]
   bg-white text-slate-800 text-sm placeholder:text-slate-400 placeholder:truncate truncate
-  focus:outline-none focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/10
+  focus:outline-none focus:border-[#4B3425] focus:ring-2 focus:ring-[#4B3425]/10
   transition-all duration-200 text-ellipsis overflow-hidden box-border
 `.trim();
 
@@ -139,7 +139,7 @@ export default function EnquiryDrawer({ isOpen, onClose }: EnquiryDrawerProps) {
               {/* ── Header ── */}
               <div style={{
                 padding: "1.5rem 2rem",
-                background: "linear-gradient(135deg, #4f46e5 0%, #6366f1 50%, #818cf8 100%)",
+                background: "#4B3425",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -205,10 +205,10 @@ export default function EnquiryDrawer({ isOpen, onClose }: EnquiryDrawerProps) {
                         onClick={() => setSuccess(false)}
                         style={{
                           padding: "0.75rem 1.75rem",
-                          background: "linear-gradient(135deg, #4f46e5, #6366f1)",
-                          color: "#fff", border: "none", borderRadius: "9999px",
-                          fontWeight: 700, fontSize: "0.85rem", cursor: "pointer",
-                          boxShadow: "0 4px 16px rgba(99,102,241,0.3)",
+                          background: "#4B3425",
+                          color: "#F2E8D8", border: "none", borderRadius: "0",
+                          fontWeight: 600, fontSize: "0.82rem", cursor: "pointer",
+                          letterSpacing: "0.06em",
                         }}
                       >
                         Submit Another Enquiry
@@ -412,13 +412,11 @@ export default function EnquiryDrawer({ isOpen, onClose }: EnquiryDrawerProps) {
                         style={{
                           display: "flex", alignItems: "center", gap: "0.5rem",
                           padding: "0.85rem 2rem",
-                          background: submitting
-                            ? "#c7d2fe"
-                            : "linear-gradient(135deg, #4f46e5, #6366f1)",
-                          color: "#fff", border: "none", borderRadius: "9999px",
-                          fontWeight: 800, fontSize: "0.9rem", cursor: submitting ? "not-allowed" : "pointer",
-                          boxShadow: submitting ? "none" : "0 4px 20px rgba(99,102,241,0.35)",
-                          transition: "all 0.2s",
+                          background: submitting ? "#7A5C42" : "#4B3425",
+                          color: "#F2E8D8", border: "none", borderRadius: "0",
+                          fontWeight: 600, fontSize: "0.82rem", cursor: submitting ? "not-allowed" : "pointer",
+                          letterSpacing: "0.07em", textTransform: "uppercase" as const,
+                          transition: "background 0.18s",
                           whiteSpace: "nowrap",
                         }}
                       >

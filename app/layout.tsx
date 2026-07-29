@@ -1,28 +1,34 @@
 import type { Metadata } from "next";
-import { Fredoka, Nunito, Outfit } from "next/font/google";
+import { Cormorant_Garamond, Inter, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 
-const fredoka = Fredoka({
-  variable: "--font-fredoka",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-const nunito = Nunito({
-  variable: "--font-nunito",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-display",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const inter = Inter({
+  variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const libreBaskerville = Libre_Baskerville({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Sunshine Public School | Learning • Leadership • Character",
-  description: "A premier CBSE affiliated institution nurturing future leaders in Gurugram since 1998.",
+  title: "Sunshine Public School | Shaping Curious Minds. Building Confident Futures.",
+  description:
+    "A premier CBSE-affiliated institution in Gurugram nurturing academic excellence, character, creativity, and holistic development since 1998.",
   other: {
     "codex-preview": "development",
   },
@@ -43,7 +49,7 @@ export default function RootLayout({
         <link rel="preload" as="image" href="/hero-school.webp" />
       </head>
       <body
-        className={`${fredoka.variable} ${nunito.variable} ${outfit.variable}`}
+        className={`${cormorant.variable} ${inter.variable} ${libreBaskerville.variable}`}
         suppressHydrationWarning
       >
         {children}

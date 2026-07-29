@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Lock } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Menu, X } from "lucide-react";
 
 export interface MorphicNavItem {
   id: string;
@@ -21,146 +20,167 @@ interface MorphicNavbarProps {
 export default function MorphicNavbar({
   items,
   onActionClick,
-  className,
 }: MorphicNavbarProps) {
-  const [activeId, setActiveId] = useState("home");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  const navLinks = items.filter((i) => !i.isAction);
+  const actionItems = items.filter((i) => i.isAction);
 
   return (
     <>
-      {/* Fixed bar — uses .nav-shell for top offset, .container for width alignment */}
-      <div className={cn("nav-shell", scrolled ? "scrolled" : "")}>
-        <div className="container">
-          <nav className={cn("morphic-nav", className)}>
-            {/* Brand Logo */}
-            <Link href="/" className="morphic-nav-logo group">
-              <span className="logo-icon group-hover:rotate-12 transition-transform duration-300">S</span>
-              <div style={{ display: "flex", flexDirection: "column", lineHeight: 1 }}>
-                <span style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "0.9rem", letterSpacing: "0.05em", color: "#1e293b" }}>SUNSHINE</span>
-                <span style={{ fontFamily: "var(--font-heading)", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "#6366f1" }}>Public School</span>
-              </div>
-            </Link>
-
-            {/* Desktop Links */}
-            <div className="nav-links">
-              {items.filter(i => !i.isAction).map((item) => (
-                <a
-                  key={item.id}
-                  href={item.href ?? `#${item.id}`}
-                  onClick={() => setActiveId(item.id)}
-                  className={cn("nav-link", activeId === item.id ? "active" : "")}
-                >
-                  {item.name}
-                </a>
-              ))}
+      {/* ── Fixed Bar ── */}
+      <div className={`spn-nav-shell${scrolled ? " scrolled" : ""}`}>
+        <nav className="spn-nav">
+          {/* Brand */}
+          <Link href="/" className="spn-nav-logo" aria-label="Sunshine Public School Home">
+            <span className="spn-nav-crest" aria-hidden="true">S</span>
+            <div className="spn-nav-name">
+              <span className="spn-nav-name-primary">Sunshine</span>
+              <span className="spn-nav-name-sub">Public School</span>
             </div>
+          </Link>
 
-            {/* Right Actions */}
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              {items.filter(i => i.isAction).map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => onActionClick?.(item.id)}
-                  className="btn-clay btn-clay-primary"
-                  style={{ padding: "0.45rem 1.1rem", fontSize: "0.72rem", letterSpacing: "0.06em" }}
-                >
-                  {item.name}
-                </button>
-              ))}
-
-              <Link href="/login" title="Portal Login">
-                <button
-                  type="button"
-                  className="btn-clay btn-clay-glass"
-                  style={{ padding: "0.55rem", borderRadius: "50%", lineHeight: 1 }}
-                >
-                  <Lock style={{ width: "0.875rem", height: "0.875rem" }} />
-                </button>
-              </Link>
-
-              {/* Mobile toggle */}
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                style={{
-                  display: "none",
-                  padding: "0.5rem",
-                  borderRadius: "50%",
-                  background: "transparent",
-                  border: "none",
-                  cursor: "pointer",
-                  color: "#475569",
-                }}
-                className="mobile-menu-btn"
-                aria-label="Toggle menu"
-              >
-                {mobileMenuOpen ? <X style={{ width: "1rem", height: "1rem" }} /> : <Menu style={{ width: "1rem", height: "1rem" }} />}
-              </button>
-            </div>
-          </nav>
-        </div>
-      </div>
-
-      {/* Mobile Fullscreen Overlay */}
-      <div className={cn("mobile-nav-panel", mobileMenuOpen ? "open" : "")}>
-        <button
-          type="button"
-          onClick={() => setMobileMenuOpen(false)}
-          style={{
-            position: "absolute",
-            top: "1.5rem", right: "2rem",
-            padding: "0.75rem",
-            borderRadius: "50%",
-            background: "rgba(0,0,0,0.05)",
-            border: "none",
-            cursor: "pointer",
-            color: "#475569",
-          }}
-        >
-          <X style={{ width: "1.25rem", height: "1.25rem" }} />
-        </button>
-
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem" }}>
-          {items.map((item) => {
-            if (item.isAction) {
-              return (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => { setMobileMenuOpen(false); onActionClick?.(item.id); }}
-                  className="btn-clay btn-clay-primary"
-                  style={{ padding: "0.85rem 2.5rem", fontSize: "0.85rem", marginTop: "1rem" }}
-                >
-                  {item.name}
-                </button>
-              );
-            }
-            return (
+          {/* Desktop Links */}
+          <div className="spn-nav-links" role="navigation" aria-label="Main navigation">
+            {navLinks.map((item) => (
               <a
                 key={item.id}
                 href={item.href ?? `#${item.id}`}
-                onClick={() => { setActiveId(item.id); setMobileMenuOpen(false); }}
-                className="mobile-nav-link"
+                className="spn-nav-link"
               >
                 {item.name}
               </a>
-            );
-          })}
+            ))}
+          </div>
+
+          {/* Desktop CTA + Mobile Toggle */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            {/* Desktop CTA */}
+            <div className="spn-nav-desktop-cta">
+              {actionItems.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  id={`nav-cta-${item.id}`}
+                  onClick={() => onActionClick?.(item.id)}
+                  className="spn-btn spn-btn-primary"
+                  style={{ padding: "0.55rem 1.25rem", fontSize: "0.7rem" }}
+                >
+                  {item.name}
+                </button>
+              ))}
+            </div>
+
+            {/* Mobile Hamburger */}
+            <button
+              type="button"
+              id="nav-mobile-toggle"
+              className="spn-mobile-btn"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Open navigation menu"
+            >
+              <Menu size={22} />
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      {/* ── Mobile Drawer ── */}
+      <div
+        className={`spn-mobile-drawer${mobileOpen ? " open" : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+      >
+        {/* Close button */}
+        <button
+          type="button"
+          id="nav-mobile-close"
+          className="spn-mobile-close"
+          onClick={() => setMobileOpen(false)}
+          aria-label="Close navigation menu"
+        >
+          <X size={24} />
+        </button>
+
+        {/* Logo in drawer */}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "3rem", marginTop: "1rem" }}>
+          <span
+            style={{
+              width: 36, height: 36,
+              background: "var(--color-brown)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              color: "var(--color-beige)",
+              fontFamily: "var(--font-display)",
+              fontSize: "1.1rem", fontWeight: 600,
+            }}
+          >
+            S
+          </span>
+          <div>
+            <div style={{ fontFamily: "var(--font-display)", fontSize: "1rem", fontWeight: 600, color: "var(--color-brown)", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+              Sunshine
+            </div>
+            <div style={{ fontFamily: "var(--font-body)", fontSize: "0.6rem", fontWeight: 500, color: "var(--color-text-muted)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              Public School
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Links */}
+        <nav style={{ display: "flex", flexDirection: "column", flex: 1 }}>
+          {navLinks.map((item) => (
+            <a
+              key={item.id}
+              href={item.href ?? `#${item.id}`}
+              className="spn-mobile-nav-link"
+              onClick={() => setMobileOpen(false)}
+            >
+              {item.name}
+            </a>
+          ))}
+        </nav>
+
+        {/* Mobile CTA */}
+        <div style={{ marginTop: "2rem", display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+          {actionItems.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              id={`mobile-cta-${item.id}`}
+              onClick={() => { setMobileOpen(false); onActionClick?.(item.id); }}
+              className="spn-btn spn-btn-primary"
+              style={{ width: "100%", justifyContent: "center" }}
+            >
+              {item.name}
+            </button>
+          ))}
+          <Link href="/login" style={{ display: "block", textAlign: "center", padding: "0.875rem", border: "1.5px solid var(--color-sand)", color: "var(--color-brown)", fontFamily: "var(--font-body)", fontSize: "0.78rem", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase" }} onClick={() => setMobileOpen(false)}>
+            Staff & Student Portal
+          </Link>
         </div>
       </div>
 
-      {/* Inject mobile toggle visibility via style tag (avoids Tailwind lg: prefix conflicts) */}
       <style>{`
+        .spn-nav-desktop-cta { display: flex; align-items: center; gap: 0.5rem; }
         @media (max-width: 1023px) {
-          .mobile-menu-btn { display: flex !important; align-items: center; justify-content: center; }
+          .spn-nav-desktop-cta { display: none; }
+        }
+        @media (min-width: 1024px) {
+          .spn-mobile-btn { display: none !important; }
         }
       `}</style>
     </>
