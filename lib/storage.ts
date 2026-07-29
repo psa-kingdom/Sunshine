@@ -14,6 +14,26 @@ import { put, del } from "@vercel/blob";
  * @param data      File | Buffer | Blob | ReadableStream to upload
  * @returns         Public URL of the uploaded asset
  */
+/**
+ * Uploads a file to Vercel Blob, handling both public and private Blob stores.
+ */
+async function uploadToVercelBlob(
+  filename: string,
+  data: File | Buffer | Blob | ReadableStream,
+  token: string
+) {
+  try {
+    return await put(filename, data, { access: "public", token });
+  } catch (err: unknown) {
+    const msg = err instanceof Error ? err.message : String(err);
+    if (msg.includes("private store") || msg.includes("configured with private access")) {
+      console.log("[storage] Vercel Blob store is private. Retrying with access: 'private'...");
+      return await put(filename, data, { access: "private", token });
+    }
+    throw err;
+  }
+}
+
 export async function uploadFile(
   filename: string,
   data: File | Buffer | Blob | ReadableStream
@@ -35,7 +55,7 @@ export async function uploadFile(
       );
     }
 
-    const blob = await put(filename, data, { access: "public", token });
+    const blob = await uploadToVercelBlob(filename, data, token);
     console.log("[storage] Uploaded to Vercel Blob:", blob.url);
     return blob.url;
   }
@@ -43,7 +63,7 @@ export async function uploadFile(
   // ── Development path: try Vercel Blob first, fall back to disk ───────────
   if (token) {
     try {
-      const blob = await put(filename, data, { access: "public", token });
+      const blob = await uploadToVercelBlob(filename, data, token);
       console.log("[storage] Uploaded to Vercel Blob (dev):", blob.url);
       return blob.url;
     } catch (err) {
