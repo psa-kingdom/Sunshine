@@ -82,7 +82,7 @@ export default function UnifiedLoginPage() {
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        background: "var(--navy-950)",
+        background: "#08111F",
         position: "relative",
         overflow: "hidden",
       }}
@@ -163,7 +163,7 @@ export default function UnifiedLoginPage() {
         }}
       >
         <Link href="/" style={{ textDecoration: "none" }}>
-          <BrandLogo height={38} />
+          <BrandLogo height={52} variant="dark" />
         </Link>
 
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>

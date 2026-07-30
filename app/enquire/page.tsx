@@ -238,7 +238,7 @@ export default function EnquirePage() {
         <div className="wrap footerGrid">
           <div className="footerBrand space-y-3.5">
             <div>
-              <BrandLogo height={36} />
+              <BrandLogo height={50} />
             </div>
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest">
               Learning • Leadership • Character

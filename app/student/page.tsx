@@ -227,7 +227,7 @@ export default function StudentDashboardPage() {
       <header className="adminHeader">
         <div className="adminHeaderInner">
           <div className="adminBrand">
-            <BrandLogo height={34} />
+            <BrandLogo height={46} />
           </div>
 
           <div className="adminUserInfo" style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>

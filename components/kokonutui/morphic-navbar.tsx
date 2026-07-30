@@ -51,7 +51,7 @@ export default function MorphicNavbar({
         <nav className="spn-nav">
           {/* Brand */}
           <Link href="/" className="spn-nav-logo" aria-label="Sunshine Public School Home">
-            <BrandLogo height={38} />
+            <BrandLogo height={56} />
           </Link>
 
           {/* Desktop Links */}
@@ -126,7 +126,7 @@ export default function MorphicNavbar({
         </button>
         {/* Logo & Theme Toggle in drawer */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "2.5rem", marginTop: "1rem" }}>
-          <BrandLogo height={32} />
+          <BrandLogo height={48} />
           <ThemeToggle />
         </div>
 

@@ -1003,7 +1003,7 @@ export default function HomePage() {
             {/* Brand column */}
             <div>
               <div style={{ marginBottom: "1.25rem" }}>
-                <BrandLogo variant="dark" height={44} />
+                <BrandLogo variant="dark" height={58} />
               </div>
               <p style={{ fontSize: "0.85rem", color: "rgba(242,232,216,0.55)", lineHeight: 1.8, marginBottom: "1.5rem", maxWidth: "280px" }}>
                 Nurturing curious minds and building confident futures since 1998.

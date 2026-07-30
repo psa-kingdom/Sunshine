@@ -1351,6 +1351,63 @@ img, svg { display: block; max-width: 100%; }
   padding: 5rem 0 2rem;
 }
 
+/* ── Dark Mode Footer — dedicated palette (never inherits brown token) ─── */
+[data-theme="dark"] .spn-footer {
+  background: #0B1524;
+  color: #F6F4EF;
+  border-top: 1px solid rgba(185, 196, 213, 0.12);
+}
+
+[data-theme="dark"] .spn-footer h4 {
+  color: #d5a843;
+}
+
+[data-theme="dark"] .spn-footer a {
+  color: #B9C4D5;
+}
+
+[data-theme="dark"] .spn-footer a:hover {
+  color: #F6F4EF;
+}
+
+[data-theme="dark"] .spn-footer p,
+[data-theme="dark"] .spn-footer span {
+  color: #B9C4D5;
+}
+
+[data-theme="dark"] .spn-footer-grid {
+  border-bottom-color: rgba(185, 196, 213, 0.15);
+}
+
+[data-theme="dark"] .spn-footer-copy {
+  color: rgba(185, 196, 213, 0.55);
+}
+
+[data-theme="dark"] .spn-footer-social-link {
+  border-color: rgba(185, 196, 213, 0.2);
+  color: #B9C4D5;
+}
+
+[data-theme="dark"] .spn-footer-social-link:hover {
+  background: rgba(213, 168, 67, 0.15);
+  border-color: rgba(213, 168, 67, 0.4);
+  color: #d5a843;
+  box-shadow: 0 0 12px rgba(213, 168, 67, 0.15);
+}
+
+/* Override inline-styled divs (contact info, CBSE badge) inside footer in dark mode */
+[data-theme="dark"] .spn-footer div {
+  color: inherit;
+}
+
+[data-theme="dark"] .spn-footer button {
+  color: #B9C4D5 !important;
+}
+
+[data-theme="dark"] .spn-footer button:hover {
+  color: #F6F4EF !important;
+}
+
 .spn-footer-grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;

@@ -79,7 +79,7 @@ export default function AdminNavbar({
           >
             {/* Brand Logo & Active Module Title */}
             <Link href="/admin" className="adminBrand" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.75rem" }}>
-              <BrandLogo height={34} />
+              <BrandLogo height={46} />
               <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--gold-400)", textTransform: "uppercase", letterSpacing: "0.08em", paddingLeft: "0.75rem", borderLeft: "1px solid rgba(255,255,255,0.15)" }}>
                 {pageLabel}
               </span>
