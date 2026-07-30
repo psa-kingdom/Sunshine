@@ -4,6 +4,10 @@ export const authConfig: NextAuthConfig = {
   pages: {
     signIn: "/login",
   },
+  session: {
+    strategy: "jwt",
+  },
+  trustHost: true,
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -20,16 +24,16 @@ export const authConfig: NextAuthConfig = {
     async session({ session, token }) {
       if (session.user) {
         const su = session.user as unknown as Record<string, unknown>;
-        su.role = token.role;
-        su.id = token.id;
-        su.grade = token.grade;
-        su.section = token.section;
-        su.employeeId = token.employeeId;
-        su.rollNumber = token.rollNumber;
+        su.role = token.role as string;
+        su.id = token.id as string;
+        su.grade = token.grade as string;
+        su.section = token.section as string;
+        su.employeeId = token.employeeId as string;
+        su.rollNumber = token.rollNumber as string;
       }
       return session;
     },
   },
   providers: [],
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
 };
