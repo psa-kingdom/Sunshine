@@ -1,7 +1,26 @@
 import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
+import fs from "fs";
+import path from "path";
+
+// Load .env.local / .env natively if not already populated
+const envPath = path.join(process.cwd(), ".env.local");
+const envDefaultPath = path.join(process.cwd(), ".env");
+
+const targetEnvPath = fs.existsSync(envPath) ? envPath : fs.existsSync(envDefaultPath) ? envDefaultPath : null;
+
+if (targetEnvPath) {
+  const envContent = fs.readFileSync(targetEnvPath, "utf8");
+  for (const line of envContent.split("\n")) {
+    const match = line.match(/^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=\s*["']?(.*?)["']?\s*$/);
+    if (match && !process.env[match[1]]) {
+      process.env[match[1]] = match[2];
+    }
+  }
+}
 
 const AdminSchema = new mongoose.Schema(
+
   {
     email: { type: String, required: true, unique: true, lowercase: true, trim: true },
     passwordHash: { type: String, required: true },
