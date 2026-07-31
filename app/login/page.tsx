@@ -80,11 +80,11 @@ export default function UnifiedLoginPage() {
 
   return (
     <div
+      className="adminShell"
       style={{
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        background: "#08111F",
         position: "relative",
         overflow: "hidden",
       }}

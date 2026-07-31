@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import BrandLogo from "@/components/ui/BrandLogo";
-import ThemeToggle from "@/components/theme/ThemeToggle";
 import {
   LayoutDashboard,
   Users,
@@ -73,6 +72,7 @@ export default function AdminNavbar({
               alignItems: "center",
               justifyContent: "space-between",
               width: "100%",
+              paddingTop: "0.75rem",
               paddingBottom: "0.6rem",
               borderBottom: "1px solid rgba(255,255,255,0.06)",
             }}
@@ -80,14 +80,13 @@ export default function AdminNavbar({
             {/* Brand Logo & Active Module Title */}
             <Link href="/admin" className="adminBrand" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: "0.75rem" }}>
               <BrandLogo height={46} />
-              <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--gold-400)", textTransform: "uppercase", letterSpacing: "0.08em", paddingLeft: "0.75rem", borderLeft: "1px solid rgba(255,255,255,0.15)" }}>
+              <span style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--gold-400)", textTransform: "uppercase", letterSpacing: "0.08em", paddingLeft: "0.75rem", borderLeft: "1px solid rgba(255,255,255,0.1)" }}>
                 {pageLabel}
               </span>
             </Link>
 
-            {/* Profile Dropdown & Theme Toggle & Mobile Menu Toggle */}
+            {/* Profile Dropdown & Mobile Menu Toggle */}
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-              <ThemeToggle />
               {/* Profile Dropdown */}
               <div style={{ position: "relative" }}>
                 <button
@@ -98,10 +97,10 @@ export default function AdminNavbar({
                     alignItems: "center",
                     gap: "0.5rem",
                     padding: "0.35rem 0.75rem",
-                    background: "var(--navy-800)",
-                    border: "1px solid var(--border-subtle)",
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.08)",
                     borderRadius: "var(--radius-full)",
-                    color: "#fff",
+                    color: "var(--admin-text)",
                     cursor: "pointer",
                     fontSize: "0.78rem",
                     fontFamily: "var(--font-heading)",
@@ -152,10 +151,10 @@ export default function AdminNavbar({
                         right: 0,
                         top: "calc(100% + 0.5rem)",
                         width: "240px",
-                        background: "var(--navy-800)",
-                        border: "1px solid var(--gold-500)",
-                        borderRadius: "var(--radius-md)",
-                        boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
+                        background: "#08111F",
+                        border: "1px solid rgba(245,185,66,0.3)",
+                        borderRadius: "8px",
+                        boxShadow: "0 24px 48px rgba(0,0,0,0.7), 0 4px 16px rgba(0,0,0,0.4)",
                         zIndex: 50,
                         overflow: "hidden",
                       }}
@@ -163,12 +162,12 @@ export default function AdminNavbar({
                       <div
                         style={{
                           padding: "0.875rem 1rem",
-                          borderBottom: "1px solid var(--border-subtle)",
-                          background: "var(--navy-900)",
+                          borderBottom: "1px solid rgba(255,255,255,0.06)",
+                          background: "rgba(5,11,20,0.8)",
                         }}
                       >
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                          <span style={{ color: "#fff", fontWeight: 600, fontSize: "0.8rem" }}>{userName}</span>
+                          <span style={{ color: "var(--admin-text)", fontWeight: 600, fontSize: "0.8rem" }}>{userName}</span>
                           <span
                             style={{
                               padding: "0.15rem 0.5rem",
@@ -184,10 +183,10 @@ export default function AdminNavbar({
                             Admin
                           </span>
                         </div>
-                        <p style={{ fontSize: "0.72rem", color: "rgba(255,255,255,0.5)", marginTop: "0.2rem" }}>{userEmail}</p>
+                        <p style={{ fontSize: "0.72rem", color: "var(--admin-text-faint)", marginTop: "0.2rem" }}>{userEmail}</p>
                       </div>
                       <div style={{ padding: "0.4rem" }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.5rem 0.75rem", fontSize: "0.78rem", color: "rgba(255,255,255,0.7)" }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.5rem 0.75rem", fontSize: "0.78rem", color: "var(--admin-text-muted)" }}>
                           <ShieldCheck style={{ width: "0.8rem", height: "0.8rem", color: "var(--gold-400)" }} />
                           Verified Admin Account
                         </div>
@@ -275,22 +274,22 @@ export default function AdminNavbar({
                     gap: "0.35rem",
                     padding: "0.35rem 0.75rem",
                     borderRadius: "var(--radius-full)",
-                    fontSize: "0.75rem",
-                    fontFamily: "var(--font-heading)",
-                    fontWeight: 700,
+                    fontSize: "0.72rem",
+                    fontFamily: "var(--font-body)",
+                    fontWeight: 600,
                     textTransform: "uppercase",
-                    letterSpacing: "0.04em",
+                    letterSpacing: "0.05em",
                     textDecoration: "none",
                     transition: "all 0.15s",
                     whiteSpace: "nowrap",
                     background: isActive
-                      ? "rgba(255,107,53,0.15)"
+                      ? "rgba(245, 185, 66, 0.1)"
                       : "transparent",
                     color: isActive
                       ? "var(--gold-400)"
-                      : "rgba(255,255,255,0.65)",
+                      : "var(--admin-text-muted)",
                     border: isActive
-                      ? "1px solid rgba(255,107,53,0.3)"
+                      ? "1px solid rgba(245, 185, 66, 0.2)"
                       : "1px solid transparent",
                   }}
                 >
@@ -328,14 +327,14 @@ export default function AdminNavbar({
                     padding: "0.4rem 0.75rem",
                     borderRadius: "var(--radius-full)",
                     fontSize: "0.72rem",
-                    fontFamily: "var(--font-heading)",
-                    fontWeight: 700,
+                    fontFamily: "var(--font-body)",
+                    fontWeight: 600,
                     textTransform: "uppercase",
-                    letterSpacing: "0.04em",
+                    letterSpacing: "0.05em",
                     textDecoration: "none",
-                    background: isActive ? "rgba(255,107,53,0.15)" : "var(--navy-800)",
-                    color: isActive ? "var(--gold-400)" : "rgba(255,255,255,0.7)",
-                    border: `1px solid ${isActive ? "rgba(255,107,53,0.3)" : "var(--border-subtle)"}`,
+                    background: isActive ? "rgba(245,185,66,0.1)" : "rgba(255,255,255,0.03)",
+                    color: isActive ? "var(--gold-400)" : "var(--admin-text-muted)",
+                    border: `1px solid ${isActive ? "rgba(245,185,66,0.2)" : "rgba(255,255,255,0.06)"}`,
                   }}
                 >
                   <Icon style={{ width: "0.75rem", height: "0.75rem" }} />

@@ -31,6 +31,7 @@
   --color-sand-light:    #EDE0CC;
   --color-gold:          #B87C14;
 
+  /* Public site nav/layout tokens */
   --navy-950: #ffffff;
   --navy-900: #f8fafc;
   --navy-800: #f1f5f9;
@@ -39,6 +40,27 @@
   --shadow-sm:   0 1px 3px rgba(45, 26, 16, 0.06);
   --shadow-md:   0 4px 16px rgba(45, 26, 16, 0.08);
   --shadow-lg:   0 8px 32px rgba(45, 26, 16, 0.10);
+
+  /* ── Admin Portal Design Tokens (always available) ────────────────── */
+  /* Gold accent palette */
+  --gold-300: #fde68a;
+  --gold-400: #f5b942;
+  --gold-500: #d99b26;
+
+  /* Admin primary — indigo */
+  --color-primary:       #6366f1;
+  --color-primary-dark:  #4f46e5;
+  --color-primary-light: #818cf8;
+
+  /* Admin secondary / accent — orange */
+  --color-secondary: #ea580c;
+  --color-accent:    #f97316;
+
+  /* Admin-specific shadow system */
+  --shadow-clay:        0 4px 24px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.08);
+  --shadow-clay-orange: 0 4px 14px rgba(234,88,12,0.25);
+  --shadow-card:        0 2px 12px rgba(0,0,0,0.15);
+  --shadow-card-hover:  0 8px 28px rgba(0,0,0,0.25);
 
   /* ── Spacing ────────────────────────────────────────────────────────── */
   --space-1: 0.25rem;
@@ -97,6 +119,26 @@
   --shadow-sm:   0 2px 4px rgba(0, 0, 0, 0.4);
   --shadow-md:   0 6px 20px rgba(0, 0, 0, 0.5);
   --shadow-lg:   0 12px 40px rgba(0, 0, 0, 0.6);
+
+  /* Gold palette (same in dark, slightly brighter) */
+  --gold-300: #fde68a;
+  --gold-400: #f5b942;
+  --gold-500: #d99b26;
+
+  /* Primary */
+  --color-primary:       #6366f1;
+  --color-primary-dark:  #4f46e5;
+  --color-primary-light: #818cf8;
+
+  /* Secondary / accent */
+  --color-secondary: #ea580c;
+  --color-accent:    #f97316;
+
+  /* Shadows */
+  --shadow-clay:        0 4px 24px rgba(0,0,0,0.5), 0 1px 4px rgba(0,0,0,0.2);
+  --shadow-clay-orange: 0 4px 14px rgba(234,88,12,0.3);
+  --shadow-card:        0 2px 12px rgba(0,0,0,0.4);
+  --shadow-card-hover:  0 8px 28px rgba(0,0,0,0.6);
 }
 
 /* Smooth Global Theme Transitions */
@@ -1517,25 +1559,43 @@ img, svg { display: block; max-width: 100%; }
   animation: spn-fade-up 0.6s var(--ease-smooth) both;
 }
 
-/* --------------------------------------------------------------------------
-   ══════════════════════════════════════════════════════════════════════════
-   ADMIN / TEACHER / STUDENT PORTAL
-   Dark shell — DO NOT MODIFY unless working on portal exclusively
-   ══════════════════════════════════════════════════════════════════════════
-   -------------------------------------------------------------------------- */
+/* ==========================================================================
+   ADMIN PORTAL — PERMANENT DARK SHELL
+   The admin ERP is always dark. We lock the CSS variables inside .adminShell
+   so the public site's light/dark toggle NEVER bleeds into the admin panel.
+   ========================================================================== */
 
+/* Lock admin shell to always-dark navy palette, regardless of data-theme on <html> */
 .adminShell {
+  --navy-950: #050b14;
+  --navy-900: #08111F;
+  --navy-800: #101C2D;
+  --navy-700: #152235;
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --admin-text: #f0f4fb;
+  --admin-text-muted: rgba(176, 196, 222, 0.85);
+  --admin-text-faint: rgba(176, 196, 222, 0.5);
+  --admin-input-bg: rgba(5, 11, 20, 0.6);
+  --admin-input-text: #e8edf5;
+  --admin-input-border: rgba(255, 255, 255, 0.1);
+  --admin-input-focus: #6366f1;
+  --admin-card-bg: rgba(16, 28, 45, 0.95);
+  --admin-card-border: rgba(255, 255, 255, 0.08);
+  --admin-card-border-hover: rgba(255, 255, 255, 0.16);
+  --admin-surface: #08111F;
+  --admin-elevated: #101C2D;
+
   min-height: 100vh;
-  background: var(--navy-950);
-  background-image: radial-gradient(circle at 50% 0%, var(--navy-900), var(--navy-950));
-  color: #ffffff;
+  background: linear-gradient(160deg, #050b14 0%, #08111F 40%, #0b1628 100%);
+  background-attachment: fixed;
+  color: var(--admin-text);
   font-family: var(--font-body);
   display: flex;
   flex-direction: column;
 }
 
 .adminShell h1, .adminShell h2, .adminShell h3, .adminShell h4 {
-  color: #ffffff;
+  color: var(--admin-text);
   font-family: var(--font-display);
 }
 
@@ -1550,32 +1610,51 @@ img, svg { display: block; max-width: 100%; }
   margin-bottom: 0.4rem;
 }
 
+/* ── Admin Form Inputs ── */
 .adminShell input,
 .adminShell textarea,
 .adminShell select {
-  color: #ffffff;
-  background: var(--navy-900);
-  border: 1.5px solid var(--border-subtle);
+  color: var(--admin-input-text);
+  background: var(--admin-input-bg);
+  border: 1.5px solid var(--admin-input-border);
   border-radius: var(--radius-md);
   padding: 0.75rem 1rem;
   outline: none;
   font-family: var(--font-body);
   font-size: 0.9rem;
-  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
   width: 100%;
 }
 
 .adminShell input:focus,
 .adminShell textarea:focus,
 .adminShell select:focus {
-  border-color: var(--color-primary-light);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  border-color: var(--admin-input-focus);
+  background: rgba(5, 11, 20, 0.8);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
 }
 
+.adminShell input::placeholder,
+.adminShell textarea::placeholder {
+  color: rgba(176, 196, 222, 0.35);
+}
+
+.adminShell input[type="date"] {
+  color-scheme: dark;
+}
+
+.adminShell select option {
+  background: #08111F;
+  color: #e8edf5;
+}
+
+/* ── Admin Header ── */
 .adminHeader {
-  background: var(--navy-900);
-  border-bottom: 1.5px solid var(--border-subtle);
-  padding: 0.75rem 2rem;
+  background: rgba(5, 11, 20, 0.92);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 0 2rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .adminHeaderInner {
@@ -1611,7 +1690,7 @@ img, svg { display: block; max-width: 100%; }
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--admin-text);
   line-height: 1.2;
 }
 
@@ -1631,7 +1710,7 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   gap: 1.25rem;
   font-size: 0.875rem;
-  color: rgba(255,255,255,0.75);
+  color: var(--admin-text-muted);
 }
 
 .adminSignOutButton {
@@ -1642,17 +1721,19 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: #fff;
-  background: rgba(239,68,68,0.8);
-  border: 1px solid rgba(239,68,68,0.4);
+  background: rgba(239,68,68,0.15);
+  border: 1px solid rgba(239,68,68,0.3);
   border-radius: var(--radius-full);
   cursor: pointer;
-  transition: background var(--dur-fast), transform var(--dur-fast);
+  transition: background var(--dur-fast), border-color var(--dur-fast), transform var(--dur-fast);
 }
 .adminSignOutButton:hover {
-  background: rgb(239,68,68);
+  background: rgba(239,68,68,0.85);
+  border-color: rgba(239,68,68,0.7);
   transform: scale(1.02);
 }
 
+/* ── Admin Main Content Area ── */
 .adminMain {
   flex: 1;
   max-width: 1280px;
@@ -1661,77 +1742,101 @@ img, svg { display: block; max-width: 100%; }
   padding: 2.5rem 2rem;
 }
 
+@media (max-width: 768px) {
+  .adminMain { padding: 1.5rem 1rem; }
+  .adminHeader { padding: 0 1rem; }
+}
+
+/* ── Admin Content Card ── */
 .adminContentCard {
-  background: var(--navy-800);
-  border: 1.5px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  padding: 2rem;
-  box-shadow: var(--shadow-clay);
+  background: linear-gradient(145deg, rgba(16, 28, 45, 0.98) 0%, rgba(8, 17, 31, 0.98) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 1.75rem;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 4px 24px rgba(0, 0, 0, 0.35),
+    0 1px 4px rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
   margin-bottom: 1.5rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.adminContentCard:hover {
+  border-color: rgba(255, 255, 255, 0.13);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .adminContentCard::before {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg,
-    rgba(255,255,255,0.06),
-    rgba(99,102,241,0.08) 60%,
-    rgba(99,102,241,0.12));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(245, 185, 66, 0.12) 30%,
+    rgba(99, 102, 241, 0.12) 70%,
+    transparent 100%);
   pointer-events: none;
 }
 
 .adminContentCard h2 {
-  font-size: 1.3rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 700;
   color: var(--gold-400);
   margin-bottom: 0.75rem;
+  font-family: var(--font-display);
 }
 
 .adminContentCard p {
   font-size: 0.9rem;
-  color: rgba(255,255,255,0.8);
+  color: var(--admin-text-muted);
   line-height: 1.7;
 }
 
+/* ── Admin Submit Button ── */
 .adminSubmitButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 0.85rem 1.5rem;
+  padding: 0.75rem 1.5rem;
   font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: white;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-  border: none;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  border: 1px solid rgba(99, 102, 241, 0.4);
   border-radius: var(--radius-full);
   cursor: pointer;
-  box-shadow: 0 8px 20px -5px rgba(99,102,241,0.35);
-  transition: transform var(--dur-fast), box-shadow var(--dur-fast);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.3);
+  transition: transform var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
 }
 .adminSubmitButton:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 12px 25px -4px rgba(99,102,241,0.4);
+  background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+  box-shadow: 0 8px 24px rgba(99, 102, 241, 0.45);
 }
 .adminSubmitButton:active:not(:disabled) {
   transform: translateY(0) scale(0.97);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
 }
-.adminSubmitButton:disabled { opacity: 0.5; cursor: not-allowed; }
+.adminSubmitButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
 
+/* ── Admin Tables ── */
 .adminShell table {
   width: 100%;
   border-collapse: separate;
@@ -1743,19 +1848,26 @@ img, svg { display: block; max-width: 100%; }
   font-family: var(--font-body);
   font-weight: 700;
   text-transform: uppercase;
-  font-size: 0.72rem;
-  letter-spacing: 0.05em;
-  padding: 0.85rem 1.25rem;
-  border-bottom: 2px solid var(--border-subtle);
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(5, 11, 20, 0.4);
+  white-space: nowrap;
 }
 .adminShell td {
-  padding: 1rem 1.25rem;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  color: rgba(255,255,255,0.85);
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: var(--admin-text-muted);
+  vertical-align: middle;
 }
 .adminShell tr:last-child td { border-bottom: none; }
-.adminShell tr:hover td { background: rgba(255,255,255,0.02); }
+.adminShell tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--admin-text);
+}
 
+/* ── Admin Labels & Inputs (class-based) ── */
 .adminLabel {
   display: block;
   font-family: var(--font-body);
@@ -1769,27 +1881,43 @@ img, svg { display: block; max-width: 100%; }
 
 .adminInput {
   width: 100%;
-  padding: 0.75rem 1rem;
+  padding: 0.7rem 1rem;
   font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: #ffffff;
-  background: var(--navy-900);
-  border: 1.5px solid var(--border-subtle);
+  font-size: 0.88rem;
+  color: var(--admin-input-text);
+  background: var(--admin-input-bg);
+  border: 1.5px solid var(--admin-input-border);
   border-radius: var(--radius-md);
   outline: none;
-  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
 }
 .adminInput:focus {
-  border-color: var(--color-primary-light);
-  box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+  border-color: var(--admin-input-focus);
+  background: rgba(5, 11, 20, 0.8);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+}
+.adminInput::placeholder {
+  color: rgba(176, 196, 222, 0.3);
 }
 
+/* Date input dark mode */
+.adminInput[type="date"] {
+  color-scheme: dark;
+}
+
+/* Select options */
+.adminInput option {
+  background: #08111F;
+  color: #e8edf5;
+}
+
+/* ── Admin Card (modal variant) ── */
 .adminCard {
-  background: var(--navy-800);
-  border: 1.5px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, rgba(16, 28, 45, 0.99) 0%, rgba(8, 17, 31, 0.99) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
   padding: 2rem;
-  box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6), 0 4px 16px rgba(0,0,0,0.3);
   position: relative;
   overflow: hidden;
   max-height: 90vh;
@@ -1799,19 +1927,15 @@ img, svg { display: block; max-width: 100%; }
 .adminCard::before {
   content: '';
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg,
-    rgba(255,255,255,0.06),
-    rgba(99,102,241,0.08) 60%,
-    rgba(99,102,241,0.12));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box,
-                linear-gradient(#fff 0 0);
-  mask: linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(245, 185, 66, 0.2) 30%,
+    rgba(99, 102, 241, 0.15) 70%,
+    transparent 100%);
   pointer-events: none;
 }
 
@@ -1825,9 +1949,9 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .adminError {
-  padding: 1rem 1.25rem;
-  background: rgba(239,68,68,0.12);
-  border: 1px solid rgba(239,68,68,0.3);
+  padding: 0.875rem 1.1rem;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.25);
   color: #fca5a5;
   border-radius: var(--radius-md);
   font-size: 0.875rem;
@@ -1835,9 +1959,9 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .adminSuccess {
-  padding: 0.875rem 1.25rem;
-  background: rgba(34,197,94,0.15);
-  border: 1px solid rgba(34,197,94,0.3);
+  padding: 0.875rem 1.1rem;
+  background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.25);
   color: #86efac;
   border-radius: var(--radius-md);
   font-size: 0.875rem;
@@ -1854,9 +1978,9 @@ img, svg { display: block; max-width: 100%; }
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-.adminBadge-paid    { background: rgba(34,197,94,0.15);  color: #86efac; border: 1px solid rgba(34,197,94,0.3); }
-.adminBadge-pending { background: rgba(234,179,8,0.15);  color: #fde047; border: 1px solid rgba(234,179,8,0.3); }
-.adminBadge-overdue { background: rgba(239,68,68,0.15);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.3); }
+.adminBadge-paid    { background: rgba(34,197,94,0.15);  color: #86efac; border: 1px solid rgba(34,197,94,0.25); }
+.adminBadge-pending { background: rgba(234,179,8,0.12);  color: #fde047; border: 1px solid rgba(234,179,8,0.25); }
+.adminBadge-overdue { background: rgba(239,68,68,0.12);  color: #fca5a5; border: 1px solid rgba(239,68,68,0.25); }
 
 /* --------------------------------------------------------------------------
    LEGACY CLASS SHIMS
