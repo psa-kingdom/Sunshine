@@ -74,7 +74,7 @@ export default function AdminGalleryPage() {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [toast]);
 
   const fetchHeroMedia = useCallback(async () => {
     setHeroLoading(true);
@@ -105,7 +105,7 @@ export default function AdminGalleryPage() {
     } finally {
       setHeroLoading(false);
     }
-  }, []);
+  }, [toast]);
 
   useEffect(() => {
     fetchItems();
