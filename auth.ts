@@ -7,6 +7,14 @@ import { Teacher } from "@/db/models/Teacher";
 import { Student } from "@/db/models/Student";
 import { authConfig } from "./auth.config";
 
+// Sanitize AUTH_URL and NEXTAUTH_URL to prevent ERR_INVALID_URL if protocol scheme is missing
+if (process.env.AUTH_URL && !process.env.AUTH_URL.startsWith("http://") && !process.env.AUTH_URL.startsWith("https://")) {
+  process.env.AUTH_URL = `https://${process.env.AUTH_URL}`;
+}
+if (process.env.NEXTAUTH_URL && !process.env.NEXTAUTH_URL.startsWith("http://") && !process.env.NEXTAUTH_URL.startsWith("https://")) {
+  process.env.NEXTAUTH_URL = `https://${process.env.NEXTAUTH_URL}`;
+}
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
   secret:
