@@ -60,26 +60,43 @@ export default function AdminAnalyticsPage() {
 
   const fetchMetrics = useCallback(async () => {
     setMetricsLoading(true);
+
+    const withTimeout = (url: string, ms = 10000) => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), ms);
+      return fetch(url, { signal: controller.signal }).finally(() => clearTimeout(timer));
+    };
+
+    const [resStudents, resTeachers, resFees, resInquiries] = await Promise.allSettled([
+      withTimeout("/api/admin/students"),
+      withTimeout("/api/admin/teachers"),
+      withTimeout("/api/admin/fees"),
+      withTimeout("/api/admin/inquiries"),
+    ]);
+
     try {
-      const [resStudents, resTeachers, resFees, resInquiries] = await Promise.all([
-        fetch("/api/admin/students"),
-        fetch("/api/admin/teachers"),
-        fetch("/api/admin/fees"),
-        fetch("/api/admin/inquiries"),
+      const safeJson = async (result: PromiseSettledResult<Response>) => {
+        if (result.status === "rejected") return null;
+        if (!result.value.ok) return null;
+        try { return await result.value.json(); } catch { return null; }
+      };
+
+      const [dataStudents, dataTeachers, dataFees, dataInquiries] = await Promise.all([
+        safeJson(resStudents),
+        safeJson(resTeachers),
+        safeJson(resFees),
+        safeJson(resInquiries),
       ]);
 
-      const dataStudents = await resStudents.json();
-      const dataTeachers = await resTeachers.json();
-      const dataFees = await resFees.json();
-      const dataInquiries = await resInquiries.json();
-
       setMetrics({
-        studentCount: (dataStudents.students || []).length,
-        teacherCount: (dataTeachers.teachers || []).length,
-        totalCollected: dataFees.totalCollected || 4850000,
-        totalPending: dataFees.totalPending || 320000,
-        inquiryCount: (dataInquiries.data || []).length,
-        admittedCount: (dataInquiries.data || []).filter((i: { status: string }) => i.status === "admitted").length,
+        studentCount: (dataStudents?.students || []).length,
+        teacherCount: (dataTeachers?.teachers || []).length,
+        totalCollected: dataFees?.totalCollected || 0,
+        totalPending: dataFees?.totalPending || 0,
+        inquiryCount: (dataInquiries?.inquiries || []).length,
+        admittedCount: (dataInquiries?.inquiries || []).filter(
+          (i: { status: string }) => i.status === "admitted"
+        ).length,
       });
     } catch {
       toast.error("Failed to load analytics metrics");
@@ -88,10 +105,13 @@ export default function AdminAnalyticsPage() {
     }
   }, [toast]);
 
+
   const fetchLogs = useCallback(async () => {
     setLogsLoading(true);
     try {
-      const res = await fetch("/api/admin/audit-logs");
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 10000);
+      const res = await fetch("/api/admin/audit-logs", { signal: controller.signal }).finally(() => clearTimeout(timer));
       if (res.ok) {
         const data = await res.json();
         setLogs(data.logs || []);

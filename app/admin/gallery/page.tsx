@@ -63,8 +63,10 @@ export default function AdminGalleryPage() {
   const fetchItems = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/admin/media");
-      if (!res.ok) throw new Error("Failed to load");
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 10000);
+      const res = await fetch("/api/admin/media", { signal: controller.signal }).finally(() => clearTimeout(timer));
+      if (!res.ok) throw new Error(`Failed to load: ${res.status}`);
       const data = await res.json();
       setItems(data.mediaItems || []);
     } catch {
@@ -76,15 +78,28 @@ export default function AdminGalleryPage() {
 
   const fetchHeroMedia = useCallback(async () => {
     setHeroLoading(true);
+    const withTimeout = (url: string, ms = 10000) => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), ms);
+      return fetch(url, { signal: controller.signal }).finally(() => clearTimeout(timer));
+    };
     try {
-      const [imgRes, vidRes] = await Promise.all([
-        fetch("/api/admin/hero-image"),
-        fetch("/api/admin/hero-video"),
+      const [imgResult, vidResult] = await Promise.allSettled([
+        withTimeout("/api/admin/hero-image"),
+        withTimeout("/api/admin/hero-video"),
       ]);
-      const imgData = await imgRes.json();
-      const vidData = await vidRes.json();
-      setHeroImages(imgData.images || []);
-      setHeroVideos(vidData.videos || []);
+      if (imgResult.status === "fulfilled" && imgResult.value.ok) {
+        const imgData = await imgResult.value.json();
+        setHeroImages(imgData.images || []);
+      } else {
+        setHeroImages([]);
+      }
+      if (vidResult.status === "fulfilled" && vidResult.value.ok) {
+        const vidData = await vidResult.value.json();
+        setHeroVideos(vidData.videos || []);
+      } else {
+        setHeroVideos([]);
+      }
     } catch {
       toast.error("Failed to load hero media assets.");
     } finally {

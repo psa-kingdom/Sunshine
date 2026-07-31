@@ -95,10 +95,14 @@ export default function AdminAnnouncementsPage() {
   const fetchNotices = useCallback(async () => {
     setNoticesLoading(true);
     try {
-      const res = await fetch("/api/admin/notices");
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 10000);
+      const res = await fetch("/api/admin/notices", { signal: controller.signal }).finally(() => clearTimeout(timer));
       if (res.ok) {
         const data = await res.json();
         setNotices(data.notices || []);
+      } else {
+        toast.error(`Failed to load notices (HTTP ${res.status})`);
       }
     } catch {
       toast.error("Failed to load notices");
@@ -110,10 +114,14 @@ export default function AdminAnnouncementsPage() {
   const fetchEvents = useCallback(async () => {
     setEventsLoading(true);
     try {
-      const res = await fetch("/api/admin/events");
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 10000);
+      const res = await fetch("/api/admin/events", { signal: controller.signal }).finally(() => clearTimeout(timer));
       if (res.ok) {
         const data = await res.json();
         setEvents(data.events || []);
+      } else {
+        toast.error(`Failed to load events (HTTP ${res.status})`);
       }
     } catch {
       toast.error("Failed to load events");
