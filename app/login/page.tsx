@@ -34,7 +34,8 @@ export default function UnifiedLoginPage() {
         redirect: false,
       });
 
-      if (res?.error) {
+      if (res?.error || !res?.ok) {
+        console.warn("[login] Authentication attempt rejected:", res?.error);
         setError("Invalid email address or password. Please try again.");
       } else {
         const targetPath =
@@ -45,7 +46,8 @@ export default function UnifiedLoginPage() {
             : "/student";
         router.replace(targetPath);
       }
-    } catch {
+    } catch (err) {
+      console.error("[login] Authentication error:", err);
       setError("An unexpected network error occurred.");
     } finally {
       setLoading(false);
