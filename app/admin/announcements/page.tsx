@@ -109,7 +109,7 @@ export default function AdminAnnouncementsPage() {
     } finally {
       setNoticesLoading(false);
     }
-  }, [toast]);
+  }, []);
 
   const fetchEvents = useCallback(async () => {
     setEventsLoading(true);
@@ -128,12 +128,13 @@ export default function AdminAnnouncementsPage() {
     } finally {
       setEventsLoading(false);
     }
-  }, [toast]);
+  }, []);
 
   useEffect(() => {
     fetchNotices();
     fetchEvents();
   }, [fetchNotices, fetchEvents]);
+
 
   // ── Notice Handlers ──
   const handleCreateNotice = async (e: React.FormEvent) => {

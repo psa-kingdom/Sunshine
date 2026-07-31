@@ -74,7 +74,7 @@ export default function AdminGalleryPage() {
     } finally {
       setLoading(false);
     }
-  }, [toast]);
+  }, []);
 
   const fetchHeroMedia = useCallback(async () => {
     setHeroLoading(true);
@@ -105,12 +105,13 @@ export default function AdminGalleryPage() {
     } finally {
       setHeroLoading(false);
     }
-  }, [toast]);
+  }, []);
 
   useEffect(() => {
     fetchItems();
     fetchHeroMedia();
   }, [fetchItems, fetchHeroMedia]);
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const f = e.target.files?.[0] || null;

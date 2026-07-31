@@ -55,7 +55,7 @@ export default function AdminInquiriesPage() {
         throw new Error(`Server error: ${res.status}`);
       }
       const data = await res.json();
-      setInquiries(data.data || []);
+      setInquiries(data.inquiries || []);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : "Failed to load inquiries";
       setError(msg);

@@ -103,7 +103,7 @@ export default function AdminAnalyticsPage() {
     } finally {
       setMetricsLoading(false);
     }
-  }, [toast]);
+  }, []);
 
 
   const fetchLogs = useCallback(async () => {
@@ -121,12 +121,13 @@ export default function AdminAnalyticsPage() {
     } finally {
       setLogsLoading(false);
     }
-  }, [toast]);
+  }, []);
 
   useEffect(() => {
     fetchMetrics();
     fetchLogs();
   }, [fetchMetrics, fetchLogs]);
+
 
   // ── Audit Logs Filtering ──
   const filteredLogs = useMemo(() => {

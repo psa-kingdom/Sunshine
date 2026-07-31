@@ -138,20 +138,24 @@ export function ToastContainer({ toasts, onRemove }: ToastProps) {
 export function useToast() {
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
 
-  const addToast = (type: ToastType, title: string, message?: string) => {
+  const addToast = useCallback((type: ToastType, title: string, message?: string) => {
     const id = `toast-${Date.now()}-${Math.random().toString(36).slice(2)}`;
     setToasts((prev) => [...prev, { id, type, title, message }]);
-  };
+  }, []);
 
-  const removeToast = (id: string) => {
+  const removeToast = useCallback((id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
-  };
+  }, []);
 
-  const toast = {
-    success: (title: string, message?: string) => addToast("success", title, message),
-    error: (title: string, message?: string) => addToast("error", title, message),
-    warning: (title: string, message?: string) => addToast("warning", title, message),
-  };
+  const toast = useMemo(
+    () => ({
+      success: (title: string, message?: string) => addToast("success", title, message),
+      error: (title: string, message?: string) => addToast("error", title, message),
+      warning: (title: string, message?: string) => addToast("warning", title, message),
+    }),
+    [addToast]
+  );
 
   return { toasts, removeToast, toast };
 }
+
