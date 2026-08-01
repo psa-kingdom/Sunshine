@@ -110,30 +110,6 @@ const TESTIMONIALS = [
   },
 ];
 
-/* ─── DEPARTMENT DIRECTORS DATA ─────────────────────────────────────────── */
-const DEPARTMENT_DIRECTORS = [
-  {
-    name: "Mrs. Ananya Sen",
-    title: "Director — Primary & Early Years",
-    qual: "M.Ed. Early Childhood, Delhi University",
-    desc: "Over 18 years dedicated to foundational pedagogy, play-integrated numeracy, and child psychology.",
-    portrait: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&q=80&auto=format&fit=crop&face",
-  },
-  {
-    name: "Dr. Vikramaditya Singh",
-    title: "Director — Senior STEM & Research",
-    qual: "Ph.D. Physics, IIT Delhi",
-    desc: "Spearheads advanced laboratory research, Olympiad mentorship, and AI-assisted learning projects.",
-    portrait: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&q=80&auto=format&fit=crop&face",
-  },
-  {
-    name: "Mrs. Radhika Kapoor",
-    title: "Director — Student Welfare & Arts",
-    qual: "M.A. Applied Psychology, TISS",
-    desc: "Leads holistic counselling, performing arts, sports academies, and inclusive education initiatives.",
-    portrait: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=300&q=80&auto=format&fit=crop&face",
-  },
-];
 
 /* ─── ADMISSIONS STEPS ───────────────────────────────────────────────────── */
 const ADMISSION_STEPS = [
@@ -496,28 +472,6 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* Department Directors & Academic Leadership */}
-          <div style={{ marginTop: "5rem", paddingTop: "3.5rem", borderTop: "1px solid var(--color-sand)" }}>
-            <div style={{ maxWidth: 560, marginBottom: "2.5rem" }}>
-              <span className="spn-eyebrow">Academic Leadership</span>
-              <h3 className="spn-h3" style={{ fontSize: "1.6rem" }}>Department Directors</h3>
-            </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2rem" }}>
-              {DEPARTMENT_DIRECTORS.map((d) => (
-                <div key={d.name} style={{ background: "var(--color-surface)", border: "1px solid var(--color-sand)", padding: "2rem", display: "flex", flexDirection: "column" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1.25rem" }}>
-                    <img src={d.portrait} alt={d.name} style={{ width: 54, height: 54, borderRadius: "50%", objectFit: "cover" }} loading="lazy" />
-                    <div>
-                      <h4 style={{ fontFamily: "var(--font-display)", fontSize: "1.05rem", fontWeight: 600, color: "var(--color-brown)" }}>{d.name}</h4>
-                      <div style={{ fontFamily: "var(--font-body)", fontSize: "0.72rem", fontWeight: 600, color: "var(--color-brown-light)", letterSpacing: "0.06em", textTransform: "uppercase", marginTop: "0.2rem" }}>{d.title}</div>
-                    </div>
-                  </div>
-                  <div style={{ fontSize: "0.75rem", fontWeight: 500, color: "var(--color-text-muted)", marginBottom: "0.75rem", fontStyle: "italic" }}>{d.qual}</div>
-                  <p style={{ fontSize: "0.85rem", color: "var(--color-text-muted)", lineHeight: 1.75, flex: 1 }}>{d.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
