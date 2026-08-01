@@ -67,21 +67,21 @@ const PROGRAMS = [
 
 /* ─── CAMPUS LIFE IMAGES ─────────────────────────────────────────────────── */
 const CAMPUS_ITEMS = [
-  { label: "Classrooms", img: "/Images/random/pexels-madman-creation-2158167362-35493021.jpg", tall: true },
-  { label: "Library", img: "/Images/random/photo-1569098272587-7af816a8293c.webp" },
+  { label: "Classrooms", img: "/Images/random/smart_classroom.webp", tall: true },
+  { label: "Library", img: "/Images/random/library.webp" },
   { label: "Science Lab", img: "/Images/random/science.webp" },
   { label: "Sports", img: "/Images/random/sports.webp", wide: true },
   { label: "Music & Performing Arts", img: "/Images/random/music.webp" },
-  { label: "Computer Lab & Tech", img: "/Images/random/photo-1701922452163-895d70209917.webp" },
+  { label: "Computer Lab & Tech", img: "/Images/random/computer_lab.webp" },
   { label: "Art Studio", img: "/Images/random/art.webp" },
 ];
 
 /* ─── FACILITIES ─────────────────────────────────────────────────────────── */
 const FACILITIES = [
-  { name: "Smart Classrooms", img: "/Images/random/pexels-madman-creation-2158167362-35493021.jpg" },
+  { name: "Smart Classrooms", img: "/Images/random/smart_classroom.webp" },
   { name: "Science Labs", img: "/Images/random/science.webp" },
-  { name: "Computer Lab", img: "/Images/random/photo-1701922452163-895d70209917.webp" },
-  { name: "Library", img: "/Images/random/photo-1569098272587-7af816a8293c.webp" },
+  { name: "Computer Lab", img: "/Images/random/computer_lab.webp" },
+  { name: "Library", img: "/Images/random/library.webp" },
   { name: "Sports Facilities", img: "/Images/random/sports.webp" },
   { name: "Music Room", img: "/Images/random/music.webp" },
   { name: "Art Studio", img: "/Images/random/art.webp" },
