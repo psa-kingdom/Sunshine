@@ -5,7 +5,6 @@ import Link from "next/link";
 import { MapPin, Mail, PhoneCall, Clock, ChevronDown, Globe } from "lucide-react";
 import MorphicNavbar from "@/components/kokonutui/morphic-navbar";
 import EnquiryDrawer from "@/components/kokonutui/enquiry-drawer";
-import InteractiveNoticeBoard from "@/components/school/InteractiveNoticeBoard";
 import BrandLogo from "@/components/ui/BrandLogo";
 import { StatCounter } from "./StatCounter";
 import { SCHOOL_INFO } from "@/lib/constants";
@@ -68,47 +67,25 @@ const PROGRAMS = [
 
 /* ─── CAMPUS LIFE IMAGES ─────────────────────────────────────────────────── */
 const CAMPUS_ITEMS = [
-  { label: "Classrooms", img: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=800&q=80&auto=format&fit=crop", tall: true },
-  { label: "Library", img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600&q=80&auto=format&fit=crop" },
-  { label: "Science Lab", img: "https://images.unsplash.com/photo-1532094349884-543559b8a7b0?w=600&q=80&auto=format&fit=crop" },
-  { label: "Sports", img: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80&auto=format&fit=crop", wide: true },
-  { label: "Performing Arts", img: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=600&q=80&auto=format&fit=crop" },
-  { label: "Morning Assembly", img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80&auto=format&fit=crop" },
-  { label: "Art Studio", img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80&auto=format&fit=crop" },
+  { label: "Classrooms", img: "/Images/random/pexels-madman-creation-2158167362-35493021.jpg", tall: true },
+  { label: "Library", img: "/Images/random/photo-1569098272587-7af816a8293c.webp" },
+  { label: "Science Lab", img: "/Images/random/science.webp" },
+  { label: "Sports", img: "/Images/random/sports.webp", wide: true },
+  { label: "Music & Performing Arts", img: "/Images/random/music.webp" },
+  { label: "Computer Lab & Tech", img: "/Images/random/photo-1701922452163-895d70209917.webp" },
+  { label: "Art Studio", img: "/Images/random/art.webp" },
 ];
 
 /* ─── FACILITIES ─────────────────────────────────────────────────────────── */
 const FACILITIES = [
-  { name: "Smart Classrooms", img: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400&q=80&auto=format&fit=crop" },
-  { name: "Science Labs", img: "https://images.unsplash.com/photo-1532094349884-543559b8a7b0?w=400&q=80&auto=format&fit=crop" },
-  { name: "Computer Lab", img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=80&auto=format&fit=crop" },
-  { name: "Library", img: "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=400&q=80&auto=format&fit=crop" },
-  { name: "Sports Facilities", img: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=400&q=80&auto=format&fit=crop" },
-  { name: "Music Room", img: "https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=400&q=80&auto=format&fit=crop" },
-  { name: "Art Studio", img: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&q=80&auto=format&fit=crop" },
-  { name: "Transportation", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&q=80&auto=format&fit=crop" },
-];
-
-/* ─── TESTIMONIALS ───────────────────────────────────────────────────────── */
-const TESTIMONIALS = [
-  {
-    quote: "The depth of attention each teacher gives to my child's individual growth has been remarkable. This school genuinely cares.",
-    name: "Mrs. Sunita Agarwal",
-    role: "Parent — Grade VII",
-    portrait: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80&auto=format&fit=crop&face",
-  },
-  {
-    quote: "I cleared my board exams with distinction and secured admission in Delhi University — all thanks to the foundation built here.",
-    name: "Arjun Mehta",
-    role: "Alumni — Batch of 2024",
-    portrait: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80&auto=format&fit=crop&face",
-  },
-  {
-    quote: "The balance between academics and co-curriculars is something no other school in the region matches. Truly holistic.",
-    name: "Mr. Rajan Sharma",
-    role: "Parent — Grade X",
-    portrait: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80&auto=format&fit=crop&face",
-  },
+  { name: "Smart Classrooms", img: "/Images/random/pexels-madman-creation-2158167362-35493021.jpg" },
+  { name: "Science Labs", img: "/Images/random/science.webp" },
+  { name: "Computer Lab", img: "/Images/random/photo-1701922452163-895d70209917.webp" },
+  { name: "Library", img: "/Images/random/photo-1569098272587-7af816a8293c.webp" },
+  { name: "Sports Facilities", img: "/Images/random/sports.webp" },
+  { name: "Music Room", img: "/Images/random/music.webp" },
+  { name: "Art Studio", img: "/Images/random/art.webp" },
+  { name: "Transportation", img: "/Images/random/transportation.webp" },
 ];
 
 
@@ -730,33 +707,6 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════════
-          § 9 — TESTIMONIALS
-          ════════════════════════════════════════════════════════════════════ */}
-      <section id="testimonials" className="spn-section-white" aria-labelledby="testimonials-heading">
-        <div className="container">
-          <div style={{ maxWidth: 480, marginBottom: "3.5rem" }}>
-            <span className="spn-eyebrow">What Our Community Says</span>
-            <h2 id="testimonials-heading" className="spn-h2">Words from Parents &amp; Alumni</h2>
-          </div>
-          <div className="spn-testimonial-grid">
-            {TESTIMONIALS.map((t) => (
-              <div key={t.name} className="spn-testimonial">
-                <div style={{ fontFamily: "var(--font-display)", fontSize: "3rem", lineHeight: 1, color: "var(--color-sand)", marginBottom: "-0.5rem" }}>&ldquo;</div>
-                <p className="spn-testimonial-quote">{t.quote}</p>
-                <div className="spn-testimonial-author">
-                  <img src={t.portrait} alt={t.name} className="spn-testimonial-portrait" loading="lazy" />
-                  <div>
-                    <div style={{ fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "0.9rem", color: "var(--color-brown)" }}>{t.name}</div>
-                    <div style={{ fontFamily: "var(--font-body)", fontSize: "0.75rem", color: "var(--color-text-muted)", marginTop: "0.15rem" }}>{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════════
           § 10 — ADMISSIONS
           ════════════════════════════════════════════════════════════════════ */}
       <section id="admissions" className="spn-section-beige" aria-labelledby="admissions-heading">
@@ -836,14 +786,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          {/* Live Notice Board */}
-          <div style={{ marginTop: "5rem" }}>
-            <div style={{ marginBottom: "2rem" }}>
-              <span className="spn-eyebrow">Live Announcements</span>
-              <h2 id="notices-heading" className="spn-h3">School Notice Board</h2>
-            </div>
-            <InteractiveNoticeBoard />
-          </div>
+
         </div>
       </section>
 
