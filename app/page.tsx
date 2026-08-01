@@ -449,45 +449,39 @@ export default function HomePage() {
             {/* Portrait */}
             <div className="spn-principal-photo">
               <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=720&auto=format&fit=crop&crop=top"
-                alt="Dr. Meenakshi Sundaram, Principal"
+                src="/Images/director-chandra-mohan-singh.jpeg"
+                alt="Chandra Mohan Singh, Director"
                 loading="lazy"
               />
               <div className="spn-principal-caption">
                 <div style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem", fontWeight: 600, color: "var(--color-brown)" }}>
-                  Dr. Meenakshi Sundaram
+                  Chandra Mohan Singh
                 </div>
                 <div style={{ fontFamily: "var(--font-body)", fontSize: "0.75rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)", marginTop: "0.25rem" }}>
-                  Principal · Ph.D. Education
+                  Director
                 </div>
               </div>
             </div>
 
             {/* Message */}
             <div style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-              <span className="spn-eyebrow">A Message from the Principal</span>
+              <span className="spn-eyebrow">A Message from the Director</span>
               <h2 id="principal-heading" className="spn-h2" style={{ marginBottom: "1.5rem" }}>
                 Welcome to Sunshine Public School
               </h2>
               <div className="spn-divider" style={{ marginBottom: "2rem" }} />
               <p style={{ fontSize: "1.05rem", color: "var(--color-text)", lineHeight: 1.9, marginBottom: "1.25rem", fontStyle: "italic", fontFamily: "var(--font-display)" }}>
-                &ldquo;Education, in its truest form, is not the filling of a vessel but the lighting
-                of a flame. At Sunshine Public School, we have spent over two decades building
-                an environment where every child is seen, heard, and empowered.&rdquo;
+                &ldquo;Education is the foundation upon which dreams are built. At Sun Shine Public School, our objective is not only academic excellence but also the overall development of every child. We believe every student deserves opportunities to explore their talents, build confidence, and become responsible citizens with strong moral values.&rdquo;
               </p>
               <p style={{ fontSize: "0.95rem", color: "var(--color-text-muted)", lineHeight: 1.85, marginBottom: "1.25rem" }}>
-                Our curriculum is designed to challenge young minds while nurturing their
-                individual strengths. We believe in the dignity of every learner and the
-                responsibility of every teacher to model curiosity, integrity, and compassion.
+                Our dedicated faculty, disciplined environment, and commitment to quality education ensure that every child receives the guidance needed for a bright and successful future.
               </p>
               <p style={{ fontSize: "0.95rem", color: "var(--color-text-muted)", lineHeight: 1.85, marginBottom: "2.5rem" }}>
-                I invite you to experience our campus, meet our faculty, and discover why
-                thousands of families in Gurugram have trusted us with their children&apos;s most
-                formative years.
+                Together, let us inspire young minds to learn, grow, and shine.
               </p>
-              <div className="spn-signature">Dr. Meenakshi Sundaram</div>
+              <div className="spn-signature">Chandra Mohan Singh</div>
               <div style={{ fontFamily: "var(--font-body)", fontSize: "0.72rem", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-text-muted)" }}>
-                Principal, Sunshine Public School
+                Director, Sunshine Public School
               </div>
               <div style={{ marginTop: "2rem" }}>
                 <button
