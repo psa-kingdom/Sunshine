@@ -103,23 +103,23 @@ const NEWS = [
   {
     date: "July 20, 2026",
     cat: "Achievement",
-    title: "Students Win National Science Olympiad — 3 Gold Medals",
-    excerpt: "Our STEM team represented the school at the National Science Olympiad in Delhi, bringing home three gold medals and setting a school record.",
-    img: "https://images.unsplash.com/photo-1532094349884-543559b8a7b0?w=600&q=80&auto=format&fit=crop",
+    title: "Students Win Regional Science Olympiad — 3 Gold Medals",
+    excerpt: "Our STEM team represented the school at the Regional Science Olympiad in Patna, bringing home three gold medals and setting a school record.",
+    img: "/Images/random/medal.webp",
   },
   {
     date: "July 15, 2026",
     cat: "Events",
     title: "Annual Day 2026 — A Celebration of Culture & Excellence",
-    excerpt: "Over 1,200 students, parents, and faculty gathered for our grandest Annual Day yet, featuring performances in music, dance, and drama.",
-    img: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=600&q=80&auto=format&fit=crop",
+    excerpt: "Over 500 students, parents, and faculty gathered for our grandest Annual Day yet, featuring performances in music, dance, and drama.",
+    img: "/Images/random/time-to-celebrate.png",
   },
   {
     date: "July 8, 2026",
     cat: "Admissions",
     title: "Admissions Open for Session 2026–27",
     excerpt: "Applications are now being accepted for all grades. Early applications receive priority processing. Schedule your campus visit today.",
-    img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80&auto=format&fit=crop",
+    img: "/Images/random/Admission_Open.png",
   },
 ];
 
@@ -766,8 +766,8 @@ export default function HomePage() {
           <div className="spn-news-grid">
             {NEWS.map((item) => (
               <div key={item.title} className="spn-news-card">
-                <div style={{ overflow: "hidden" }}>
-                  <img src={item.img} alt={item.title} className="spn-news-img" loading="lazy" />
+                <div style={{ overflow: "hidden", height: "220px", position: "relative" }}>
+                  <img src={item.img} alt={item.title} className="spn-news-img" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} loading="lazy" />
                 </div>
                 <div className="spn-news-body">
                   <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", marginBottom: "0.75rem" }}>
