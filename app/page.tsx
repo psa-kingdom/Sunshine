@@ -59,9 +59,9 @@ const PROGRAMS = [
     img: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80&auto=format&fit=crop",
   },
   {
-    label: "Senior School",
-    grades: "Grade IX – XII",
-    desc: "Rigorous CBSE board preparation with Science, Commerce, and Humanities streams. Guided by experienced faculty.",
+    label: "Secondary School",
+    grades: "Grade IX – X",
+    desc: "Rigorous CBSE Board Examination preparation focusing on core concepts, analytical reasoning, and comprehensive subject mastery.",
     img: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&q=80&auto=format&fit=crop",
   },
 ];
@@ -478,73 +478,74 @@ export default function HomePage() {
           ════════════════════════════════════════════════════════════════════ */}
       <section id="why" className="spn-section-beige" aria-labelledby="why-heading">
         <div className="container">
-          <div style={{ maxWidth: 560, marginBottom: "4rem" }}>
+          <div style={{ maxWidth: 560, marginBottom: "3.5rem" }}>
             <span className="spn-eyebrow">Why Sunshine</span>
             <h2 id="why-heading" className="spn-h2">Four Pillars of an Exceptional Education</h2>
           </div>
-        </div>
 
-        <div className="spn-pillars">
-          {[
-            {
-              num: "01",
-              title: "Academic Excellence",
-              desc: "A rigorous CBSE curriculum delivered by subject matter experts, supported by structured assessments, personalised mentoring, and a consistent record of outstanding board results.",
-              img: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=700&q=80&auto=format&fit=crop",
-              imgAlt: "Students in a classroom",
-              imgLeft: true,
-            },
-            {
-              num: "02",
-              title: "Character Building",
-              desc: "Ethics, empathy, and leadership are woven into everyday school life — from morning assemblies to community service programmes and student-led councils.",
-              img: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=700&q=80&auto=format&fit=crop",
-              imgAlt: "Morning assembly",
-              imgLeft: false,
-            },
-            {
-              num: "03",
-              title: "Holistic Development",
-              desc: "Sports, performing arts, music, visual arts, and STEM clubs run alongside academics — because a well-rounded student is a prepared student.",
-              img: "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=700&q=80&auto=format&fit=crop",
-              imgAlt: "Students in sports",
-              imgLeft: true,
-            },
-            {
-              num: "04",
-              title: "Experienced Faculty",
-              desc: "Our teachers are postgraduates and Ph.D. holders in their disciplines, committed to continuous professional development and student-centred pedagogy.",
-              img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=700&q=80&auto=format&fit=crop",
-              imgAlt: "Faculty member",
-              imgLeft: false,
-            },
-          ].map(({ num, title, desc, img, imgAlt, imgLeft }) => (
-            <div key={num} className="spn-pillar">
-              {imgLeft ? (
-                <>
-                  <div style={{ overflow: "hidden" }}>
-                    <img src={img} alt={imgAlt} className="spn-pillar-img" loading="lazy" />
-                  </div>
-                  <div className="spn-pillar-body">
-                    <div className="spn-pillar-num">{num}</div>
-                    <h3 className="spn-h3" style={{ marginBottom: "1rem" }}>{title}</h3>
-                    <p style={{ color: "var(--color-text-muted)", lineHeight: 1.85, fontSize: "0.95rem" }}>{desc}</p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="spn-pillar-body">
-                    <div className="spn-pillar-num">{num}</div>
-                    <h3 className="spn-h3" style={{ marginBottom: "1rem" }}>{title}</h3>
-                    <p style={{ color: "var(--color-text-muted)", lineHeight: 1.85, fontSize: "0.95rem" }}>{desc}</p>
-                  </div>
-                  <div style={{ overflow: "hidden" }}>
-                    <img src={img} alt={imgAlt} className="spn-pillar-img" loading="lazy" />
-                  </div>
-                </>
-              )}
-            </div>
-          ))}
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+            gap: "2rem",
+          }}>
+            {[
+              {
+                num: "01",
+                title: "Academic Excellence",
+                desc: "A rigorous CBSE curriculum delivered by subject matter experts, supported by structured assessments, personalised mentoring, and a consistent record of outstanding board results.",
+                img: "/Images/academic_excellence.webp",
+                imgAlt: "Academic Excellence",
+              },
+              {
+                num: "02",
+                title: "Character Building",
+                desc: "Ethics, empathy, and leadership are woven into everyday school life — from morning assemblies to community service programmes and student-led councils.",
+                img: "/Images/character_building.webp",
+                imgAlt: "Character Building",
+              },
+              {
+                num: "03",
+                title: "Holistic Development",
+                desc: "Sports, performing arts, music, visual arts, and STEM clubs run alongside academics — because a well-rounded student is a prepared student.",
+                img: "/Images/holistic_development.webp",
+                imgAlt: "Holistic Development",
+              },
+              {
+                num: "04",
+                title: "Experienced Faculty",
+                desc: "Our teachers are dedicated professionals committed to continuous professional development, student-centred pedagogy, and personal mentoring.",
+                img: "/Images/experienced_faculty.webp",
+                imgAlt: "Experienced Faculty",
+              },
+            ].map(({ num, title, desc, img, imgAlt }) => (
+              <div
+                key={num}
+                style={{
+                  background: "var(--color-bg)",
+                  border: "1px solid var(--color-sand-light)",
+                  borderRadius: "0.75rem",
+                  overflow: "hidden",
+                  display: "flex",
+                  flexDirection: "column",
+                  boxShadow: "0 4px 20px rgba(0,0,0,0.03)",
+                }}
+              >
+                <div style={{ width: "100%", height: "210px", overflow: "hidden", position: "relative" }}>
+                  <img
+                    src={img}
+                    alt={imgAlt}
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                    loading="lazy"
+                  />
+                </div>
+                <div style={{ padding: "2rem 1.75rem", display: "flex", flexDirection: "column", flex: 1 }}>
+                  <div className="spn-pillar-num" style={{ marginBottom: "0.5rem" }}>{num}</div>
+                  <h3 className="spn-h3" style={{ fontSize: "1.35rem", marginBottom: "0.75rem" }}>{title}</h3>
+                  <p style={{ color: "var(--color-text-muted)", lineHeight: 1.8, fontSize: "0.92rem", margin: 0, flex: 1 }}>{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -555,8 +556,8 @@ export default function HomePage() {
         <div className="spn-about-grid">
           <div className="spn-about-img-wrap">
             <img
-              src="https://images.unsplash.com/photo-1562774053-701939374585?w=900&q=80&auto=format&fit=crop"
-              alt="Sunshine Public School campus"
+              src="/Images/ssps image.png"
+              alt="Sunshine Public School campus building"
               loading="lazy"
             />
           </div>
@@ -699,17 +700,17 @@ export default function HomePage() {
               </h2>
               <div className="spn-divider" style={{ background: "rgba(213,195,161,0.4)", marginBottom: "2rem" }} />
               <p style={{ color: "rgba(242,232,216,0.72)", lineHeight: 1.9, fontSize: "0.95rem" }}>
-                For over 25 years, our students have excelled in board examinations, national
-                competitions, university placements, and sports championships. These numbers
-                reflect the dedication of our students, families, and faculty.
+                For over 12 years, our students have excelled in board examinations, sports,
+                co-curricular competitions, and holistic learning. These numbers reflect the
+                dedication of our students, families, and faculty.
               </p>
             </div>
             <div className="spn-stats-grid" style={{ border: "1px solid rgba(213,195,161,0.2)" }}>
               {[
-                { value: "25+", label: "Years of Excellence" },
-                { value: "2,400+", label: "Students Enrolled" },
+                { value: "12+", label: "Years of Experience" },
+                { value: "400+", label: "Students Enrolled" },
                 { value: "100%", label: "CBSE Pass Rate" },
-                { value: "180+", label: "Faculty Members" },
+                { value: "50+", label: "Faculty Members" },
               ].map(({ value, label }) => (
                 <div key={label} className="spn-stat-item" style={{ border: "none", borderRight: "1px solid rgba(213,195,161,0.2)" }}>
                   <span className="spn-stat-num" style={{ color: "var(--color-beige)" }}>
@@ -899,7 +900,7 @@ export default function HomePage() {
             {/* Map / Campus Image */}
             <div style={{ position: "relative", overflow: "hidden" }}>
               <img
-                src="https://images.unsplash.com/photo-1562774053-701939374585?w=900&q=80&auto=format&fit=crop"
+                src="/Images/ssps image.png"
                 alt="Sunshine Public School campus entrance"
                 className="spn-contact-map"
                 loading="lazy"
