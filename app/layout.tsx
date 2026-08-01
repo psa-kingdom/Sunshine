@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
+import { SCHOOL_INFO } from "@/lib/constants";
 
 const cormorant = Cormorant_Garamond({
   variable: "--font-display",
@@ -27,9 +28,8 @@ const libreBaskerville = Libre_Baskerville({
 });
 
 export const metadata: Metadata = {
-  title: "Sunshine Public School | Shaping Curious Minds. Building Confident Futures.",
-  description:
-    "A premier CBSE-affiliated institution in Gurugram nurturing academic excellence, character, creativity, and holistic development since 1998.",
+  title: `${SCHOOL_INFO.name} | ${SCHOOL_INFO.tagline} • ${SCHOOL_INFO.subTagline}`,
+  description: `A premier ${SCHOOL_INFO.affiliation}-affiliated institution in ${SCHOOL_INFO.address.cityState} (${SCHOOL_INFO.classes}) nurturing academic excellence, character, and holistic development since ${SCHOOL_INFO.established}.`,
   other: {
     "codex-preview": "development",
   },
@@ -45,6 +45,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    name: SCHOOL_INFO.name,
+    url: SCHOOL_INFO.websiteUrl,
+    telephone: [SCHOOL_INFO.phone.primary, SCHOOL_INFO.phone.secondary],
+    email: SCHOOL_INFO.email.primary,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: SCHOOL_INFO.address.street,
+      addressLocality: SCHOOL_INFO.address.city,
+      addressRegion: SCHOOL_INFO.address.state,
+      postalCode: SCHOOL_INFO.address.pincode,
+      addressCountry: "IN",
+    },
+  };
+
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
@@ -52,6 +69,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var s=localStorage.getItem('sunshine_theme');var t;if(s==='light'||s==='dark'){t=s;}else{t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','light');}})();`,
           }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <link rel="preload" as="image" href="/hero-school.webp" />
       </head>

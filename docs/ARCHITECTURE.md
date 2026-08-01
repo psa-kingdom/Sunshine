@@ -484,4 +484,4 @@ The [nutlope/hallmark](https://github.com/Nutlope/hallmark) design skill is inst
 
 ---
 
-*Architecture maintained by: Sunshine Public School Digital Team | CBSE Affiliation No. 1234567*
+*Architecture maintained by: Sunshine Public School Digital Team | CBSE Affiliated*

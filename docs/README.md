@@ -29,11 +29,11 @@
 
 | Field | Details |
 |---|---|
-| **School** | Sunshine Public School, Sector 45, Gurugram, Haryana |
-| **CBSE Affiliation** | No. 1234567 |
-| **Established** | 1998 |
-| **Students** | 2,400+ |
-| **Contact** | +91 11 4567 8900 · info@sunshineps.edu.in |
+| **School** | Sunshine Public School, Kothi Compound, Singheshwar, Near MLDP Petrol Pump, Madhepura, Bihar, 852128 |
+| **CBSE Affiliation** | CBSE Affiliated (Nursery – Class X) |
+| **Established** | 2014 |
+| **Website** | www.sspsedu.com |
+| **Contact** | +91 7091962906, +91 9911989508 · ssps.connect@gmail.com |
 
 The website serves four core audiences: **prospective families**, **current parents**, **students**, and **alumni**. It prioritizes admissions enquiry conversion, academic credibility communication, and quick access to school notices and portals.
 

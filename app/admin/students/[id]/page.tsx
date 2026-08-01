@@ -294,7 +294,7 @@ export default function StudentProfilePage({ params }: { params: Promise<{ id: s
               <div><div className="adminLabel">Gender</div><div style={{ color: "#fff" }}>{student.gender || "Male"}</div></div>
               <div><div className="adminLabel">Blood Group</div><div style={{ color: "#fff" }}>{student.bloodGroup || "O+"}</div></div>
             </div>
-            <div><div className="adminLabel">Permanent Residential Address</div><div style={{ color: "#fff" }}>{student.address || "House No. 104, Sector 45, Gurugram, Haryana 122003"}</div></div>
+            <div><div className="adminLabel">Permanent Residential Address</div><div style={{ color: "#fff" }}>{student.address || "Singheshwar, Madhepura, Bihar 852128"}</div></div>
           </div>
         )}
 

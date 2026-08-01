@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import MorphicNavbar from "@/components/kokonutui/morphic-navbar";
 import BrandLogo from "@/components/ui/BrandLogo";
+import { SCHOOL_INFO } from "@/lib/constants";
 
 export default function EnquirePage() {
   const [parentName, setParentName] = useState("");
@@ -245,16 +246,16 @@ export default function EnquirePage() {
             </p>
             <div className="text-xs text-slate-500 space-y-2">
               <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-indigo-500" />
-                <span>Sector 45, Gurugram, Haryana 122003</span>
+                <MapPin className="w-3.5 h-3.5 text-indigo-500 flex-shrink-0" />
+                <span>{SCHOOL_INFO.address.full}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-3.5 h-3.5 text-indigo-500" />
-                <a href="mailto:info@sunshineps.edu.in" className="hover:text-indigo-600">info@sunshineps.edu.in</a>
+                <Mail className="w-3.5 h-3.5 text-indigo-500 flex-shrink-0" />
+                <a href={`mailto:${SCHOOL_INFO.email.primary}`} className="hover:text-indigo-600">{SCHOOL_INFO.email.primary}</a>
               </div>
               <div className="flex items-center gap-2">
-                <PhoneCall className="w-3.5 h-3.5 text-indigo-500" />
-                <a href="tel:+911145678900" className="hover:text-indigo-600">+91 11 4567 8900</a>
+                <PhoneCall className="w-3.5 h-3.5 text-indigo-500 flex-shrink-0" />
+                <a href={SCHOOL_INFO.phone.primaryHref} className="hover:text-indigo-600">{SCHOOL_INFO.phone.display}</a>
               </div>
             </div>
           </div>
@@ -281,8 +282,8 @@ export default function EnquirePage() {
           <div>
             <h4>CBSE Affiliation</h4>
             <p className="text-xs font-medium text-slate-500 leading-relaxed">
-              Affiliation No. 1234567<br />
-              School Code: 54321
+              CBSE Affiliated<br />
+              {SCHOOL_INFO.classes}
             </p>
             <div className="flex items-center gap-2 mt-4 text-xs font-medium text-slate-500">
               <Clock className="w-3.5 h-3.5 text-indigo-500" />
@@ -292,7 +293,7 @@ export default function EnquirePage() {
         </div>
 
         <div className="wrap copyright text-xs font-medium text-slate-400">
-          <span>© 2026 Sunshine Public School. All rights reserved.</span>
+          <span>© 2026 {SCHOOL_INFO.name}. All rights reserved.</span>
           <span className="flex items-center gap-1.5">
             <Sparkles className="w-3.5 h-3.5 text-indigo-500" /> Built for the Future
           </span>

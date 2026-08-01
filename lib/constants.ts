@@ -1,0 +1,33 @@
+export const SCHOOL_INFO = {
+  name: "Sunshine Public School",
+  established: 2014,
+  establishedText: "2014",
+  address: {
+    street: "Kothi Compound, Singheshwar, Near MLDP Petrol Pump",
+    city: "Madhepura",
+    state: "Bihar",
+    pincode: "852128",
+    full: "Kothi Compound, Singheshwar, Near MLDP Petrol Pump, Madhepura, Bihar, 852128",
+    short: "Singheshwar, Madhepura, Bihar 852128",
+    cityState: "Madhepura, Bihar",
+  },
+  phone: {
+    primary: "+91 7091962906",
+    secondary: "+91 9911989508",
+    display: "+91 7091962906, +91 9911989508",
+    primaryHref: "tel:+917091962906",
+    secondaryHref: "tel:+919911989508",
+  },
+  email: {
+    primary: "ssps.connect@gmail.com",
+    admissions: "ssps.connect@gmail.com",
+    info: "ssps.connect@gmail.com",
+  },
+  website: "www.sspsedu.com",
+  websiteUrl: "https://www.sspsedu.com",
+  affiliation: "CBSE",
+  classes: "Nursery – Class X",
+  heroTagline: "Est. 2014 · CBSE Affiliated · Madhepura",
+  tagline: "Learn • Grow • Shine",
+  subTagline: "Nurturing Young Minds for a Brighter Tomorrow",
+} as const;

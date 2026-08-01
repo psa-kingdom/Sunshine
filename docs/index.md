@@ -19,8 +19,8 @@ This folder contains the living documentation for the Sunshine Public School web
 
 - **Local dev server:** `npx vite --port 3000` → [http://localhost:3000](http://localhost:3000)
 - **Production build:** `npx vite build`
-- **Contact:** info@sunshineps.edu.in | +91 11 4567 8900
+- **Contact:** ssps.connect@gmail.com | +91 7091962906, +91 9911989508
 
 ---
 
-*Sunshine Public School · Sector 45, Gurugram, Haryana 122003 · CBSE Affiliation No. 1234567*
+*Sunshine Public School · Kothi Compound, Singheshwar, Near MLDP Petrol Pump, Madhepura, Bihar, 852128 · CBSE Affiliated*

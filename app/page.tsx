@@ -8,6 +8,7 @@ import EnquiryDrawer from "@/components/kokonutui/enquiry-drawer";
 import InteractiveNoticeBoard from "@/components/school/InteractiveNoticeBoard";
 import BrandLogo from "@/components/ui/BrandLogo";
 import { StatCounter } from "./StatCounter";
+import { SCHOOL_INFO } from "@/lib/constants";
 
 /* ─── FAQ DATA ────────────────────────────────────────────────────────────── */
 const FAQ_DATA = [
@@ -17,11 +18,11 @@ const FAQ_DATA = [
   },
   {
     q: "Which curriculum does the school follow?",
-    a: "Sunshine Public School is affiliated with the Central Board of Secondary Education (CBSE), New Delhi. Affiliation No. 1234567, School Code: 54321.",
+    a: "Sunshine Public School is affiliated with the Central Board of Secondary Education (CBSE), New Delhi.",
   },
   {
     q: "Are transportation facilities available?",
-    a: "Yes. GPS-tracked school buses cover major routes across Gurugram. Transportation fees are charged separately based on route distance. Please contact the transport office for the current route list.",
+    a: "Yes. GPS-tracked school buses cover major routes across Madhepura and surrounding areas. Transportation fees are charged separately based on route distance. Please contact the transport office for the current route list.",
   },
   {
     q: "What is the school's fee structure?",
@@ -380,17 +381,14 @@ export default function HomePage() {
 
         {/* Content */}
         <div className="spn-hero-content">
-          <span className="spn-hero-tagline">Est. 1998 · CBSE Affiliated · Gurugram</span>
+          <span className="spn-hero-tagline">{SCHOOL_INFO.heroTagline}</span>
           <h1 className="spn-hero-h1">
-            Shaping Curious Minds.<br />
-            Building Confident Futures.
+            Learn &bull; Grow &bull; Shine<br />
+            <span style={{ fontSize: "0.62em", fontWeight: 400, display: "block", marginTop: "0.6rem", color: "rgba(255,255,255,0.92)", letterSpacing: "0.01em" }}>
+              Nurturing Young Minds for a Brighter Tomorrow
+            </span>
           </h1>
-          <p className="spn-hero-desc">
-            At Sunshine Public School, we believe education is more than examinations. It is
-            the pursuit of character, the development of creativity, and the cultivation of
-            lifelong learners who lead with empathy and purpose.
-          </p>
-          <div className="spn-hero-actions">
+          <div className="spn-hero-actions" style={{ marginTop: "2.5rem" }}>
             <button
               type="button"
               id="hero-cta-primary"
@@ -565,14 +563,14 @@ export default function HomePage() {
           <div className="spn-about-copy">
             <span className="spn-eyebrow">Our Story</span>
             <h2 id="about-heading" className="spn-h2" style={{ marginBottom: "1.5rem" }}>
-              A Legacy of Learning Since 1998
+              A Legacy of Learning Since {SCHOOL_INFO.established}
             </h2>
             <div className="spn-divider" style={{ marginBottom: "2rem" }} />
             <p style={{ color: "var(--color-text)", lineHeight: 1.9, marginBottom: "1.25rem" }}>
-              Founded in 1998, Sunshine Public School began with a single vision: to create an
+              Founded in {SCHOOL_INFO.established}, Sunshine Public School began with a single vision: to create an
               institution where rigorous scholarship and genuine human development co-exist.
-              What started with 180 students and 12 teachers has grown into one of Gurugram&apos;s
-              most respected educational institutions, serving over 2,400 students today.
+              What started with a passion for quality education has grown into one of {SCHOOL_INFO.address.city}&apos;s
+              most respected educational institutions.
             </p>
             <p style={{ color: "var(--color-text-muted)", lineHeight: 1.9, marginBottom: "2rem" }}>
               Our philosophy is simple — every child deserves an education that honours their
@@ -914,9 +912,9 @@ export default function HomePage() {
               }}>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                   {[
-                    { Icon: MapPin, text: "Sector 45, Gurugram, Haryana 122003" },
-                    { Icon: Mail, text: "admissions@sunshineps.edu.in", href: "mailto:admissions@sunshineps.edu.in" },
-                    { Icon: PhoneCall, text: "+91 11 4567 8900", href: "tel:+911145678900" },
+                    { Icon: MapPin, text: SCHOOL_INFO.address.full },
+                    { Icon: Mail, text: SCHOOL_INFO.email.primary, href: `mailto:${SCHOOL_INFO.email.primary}` },
+                    { Icon: PhoneCall, text: SCHOOL_INFO.phone.display, href: SCHOOL_INFO.phone.primaryHref },
                     { Icon: Clock, text: "Mon–Sat · 8:00 AM – 3:30 PM" },
                   ].map(({ Icon, text, href }) => (
                     <div key={text} style={{ display: "flex", alignItems: "center", gap: "0.6rem", color: "rgba(242,232,216,0.85)", fontSize: "0.85rem" }}>
@@ -954,14 +952,14 @@ export default function HomePage() {
                 <BrandLogo variant="dark" height={58} />
               </div>
               <p style={{ fontSize: "0.85rem", color: "rgba(242,232,216,0.55)", lineHeight: 1.8, marginBottom: "1.5rem", maxWidth: "280px" }}>
-                Nurturing curious minds and building confident futures since 1998.
-                CBSE Affiliated · Affiliation No. 1234567
+                {SCHOOL_INFO.tagline} &bull; {SCHOOL_INFO.subTagline} since {SCHOOL_INFO.established}.
+                CBSE Affiliated
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                 {[
-                  { Icon: MapPin, text: "Sector 45, Gurugram, Haryana 122003" },
-                  { Icon: Mail, text: "info@sunshineps.edu.in", href: "mailto:info@sunshineps.edu.in" },
-                  { Icon: PhoneCall, text: "+91 11 4567 8900", href: "tel:+911145678900" },
+                  { Icon: MapPin, text: SCHOOL_INFO.address.full },
+                  { Icon: Mail, text: SCHOOL_INFO.email.primary, href: `mailto:${SCHOOL_INFO.email.primary}` },
+                  { Icon: PhoneCall, text: SCHOOL_INFO.phone.display, href: SCHOOL_INFO.phone.primaryHref },
                 ].map(({ Icon, text, href }) => (
                   <div key={text} style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.82rem", color: "rgba(242,232,216,0.55)" }}>
                     <Icon size={13} style={{ color: "var(--color-sand)", flexShrink: 0 }} />
@@ -1073,8 +1071,7 @@ export default function HomePage() {
               <div style={{ marginTop: "1.25rem", paddingTop: "1.25rem", borderTop: "1px solid rgba(213,195,161,0.15)" }}>
                 <div style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-sand)", marginBottom: "0.5rem" }}>CBSE</div>
                 <p style={{ fontSize: "0.8rem", color: "rgba(242,232,216,0.45)", lineHeight: 1.7 }}>
-                  Affiliation No. 1234567<br />
-                  School Code: 54321<br />
+                  CBSE Affiliated · {SCHOOL_INFO.classes}<br />
                   Mon–Sat · 8:00 AM – 3:30 PM
                 </p>
               </div>
@@ -1083,8 +1080,8 @@ export default function HomePage() {
 
           {/* Copyright */}
           <div className="spn-footer-copy">
-            <span>© 2026 Sunshine Public School. All rights reserved.</span>
-            <span>Sector 45, Gurugram, Haryana 122003</span>
+            <span>© 2026 {SCHOOL_INFO.name}. All rights reserved.</span>
+            <span>{SCHOOL_INFO.address.full}</span>
           </div>
         </div>
       </footer>

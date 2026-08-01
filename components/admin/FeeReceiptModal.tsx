@@ -3,6 +3,7 @@
 import React from "react";
 import { Printer, CheckCircle } from "lucide-react";
 import AdminModal from "./AdminModal";
+import { SCHOOL_INFO } from "@/lib/constants";
 
 export interface FeeReceiptData {
   _id: string;
@@ -44,9 +45,9 @@ export default function FeeReceiptModal({
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
               <div style={{ width: "2rem", height: "2rem", borderRadius: "50%", background: "linear-gradient(135deg, #4f46e5, #ea580c)", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 800, fontSize: "0.9rem" }}>S</div>
-              <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 800, color: "#0f172a" }}>SUNSHINE PUBLIC SCHOOL</h3>
+              <h3 style={{ margin: 0, fontSize: "1.1rem", fontWeight: 800, color: "#0f172a" }}>{SCHOOL_INFO.name.toUpperCase()}</h3>
             </div>
-            <p style={{ fontSize: "0.72rem", color: "#64748b", margin: "0.2rem 0 0 0" }}>Sector 45, Gurugram, Haryana 122003 • Affiliation No. 1234567</p>
+            <p style={{ fontSize: "0.72rem", color: "#64748b", margin: "0.2rem 0 0 0" }}>{SCHOOL_INFO.address.full} • CBSE Affiliated</p>
           </div>
           <div style={{ textAlign: "right" }}>
             <div style={{ fontSize: "0.75rem", fontWeight: 800, color: "#4f46e5", textTransform: "uppercase" }}>{receiptNo}</div>

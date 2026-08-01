@@ -38,7 +38,7 @@ The website should communicate premium institutional quality at first glance —
 ## 4. Target Personas
 
 ### 4.1 Prospective Parent (Primary)
-- **Who:** Family with children aged 3–16 exploring school options in Gurugram NCR
+- **Who:** Family with children aged 3–16 exploring school options in Madhepura, Bihar
 - **Motivation:** Understand admission criteria, fee structure, campus quality, academic outcomes
 - **Key Journey:** Homepage → Academics → Admissions → Contact / Campus Tour Booking
 - **Pain Point:** Uncertainty about whether Sunshine's ethos and outcomes match family aspirations
@@ -92,8 +92,8 @@ The website should communicate premium institutional quality at first glance —
 
 ### 5.3 Contact & Admissions Flow
 
-- **Primary CTA:** `mailto:admissions@sunshineps.edu.in`
-- **Secondary CTA:** `tel:+911145678900`
+- **Primary CTA:** `mailto:ssps.connect@gmail.com`
+- **Secondary CTA:** `tel:+917091962906`
 - **Campus Tour:** Button linking to phone or future booking page
 - No form submission required in v1 — external email + phone sufficient
 
