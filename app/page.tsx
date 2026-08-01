@@ -105,7 +105,7 @@ const NEWS = [
     cat: "Achievement",
     title: "Students Win Regional Science Olympiad — 3 Gold Medals",
     excerpt: "Our STEM team represented the school at the Regional Science Olympiad in Patna, bringing home three gold medals and setting a school record.",
-    img: "/Images/random/medal.webp",
+    img: "/Images/random/medal.png",
   },
   {
     date: "July 15, 2026",
