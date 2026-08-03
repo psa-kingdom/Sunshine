@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import BrandLogo from "@/components/ui/BrandLogo";
+import LogoContainer from "@/components/ui/LogoContainer";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 
 export interface MorphicNavItem {
@@ -50,8 +51,8 @@ export default function MorphicNavbar({
       <div className={`spn-nav-shell${scrolled ? " scrolled" : ""} ${className}`}>
         <nav className="spn-nav">
           {/* Brand */}
-          <Link href="/" className="spn-nav-logo" aria-label="Sunshine Public School Home">
-            <BrandLogo height={56} />
+          <Link href="/" className="spn-nav-logo-link" aria-label="Sunshine Public School Home">
+            <LogoContainer scrolled={scrolled} logoHeight={66} />
           </Link>
 
           {/* Desktop Links */}
@@ -126,7 +127,7 @@ export default function MorphicNavbar({
         </button>
         {/* Logo & Theme Toggle in drawer */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "2.5rem", marginTop: "1rem" }}>
-          <BrandLogo height={48} />
+          <LogoContainer scrolled={true} logoHeight={50} />
           <ThemeToggle />
         </div>
 

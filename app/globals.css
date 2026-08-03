@@ -330,18 +330,62 @@ img, svg { display: block; max-width: 100%; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25rem 0;
+  padding: 0.75rem 0;
   max-width: 1280px;
   margin: 0 auto;
   padding-left: 24px;
   padding-right: 24px;
 }
 
-.spn-nav-logo {
-  display: flex;
+.spn-nav-logo-link {
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
   text-decoration: none;
+}
+
+/* ── Header Logo Container Design System ── */
+.spn-logo-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  transition: background-color 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              backdrop-filter 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              -webkit-backdrop-filter 280ms cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background-color, border-color, backdrop-filter;
+}
+
+/* Transparent Navbar (over hero video) - Frosted Glass Pill */
+.spn-logo-container.transparent {
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.18);
+}
+
+/* Dark mode refinement for transparent pill over video */
+[data-theme="dark"] .spn-logo-container.transparent {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* Solid Navbar (scrolled down) - Seamless transparent integration */
+.spn-logo-container.scrolled {
+  background: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .spn-logo-container {
+    padding: 6px 12px;
+  }
 }
 
 .spn-nav-crest {
