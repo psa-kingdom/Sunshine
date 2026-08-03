@@ -1,4 +1,5 @@
 import type { NextAuthConfig } from "next-auth";
+import { APP_URL } from "@/lib/url";
 
 // Sanitize AUTH_URL and NEXTAUTH_URL to prevent ERR_INVALID_URL if protocol scheme is missing
 if (process.env.AUTH_URL && !process.env.AUTH_URL.startsWith("http://") && !process.env.AUTH_URL.startsWith("https://")) {
@@ -17,6 +18,21 @@ export const authConfig: NextAuthConfig = {
   },
   trustHost: true,
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      // Relative path redirect (e.g. "/login") -> bound to canonical APP_URL
+      if (url.startsWith("/")) {
+        return `${APP_URL}${url}`;
+      }
+
+      // Absolute URL redirect -> enforce canonical domain APP_URL for application paths
+      try {
+        const parsedUrl = new URL(url);
+        // Standardize any internal application route to canonical APP_URL origin
+        return `${APP_URL}${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`;
+      } catch {
+        return `${APP_URL}/login`;
+      }
+    },
     async jwt({ token, user }) {
       if (user) {
         const u = user as unknown as Record<string, string>;

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
+import { absoluteUrl } from "@/lib/url";
 import BrandLogo from "@/components/ui/BrandLogo";
 import {
   LayoutDashboard,
@@ -193,7 +194,7 @@ export default function AdminNavbar({
                         <div style={{ height: "1px", background: "var(--border-subtle)", margin: "0.25rem 0" }} />
                         <button
                           type="button"
-                          onClick={() => signOut({ callbackUrl: "/login" })}
+                          onClick={() => signOut({ callbackUrl: absoluteUrl("/login") })}
                           style={{
                             width: "100%",
                             display: "flex",

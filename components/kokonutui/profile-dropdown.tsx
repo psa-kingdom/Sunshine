@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { signOut } from "next-auth/react";
+import { absoluteUrl } from "@/lib/url";
 import { motion, AnimatePresence } from "motion/react";
 import { LogOut, Shield, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -77,7 +78,7 @@ export default function ProfileDropdown({
 
               <button
                 type="button"
-                onClick={() => signOut({ callbackUrl: "/login" })}
+                onClick={() => signOut({ callbackUrl: absoluteUrl("/login") })}
                 className="w-full flex items-center gap-2 px-3 py-2 text-xs text-[var(--gold-300)] font-semibold rounded hover:bg-red-500/20 hover:text-red-300 transition-colors cursor-pointer text-left"
               >
                 <LogOut className="w-3.5 h-3.5" />

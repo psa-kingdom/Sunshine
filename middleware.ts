@@ -1,6 +1,7 @@
 import NextAuth from "next-auth";
 import { authConfig } from "./auth.config";
 import { NextResponse } from "next/server";
+import { APP_URL } from "@/lib/url";
 
 const { auth } = NextAuth(authConfig);
 
@@ -28,31 +29,31 @@ export default auth((req) => {
     // Admin route protection
     if (isAdminRoute && !isLoginPage) {
       if (!isLoggedIn) {
-        return NextResponse.redirect(new URL("/login", nextUrl));
+        return NextResponse.redirect(new URL("/login", APP_URL));
       }
       if (userRole !== "admin") {
         const redirectTarget = userRole === "teacher" ? "/teacher" : "/student";
-        return NextResponse.redirect(new URL(redirectTarget, nextUrl));
+        return NextResponse.redirect(new URL(redirectTarget, APP_URL));
       }
     }
 
     // Teacher route protection
     if (isTeacherRoute) {
       if (!isLoggedIn) {
-        return NextResponse.redirect(new URL("/login", nextUrl));
+        return NextResponse.redirect(new URL("/login", APP_URL));
       }
       if (userRole !== "teacher" && userRole !== "admin") {
-        return NextResponse.redirect(new URL("/student", nextUrl));
+        return NextResponse.redirect(new URL("/student", APP_URL));
       }
     }
 
     // Student route protection
     if (isStudentRoute) {
       if (!isLoggedIn) {
-        return NextResponse.redirect(new URL("/login", nextUrl));
+        return NextResponse.redirect(new URL("/login", APP_URL));
       }
       if (userRole !== "student" && userRole !== "admin") {
-        return NextResponse.redirect(new URL("/teacher", nextUrl));
+        return NextResponse.redirect(new URL("/teacher", APP_URL));
       }
     }
 
